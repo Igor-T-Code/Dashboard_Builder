@@ -1,26 +1,24 @@
 /**
- * Automotive Data Platform - Component Library
- * =============================================
- * Comprehensive library of automotive components for the Data Platform Builder
- * Based on Cradle-to-Grave Vehicle Lifecycle Architecture
+ * Automotive Data Platform - Component Library v2.0
+ * ==================================================
+ * Reorganized library with 86 automotive components
  *
  * Categories:
- * - FAHRZEUG-SYSTEME: ECUs, Zonal Controllers, Vehicle Hardware
- * - DATA INGESTION: Data collection and streaming components
- * - DATA PLATFORM: Storage, Processing, Lakehouse Architecture
- * - ML & AI: Machine Learning and AI components
- * - BACKEND SERVICES: Business logic and backend systems
- * - FRONTENDS: User-facing applications and dashboards
- * - EXTERNAL: Third-party integrations and external services
+ * - VEHICLE: In-Vehicle Systems (ECUs, Controllers, Sensors)
+ * - NEAR VEHICLE BACKEND: Edge & Gateway Infrastructure
+ * - DATA PROCESSING BACKEND: Data Platform, Processing, ML/AI
+ * - FRONTENDS: User Applications & Dashboards
+ * - DEVELOPMENT: Development & Testing Tools
+ * - AFTERSALES: Service, Quality & Partner Integration
  */
 
 const AUTOMOTIVE_COMPONENTS = {
 
     // =========================================================================
-    // FAHRZEUG-SYSTEME (Vehicle Systems) - ECUs & Zonal Controllers
+    // VEHICLE - In-Vehicle Systems (ECUs, Controllers, Sensors)
     // =========================================================================
-    vehicleSystems: {
-        categoryName: "FAHRZEUG-SYSTEME",
+    vehicle: {
+        categoryName: "VEHICLE",
         categoryColor: "#1565C0",
         components: [
             {
@@ -28,20 +26,20 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Central Vehicle Computer",
                 shortName: "CVC",
                 icon: "🖥️",
-                description: "Zentraler Fahrzeugrechner für Software-Defined Vehicle Architektur. Koordiniert alle Zonal Controller und führt High-Level Funktionen aus.",
+                description: "Zentraler Fahrzeugrechner für Software-Defined Vehicle Architektur. Koordiniert alle Zonal Controller.",
                 requirements: [
                     "AUTOSAR Adaptive Platform",
                     "Echtzeit-Betriebssystem",
                     "OTA Update fähig",
-                    "Cybersecurity nach ISO 21434"
+                    "Cybersecurity ISO 21434"
                 ]
             },
             {
                 id: "zone-front",
                 name: "Zone Controller Front",
                 shortName: "ZC-F",
-                icon: "🔲",
-                description: "Zonal Controller für Front-Domäne: ADAS Sensoren, Frontbeleuchtung, Frontscheibe, Klimatisierung vorne.",
+                icon: "🔳",
+                description: "Zonal Controller für Front-Domäne: ADAS Sensoren, Frontbeleuchtung, Klimatisierung vorne.",
                 requirements: [
                     "CAN/LIN Gateway",
                     "Ethernet Backbone",
@@ -52,8 +50,8 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-rear",
                 name: "Zone Controller Rear",
                 shortName: "ZC-R",
-                icon: "🔲",
-                description: "Zonal Controller für Heck-Domäne: Heckbeleuchtung, Kofferraum, Anhängerkupplung, Rückfahrkamera.",
+                icon: "🔳",
+                description: "Zonal Controller für Heck-Domäne: Heckbeleuchtung, Kofferraum, Anhängerkupplung.",
                 requirements: [
                     "CAN/LIN Gateway",
                     "Ethernet Backbone",
@@ -64,7 +62,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-left",
                 name: "Zone Controller Left",
                 shortName: "ZC-L",
-                icon: "🔲",
+                icon: "🔳",
                 description: "Zonal Controller für linke Seite: Fahrertür, Seitenspiegel, Sitzsteuerung links.",
                 requirements: [
                     "Door Module Integration",
@@ -75,7 +73,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-right",
                 name: "Zone Controller Right",
                 shortName: "ZC-RT",
-                icon: "🔲",
+                icon: "🔳",
                 description: "Zonal Controller für rechte Seite: Beifahrertür, Seitenspiegel, Sitzsteuerung rechts.",
                 requirements: [
                     "Door Module Integration",
@@ -87,11 +85,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Battery Management System",
                 shortName: "BMS",
                 icon: "🔋",
-                description: "Überwacht und steuert HV-Batterie: State of Charge, State of Health, Zellbalancing, Thermomanagement.",
+                description: "Überwacht HV-Batterie: State of Charge, State of Health, Zellbalancing, Thermomanagement.",
                 requirements: [
                     "Cell Monitoring",
                     "Thermal Management",
-                    "Safety Monitoring (ASIL-D)",
+                    "Safety ASIL-D",
                     "V2G Communication"
                 ]
             },
@@ -100,11 +98,10 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "ADAS ECU",
                 shortName: "ADAS",
                 icon: "👁️",
-                description: "Advanced Driver Assistance Systems Controller: Sensorfusion, Objekterkennung, Pfadplanung.",
+                description: "Advanced Driver Assistance Systems: Sensorfusion, Objekterkennung, Pfadplanung.",
                 requirements: [
                     "Camera Processing",
-                    "Radar Processing",
-                    "LiDAR Processing",
+                    "Radar/LiDAR Processing",
                     "Sensor Fusion",
                     "ASIL-D Compliance"
                 ]
@@ -114,12 +111,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Infotainment ECU",
                 shortName: "IVI",
                 icon: "📱",
-                description: "In-Vehicle Infotainment System: Multimedia, Navigation, Connectivity, Voice Assistant.",
+                description: "In-Vehicle Infotainment: Multimedia, Navigation, Connectivity, Voice Assistant.",
                 requirements: [
                     "Android Automotive / QNX",
                     "Voice Recognition",
-                    "Smartphone Integration",
-                    "OTA Content Updates"
+                    "Smartphone Integration"
                 ]
             },
             {
@@ -127,13 +123,12 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Telematics Control Unit",
                 shortName: "TCU",
                 icon: "📡",
-                description: "Telematik-Steuergerät für Fahrzeug-Cloud Kommunikation: 4G/5G, V2X, eCall, Remote Services.",
+                description: "Telematik-Steuergerät für Fahrzeug-Cloud Kommunikation: 4G/5G, V2X, eCall.",
                 requirements: [
                     "4G/5G Modem",
                     "V2X Communication",
                     "eCall Support",
-                    "GNSS Positioning",
-                    "Secure Element"
+                    "GNSS Positioning"
                 ]
             },
             {
@@ -141,7 +136,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Central Gateway",
                 shortName: "CGW",
                 icon: "🔀",
-                description: "Zentrales Gateway für Netzwerk-Routing und Protokollübersetzung zwischen Fahrzeugdomänen.",
+                description: "Zentrales Gateway für Netzwerk-Routing und Protokollübersetzung zwischen Domänen.",
                 requirements: [
                     "Multi-Protocol Support",
                     "Firewall Function",
@@ -153,7 +148,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Body Control Module",
                 shortName: "BCM",
                 icon: "💡",
-                description: "Karosserie-Steuergerät: Beleuchtung, Zentralverriegelung, Fensterheber, Scheibenwischer.",
+                description: "Karosserie-Steuergerät: Beleuchtung, Zentralverriegelung, Fensterheber.",
                 requirements: [
                     "LIN Master",
                     "PWM Control",
@@ -169,26 +164,15 @@ const AUTOMOTIVE_COMPONENTS = {
                 requirements: [
                     "Motor Control",
                     "Inverter Interface",
-                    "ASIL-D Functions",
-                    "Torque Vectoring"
+                    "ASIL-D Functions"
                 ]
-            }
-        ]
-    },
-
-    // =========================================================================
-    // DATA INGESTION - Datenerfassung und Streaming
-    // =========================================================================
-    dataIngestion: {
-        categoryName: "DATA INGESTION",
-        categoryColor: "#7B1FA2",
-        components: [
+            },
             {
                 id: "vehicle-collector",
                 name: "Vehicle Data Collector",
                 shortName: "VDC",
                 icon: "📥",
-                description: "Edge-Service im Fahrzeug zur Sammlung und Vorverarbeitung von Telematikdaten vor Cloud-Upload.",
+                description: "Edge-Service im Fahrzeug zur Sammlung und Vorverarbeitung von Telematikdaten.",
                 requirements: [
                     "Edge Processing",
                     "Data Compression",
@@ -197,11 +181,33 @@ const AUTOMOTIVE_COMPONENTS = {
                 ]
             },
             {
+                id: "obd-bridge",
+                name: "OBD Diagnostic Bridge",
+                shortName: "OBD",
+                icon: "🔌",
+                description: "Diagnose-Schnittstelle: OBD-II, DoIP, UDS Protokolle für Werkstatt und Entwicklung.",
+                requirements: [
+                    "OBD-II Protocol",
+                    "DoIP Support",
+                    "UDS Services"
+                ]
+            }
+        ]
+    },
+
+    // =========================================================================
+    // NEAR VEHICLE BACKEND - Edge & Gateway Infrastructure
+    // =========================================================================
+    nearVehicleBackend: {
+        categoryName: "NEAR VEHICLE BACKEND",
+        categoryColor: "#7B1FA2",
+        components: [
+            {
                 id: "iot-hub",
                 name: "IoT Hub",
                 shortName: "IoT",
                 icon: "🌐",
-                description: "Managed IoT Platform für Fahrzeugkonnektivität: Device Management, Message Routing, Protocol Support.",
+                description: "Managed IoT Platform: Device Management, Message Routing, Protocol Support.",
                 requirements: [
                     "MQTT/AMQP Support",
                     "Device Twin",
@@ -218,32 +224,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 requirements: [
                     "High Throughput",
                     "Exactly-Once Semantics",
-                    "Schema Registry",
-                    "Multi-Datacenter"
-                ]
-            },
-            {
-                id: "cdc-connector",
-                name: "CDC Connector",
-                shortName: "CDC",
-                icon: "🔄",
-                description: "Change Data Capture für Echtzeit-Replikation aus operativen Systemen (ERP, MES, CRM).",
-                requirements: [
-                    "Debezium Integration",
-                    "Transaction Log Mining",
-                    "Schema Evolution"
-                ]
-            },
-            {
-                id: "batch-loader",
-                name: "Batch File Loader",
-                shortName: "Batch",
-                icon: "📁",
-                description: "Batch-Ingestion für periodische Datenlieferungen: CSV, Parquet, XML von Partnern und Legacy-Systemen.",
-                requirements: [
-                    "File Format Support",
-                    "Schema Validation",
-                    "Error Handling"
+                    "Schema Registry"
                 ]
             },
             {
@@ -251,7 +232,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Edge Gateway",
                 shortName: "Edge",
                 icon: "🏭",
-                description: "Edge Computing Gateway für Produktionsumgebung: Datensammlung von PLCs, Sensoren, MES.",
+                description: "Edge Computing Gateway für Produktionsumgebung: PLCs, Sensoren, MES.",
                 requirements: [
                     "OPC-UA Support",
                     "Local Processing",
@@ -259,23 +240,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 ]
             },
             {
-                id: "obd-bridge",
-                name: "OBD Diagnostic Bridge",
-                shortName: "OBD",
-                icon: "🔌",
-                description: "Diagnose-Schnittstelle für Werkstatt und Entwicklung: OBD-II, DoIP, UDS Protokolle.",
-                requirements: [
-                    "OBD-II Protocol",
-                    "DoIP Support",
-                    "UDS Services"
-                ]
-            },
-            {
                 id: "fleet-gateway",
                 name: "Fleet Telematics Gateway",
                 shortName: "FTG",
                 icon: "🚛",
-                description: "Gateway für Flottendaten: Aggregation von mehreren Fahrzeugen, Flottenspezifische Metriken.",
+                description: "Gateway für Flottendaten: Multi-Vehicle Aggregation, Fleet Metriken.",
                 requirements: [
                     "Multi-Vehicle Support",
                     "Fleet Analytics",
@@ -295,6 +264,30 @@ const AUTOMOTIVE_COMPONENTS = {
                 ]
             },
             {
+                id: "cdc-connector",
+                name: "CDC Connector",
+                shortName: "CDC",
+                icon: "🔄",
+                description: "Change Data Capture für Echtzeit-Replikation aus ERP, MES, CRM.",
+                requirements: [
+                    "Debezium Integration",
+                    "Transaction Log Mining",
+                    "Schema Evolution"
+                ]
+            },
+            {
+                id: "batch-loader",
+                name: "Batch File Loader",
+                shortName: "Batch",
+                icon: "📁",
+                description: "Batch-Ingestion: CSV, Parquet, XML von Partnern und Legacy-Systemen.",
+                requirements: [
+                    "File Format Support",
+                    "Schema Validation",
+                    "Error Handling"
+                ]
+            },
+            {
                 id: "supplier-connector",
                 name: "Supplier Data Connector",
                 shortName: "SDC",
@@ -310,12 +303,13 @@ const AUTOMOTIVE_COMPONENTS = {
     },
 
     // =========================================================================
-    // DATA PLATFORM - Lakehouse Architektur
+    // DATA PROCESSING BACKEND - Data Platform, Processing, ML/AI, Cloud
     // =========================================================================
-    dataPlatform: {
-        categoryName: "DATA PLATFORM",
+    dataProcessingBackend: {
+        categoryName: "DATA PROCESSING BACKEND",
         categoryColor: "#00695C",
         components: [
+            // --- Lakehouse Architecture ---
             {
                 id: "bronze-layer",
                 name: "Bronze Layer",
@@ -333,12 +327,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Silver Layer",
                 shortName: "Silver",
                 icon: "🥈",
-                description: "Cleaned Data Layer: Validierte, bereinigte und angereicherte Daten, standardisierte Schemas.",
+                description: "Cleaned Data Layer: Validierte, bereinigte und angereicherte Daten.",
                 requirements: [
                     "Data Validation",
                     "Deduplication",
-                    "Schema Enforcement",
-                    "Data Quality Rules"
+                    "Schema Enforcement"
                 ]
             },
             {
@@ -346,12 +339,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Gold Layer",
                 shortName: "Gold",
                 icon: "🥇",
-                description: "Business Layer: Aggregierte, business-ready Daten, optimiert für Analytics und Reporting.",
+                description: "Business Layer: Aggregierte, business-ready Daten für Analytics und Reporting.",
                 requirements: [
                     "Business Aggregations",
                     "Dimension Tables",
-                    "Fact Tables",
-                    "Performance Optimized"
+                    "Fact Tables"
                 ]
             },
             {
@@ -359,12 +351,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Delta Lake Storage",
                 shortName: "Delta",
                 icon: "💾",
-                description: "ACID-transaktionaler Data Lake Storage mit Time Travel, Schema Evolution, Unified Batch/Streaming.",
+                description: "ACID-transaktionaler Data Lake: Time Travel, Schema Evolution, Unified Batch/Streaming.",
                 requirements: [
                     "ACID Transactions",
                     "Time Travel",
-                    "Schema Evolution",
-                    "Z-Order Optimization"
+                    "Schema Evolution"
                 ]
             },
             {
@@ -372,37 +363,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Unity Catalog",
                 shortName: "Unity",
                 icon: "📚",
-                description: "Zentraler Metadaten-Katalog: Data Governance, Access Control, Lineage, Discovery.",
+                description: "Zentraler Metadaten-Katalog: Data Governance, Access Control, Lineage.",
                 requirements: [
                     "Fine-grained ACLs",
                     "Data Lineage",
-                    "Audit Logging",
-                    "TISAX Compliance"
-                ]
-            },
-            {
-                id: "feature-store",
-                name: "Feature Store",
-                shortName: "FS",
-                icon: "🎯",
-                description: "Zentrales Repository für ML Features: Feature Engineering, Versioning, Online/Offline Serving.",
-                requirements: [
-                    "Feature Versioning",
-                    "Online Serving",
-                    "Offline Serving",
-                    "Feature Discovery"
-                ]
-            },
-            {
-                id: "model-registry",
-                name: "Model Registry",
-                shortName: "MLR",
-                icon: "📋",
-                description: "Zentrale Verwaltung von ML-Modellen: Versioning, Staging, Deployment Tracking.",
-                requirements: [
-                    "Model Versioning",
-                    "Stage Management",
-                    "Approval Workflows"
+                    "Audit Logging"
                 ]
             },
             {
@@ -410,7 +375,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Data Quality Engine",
                 shortName: "DQE",
                 icon: "✅",
-                description: "Automatisierte Datenqualitätsprüfung: Rules Engine, Anomalie-Detection, Quality Scores.",
+                description: "Automatisierte Datenqualitätsprüfung: Rules Engine, Anomalie-Detection.",
                 requirements: [
                     "Rule-based Validation",
                     "Anomaly Detection",
@@ -434,30 +399,20 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Delta Sharing Hub",
                 shortName: "DSH",
                 icon: "🔐",
-                description: "Sichere Datenfreigabe für Partner: Open Protocol, Zero-Copy Sharing, Access Control.",
+                description: "Sichere Datenfreigabe für Partner: Open Protocol, Zero-Copy Sharing.",
                 requirements: [
                     "Open Protocol",
                     "Access Tokens",
-                    "Audit Trail",
-                    "Cross-Cloud Support"
+                    "Audit Trail"
                 ]
-            }
-        ]
-    },
-
-    // =========================================================================
-    // PROCESSING - Datenverarbeitung
-    // =========================================================================
-    processing: {
-        categoryName: "PROCESSING",
-        categoryColor: "#E65100",
-        components: [
+            },
+            // --- Processing ---
             {
                 id: "spark-cluster",
                 name: "Spark Cluster",
                 shortName: "Spark",
                 icon: "⚡",
-                description: "Distributed Processing Engine für Batch und Streaming Analytics auf großen Datenmengen.",
+                description: "Distributed Processing Engine für Batch und Streaming Analytics.",
                 requirements: [
                     "Auto-Scaling",
                     "Photon Engine",
@@ -469,7 +424,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Delta Live Tables",
                 shortName: "DLT",
                 icon: "🔄",
-                description: "Deklarative ETL Pipelines mit automatischer Fehlerbehandlung und Datenqualität.",
+                description: "Deklarative ETL Pipelines mit automatischer Fehlerbehandlung.",
                 requirements: [
                     "Declarative ETL",
                     "Auto-Recovery",
@@ -481,7 +436,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "SQL Warehouse",
                 shortName: "SQL",
                 icon: "🗄️",
-                description: "Serverless SQL Analytics für BI und Ad-hoc Queries mit hoher Concurrency.",
+                description: "Serverless SQL Analytics für BI und Ad-hoc Queries.",
                 requirements: [
                     "Serverless",
                     "High Concurrency",
@@ -493,7 +448,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Stream Processing Engine",
                 shortName: "SPE",
                 icon: "🌊",
-                description: "Echtzeit-Streaming für kontinuierliche Datenverarbeitung: Structured Streaming, Watermarks.",
+                description: "Echtzeit-Streaming: Structured Streaming, Watermarks, Exactly-Once.",
                 requirements: [
                     "Structured Streaming",
                     "Watermark Support",
@@ -504,7 +459,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "etl-engine",
                 name: "ETL Pipeline Engine",
                 shortName: "ETL",
-                icon: "🔧",
+                icon: "⚙️",
                 description: "Orchestrierte ETL Workflows: Scheduling, Dependencies, Monitoring.",
                 requirements: [
                     "Workflow Orchestration",
@@ -529,7 +484,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Aggregation Engine",
                 shortName: "AGG",
                 icon: "📈",
-                description: "Vordefinierte Aggregationen für Performance: Rollups, Cubes, Materialized Views.",
+                description: "Vordefinierte Aggregationen: Rollups, Cubes, Materialized Views.",
                 requirements: [
                     "Pre-Aggregations",
                     "Materialized Views",
@@ -547,23 +502,38 @@ const AUTOMOTIVE_COMPONENTS = {
                     "In-Memory Processing",
                     "Push Updates"
                 ]
-            }
-        ]
-    },
-
-    // =========================================================================
-    // ML & AI - Machine Learning und KI
-    // =========================================================================
-    mlAi: {
-        categoryName: "ML & AI",
-        categoryColor: "#C62828",
-        components: [
+            },
+            // --- ML & AI ---
+            {
+                id: "feature-store",
+                name: "Feature Store",
+                shortName: "FS",
+                icon: "🎯",
+                description: "Zentrales Repository für ML Features: Versioning, Online/Offline Serving.",
+                requirements: [
+                    "Feature Versioning",
+                    "Online Serving",
+                    "Offline Serving"
+                ]
+            },
+            {
+                id: "model-registry",
+                name: "Model Registry",
+                shortName: "MLR",
+                icon: "📋",
+                description: "Zentrale Verwaltung von ML-Modellen: Versioning, Staging, Deployment.",
+                requirements: [
+                    "Model Versioning",
+                    "Stage Management",
+                    "Approval Workflows"
+                ]
+            },
             {
                 id: "ml-training",
                 name: "ML Training Pipeline",
                 shortName: "MLT",
                 icon: "🧠",
-                description: "End-to-End ML Training: Feature Engineering, Model Training, Hyperparameter Tuning.",
+                description: "End-to-End ML Training: Feature Engineering, Hyperparameter Tuning.",
                 requirements: [
                     "Distributed Training",
                     "Hyperparameter Tuning",
@@ -575,7 +545,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "AutoML Engine",
                 shortName: "AutoML",
                 icon: "🤖",
-                description: "Automatisiertes Machine Learning: Feature Selection, Algorithm Selection, Model Optimization.",
+                description: "Automatisiertes ML: Feature Selection, Algorithm Selection, Optimization.",
                 requirements: [
                     "Auto Feature Engineering",
                     "Algorithm Selection",
@@ -587,7 +557,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Anomaly Detection Model",
                 shortName: "ADM",
                 icon: "🔍",
-                description: "ML-basierte Anomalie-Erkennung für Fahrzeugdaten, Produktionsprozesse und Qualität.",
+                description: "ML-basierte Anomalie-Erkennung für Fahrzeug- und Produktionsdaten.",
                 requirements: [
                     "Unsupervised Learning",
                     "Real-time Scoring",
@@ -599,7 +569,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Predictive Maintenance Model",
                 shortName: "PDM",
                 icon: "🔮",
-                description: "Vorhersagemodell für Wartungsbedarf: Remaining Useful Life, Failure Prediction.",
+                description: "Vorhersagemodell: Remaining Useful Life, Failure Prediction.",
                 requirements: [
                     "Time Series Analysis",
                     "Survival Analysis",
@@ -611,12 +581,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "GenAI / LLM Service",
                 shortName: "GenAI",
                 icon: "💬",
-                description: "Generative AI Service: LLM für Dokumentenanalyse, Code-Generierung, Chatbots.",
+                description: "Generative AI: LLM für Dokumentenanalyse, Code-Generierung, Chatbots.",
                 requirements: [
                     "LLM Hosting",
                     "RAG Pipeline",
-                    "Prompt Management",
-                    "Guardrails"
+                    "Prompt Management"
                 ]
             },
             {
@@ -636,11 +605,10 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "NLP Engine",
                 shortName: "NLP",
                 icon: "📝",
-                description: "Natural Language Processing: Sentiment Analysis, Text Classification, Entity Extraction.",
+                description: "Natural Language Processing: Sentiment, Classification, Entity Extraction.",
                 requirements: [
                     "Text Classification",
                     "NER",
-                    "Sentiment Analysis",
                     "Multi-Language"
                 ]
             },
@@ -649,7 +617,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Recommendation Engine",
                 shortName: "REC",
                 icon: "💡",
-                description: "Empfehlungssystem für Personalisierung: Next-Best-Action, Product Recommendations.",
+                description: "Empfehlungssystem: Next-Best-Action, Product Recommendations.",
                 requirements: [
                     "Collaborative Filtering",
                     "Content-based",
@@ -679,144 +647,109 @@ const AUTOMOTIVE_COMPONENTS = {
                     "Statistical Analysis",
                     "Metric Tracking"
                 ]
-            }
-        ]
-    },
-
-    // =========================================================================
-    // BACKEND SERVICES - Business Logic
-    // =========================================================================
-    backendServices: {
-        categoryName: "BACKEND SERVICES",
-        categoryColor: "#37474F",
-        components: [
+            },
+            // --- Cloud Platforms ---
             {
-                id: "ota-server",
-                name: "OTA Update Server",
-                shortName: "OTA",
-                icon: "📲",
-                description: "Over-the-Air Update Management: Staged Rollout, Versioning, Rollback, Monitoring.",
+                id: "aws-cloud",
+                name: "AWS Cloud Services",
+                shortName: "AWS",
+                icon: "☁️",
+                description: "Amazon Web Services: EC2, S3, Lambda, IoT Core, SageMaker.",
                 requirements: [
-                    "Staged Rollout",
-                    "Version Control",
-                    "Rollback Support",
-                    "Update Monitoring"
+                    "VPC Configuration",
+                    "IAM Roles & Policies",
+                    "TISAX-compliant"
                 ]
             },
             {
-                id: "customer-360",
-                name: "Customer 360 Service",
-                shortName: "C360",
-                icon: "👤",
-                description: "Ganzheitliche Kundenansicht: Profile, Interaktionen, Fahrzeuge, Präferenzen.",
+                id: "azure-cloud",
+                name: "Microsoft Azure",
+                shortName: "Azure",
+                icon: "☁️",
+                description: "Azure Cloud: IoT Hub, Synapse Analytics, Azure ML, Data Factory.",
                 requirements: [
-                    "Profile Management",
-                    "Consent Management",
-                    "GDPR Compliance"
+                    "Azure Active Directory",
+                    "Virtual Network",
+                    "Key Vault"
                 ]
             },
             {
-                id: "fleet-backend",
-                name: "Fleet Management Backend",
-                shortName: "FMB",
-                icon: "🚗",
-                description: "Backend für Flottenverwaltung: Vehicle Tracking, Utilization, TCO Analysis.",
+                id: "databricks",
+                name: "Databricks Platform",
+                shortName: "DBX",
+                icon: "🔶",
+                description: "Unified Analytics: Lakehouse Architecture, Delta Lake, MLflow, Spark.",
                 requirements: [
-                    "Real-time Tracking",
-                    "Geofencing",
-                    "Utilization Analytics"
+                    "Unity Catalog",
+                    "Workspace Configuration",
+                    "Photon Runtime"
                 ]
             },
             {
-                id: "warranty-analytics",
-                name: "Warranty Analytics Service",
-                shortName: "WAS",
-                icon: "📊",
-                description: "Garantie-Analyse: Claim Processing, Fraud Detection, Cost Analytics.",
+                id: "delta-sharing-server",
+                name: "Delta Sharing Server",
+                shortName: "DSS",
+                icon: "🔗",
+                description: "Open Protocol für sicheren Datenaustausch: Cross-Organization Sharing.",
                 requirements: [
-                    "Claim Processing",
-                    "Fraud Detection",
-                    "Cost Attribution"
+                    "Share Endpoints",
+                    "Recipient Management",
+                    "Audit Logging"
                 ]
             },
             {
-                id: "qms",
-                name: "Quality Management System",
-                shortName: "QMS",
-                icon: "✅",
-                description: "Qualitätsmanagement: Issue Tracking, SPC/SQC, Audit Management.",
+                id: "gcp-cloud",
+                name: "Google Cloud Platform",
+                shortName: "GCP",
+                icon: "☁️",
+                description: "GCP: BigQuery, Vertex AI, Cloud IoT, Dataflow für Streaming.",
                 requirements: [
-                    "Issue Tracking",
-                    "SPC/SQC",
-                    "Audit Trail"
+                    "Project Configuration",
+                    "Service Accounts",
+                    "VPC Networks"
                 ]
             },
             {
-                id: "fmea-db",
-                name: "FMEA Database",
-                shortName: "FMEA",
-                icon: "📋",
-                description: "Failure Mode and Effects Analysis: Design FMEA, Process FMEA, RPN Tracking.",
+                id: "snowflake",
+                name: "Snowflake Data Cloud",
+                shortName: "SF",
+                icon: "❄️",
+                description: "Cloud Data Warehouse: Data Sharing, Secure Exchange, Multi-Cloud.",
                 requirements: [
-                    "Design FMEA",
-                    "Process FMEA",
-                    "RPN Calculation",
-                    "Action Tracking"
+                    "Warehouse Configuration",
+                    "Data Sharing Setup",
+                    "Role-based Access"
                 ]
             },
             {
-                id: "8d-engine",
-                name: "8D Process Engine",
-                shortName: "8D",
+                id: "terraform",
+                name: "Terraform IaC",
+                shortName: "TF",
                 icon: "🔧",
-                description: "Problemlösungsprozess: 8D Report Workflow, Root Cause, Corrective Actions.",
+                description: "Infrastructure as Code: Multi-Cloud Provisioning, State Management.",
                 requirements: [
-                    "8D Workflow",
-                    "Root Cause Analysis",
-                    "Action Management"
+                    "State Backend",
+                    "Provider Configuration",
+                    "CI/CD Integration"
                 ]
             },
             {
-                id: "parts-forecast",
-                name: "Parts Demand Forecasting",
-                shortName: "PDF",
-                icon: "📦",
-                description: "Ersatzteil-Bedarfsprognose: Demand Planning, Inventory Optimization.",
+                id: "kubernetes",
+                name: "Kubernetes Cluster",
+                shortName: "K8s",
+                icon: "☸️",
+                description: "Container Orchestration: EKS/AKS/GKE, Service Mesh, Auto-Scaling.",
                 requirements: [
-                    "Demand Forecasting",
-                    "Safety Stock",
-                    "Lead Time Optimization"
-                ]
-            },
-            {
-                id: "service-optimizer",
-                name: "Service Network Optimizer",
-                shortName: "SNO",
-                icon: "🔧",
-                description: "Werkstatt-Netzwerk Optimierung: Capacity Planning, Appointment Scheduling.",
-                requirements: [
-                    "Capacity Planning",
-                    "Scheduling",
-                    "Resource Allocation"
-                ]
-            },
-            {
-                id: "pricing-engine",
-                name: "Dynamic Pricing Engine",
-                shortName: "DPE",
-                icon: "💰",
-                description: "Dynamische Preisgestaltung: Marktanalyse, Incentive Optimization, Yield Management.",
-                requirements: [
-                    "Market Analysis",
-                    "Price Optimization",
-                    "Competitor Monitoring"
+                    "Cluster Configuration",
+                    "Namespace Isolation",
+                    "Ingress Controller"
                 ]
             }
         ]
     },
 
     // =========================================================================
-    // FRONTENDS - User Applications
+    // FRONTENDS - User Applications & Dashboards
     // =========================================================================
     frontends: {
         categoryName: "FRONTENDS",
@@ -827,7 +760,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Driver Mobile App",
                 shortName: "App",
                 icon: "📱",
-                description: "Kunden-App: Remote Services, Fahrzeugstatus, Navigation, Charging, Service Booking.",
+                description: "Kunden-App: Remote Services, Fahrzeugstatus, Navigation, Charging.",
                 requirements: [
                     "iOS/Android",
                     "Push Notifications",
@@ -863,7 +796,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Service Technician App",
                 shortName: "STA",
                 icon: "🔧",
-                description: "Werkstatt-App: Diagnose, Reparaturanleitungen, Teilebestellung, Dokumentation.",
+                description: "Werkstatt-App: Diagnose, Reparaturanleitungen, Teilebestellung.",
                 requirements: [
                     "Offline Mode",
                     "Diagnostic Integration",
@@ -875,7 +808,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Dealer Portal",
                 shortName: "DP",
                 icon: "🏢",
-                description: "Händler-Portal: Fahrzeugbestand, Kundenmanagement, Kampagnen, Reporting.",
+                description: "Händler-Portal: Fahrzeugbestand, Kundenmanagement, Kampagnen.",
                 requirements: [
                     "Inventory Management",
                     "CRM Integration",
@@ -922,18 +855,234 @@ const AUTOMOTIVE_COMPONENTS = {
     },
 
     // =========================================================================
-    // EXTERNAL - Third Party & Partner
+    // DEVELOPMENT - Development & Testing Tools
     // =========================================================================
-    external: {
-        categoryName: "EXTERNAL / PARTNER",
-        categoryColor: "#455A64",
+    development: {
+        categoryName: "DEVELOPMENT",
+        categoryColor: "#E65100",
         components: [
+            {
+                id: "ota-server",
+                name: "OTA Update Server",
+                shortName: "OTA",
+                icon: "📲",
+                description: "Over-the-Air Update Management: Staged Rollout, Versioning, Rollback.",
+                requirements: [
+                    "Staged Rollout",
+                    "Version Control",
+                    "Rollback Support"
+                ]
+            },
+            {
+                id: "hil-simulator",
+                name: "HIL Simulator Interface",
+                shortName: "HIL",
+                icon: "🔬",
+                description: "Hardware-in-the-Loop Simulation: ECU Testing, Signal Injection.",
+                requirements: [
+                    "Signal Simulation",
+                    "Real-time Processing",
+                    "Test Automation"
+                ]
+            },
+            {
+                id: "data-logger",
+                name: "Development Data Logger",
+                shortName: "DDL",
+                icon: "📝",
+                description: "High-Speed Datenerfassung für Entwicklungsfahrzeuge: CAN, FlexRay, Ethernet.",
+                requirements: [
+                    "High Bandwidth",
+                    "Time Synchronization",
+                    "Cloud Upload"
+                ]
+            },
+            {
+                id: "calibration-tool",
+                name: "Calibration Tool Interface",
+                shortName: "CAL",
+                icon: "🎚️",
+                description: "Kalibrier-Werkzeug Anbindung: Parameter Tuning, Flash Programming.",
+                requirements: [
+                    "XCP/CCP Protocol",
+                    "A2L File Support",
+                    "Parameter Management"
+                ]
+            },
+            {
+                id: "test-bench",
+                name: "Test Bench Connector",
+                shortName: "TBC",
+                icon: "🏗️",
+                description: "Prüfstand-Anbindung: Motorprüfstand, Batterie-Test, Klimakammer.",
+                requirements: [
+                    "Measurement Integration",
+                    "Test Sequences",
+                    "Data Export"
+                ]
+            },
+            {
+                id: "validation-hub",
+                name: "Validation Data Hub",
+                shortName: "VDH",
+                icon: "✔️",
+                description: "Zentrale für Validierungsdaten: Test Results, Requirements Tracing.",
+                requirements: [
+                    "Requirements Linking",
+                    "Test Coverage",
+                    "Approval Workflows"
+                ]
+            },
+            {
+                id: "simulation-cloud",
+                name: "Simulation Cloud",
+                shortName: "SIM",
+                icon: "☁️",
+                description: "Cloud-basierte Simulation: Virtual Testing, Scenario Generation.",
+                requirements: [
+                    "Scalable Compute",
+                    "Scenario Library",
+                    "Result Analysis"
+                ]
+            },
+            {
+                id: "ci-cd-pipeline",
+                name: "CI/CD Pipeline",
+                shortName: "CICD",
+                icon: "🔄",
+                description: "Continuous Integration/Deployment: Build, Test, Deploy Automation.",
+                requirements: [
+                    "Git Integration",
+                    "Automated Testing",
+                    "Deployment Stages"
+                ]
+            }
+        ]
+    },
+
+    // =========================================================================
+    // AFTERSALES - Service, Quality & Partner Integration
+    // =========================================================================
+    aftersales: {
+        categoryName: "AFTERSALES",
+        categoryColor: "#37474F",
+        components: [
+            // --- Quality & Service ---
+            {
+                id: "customer-360",
+                name: "Customer 360 Service",
+                shortName: "C360",
+                icon: "👤",
+                description: "Ganzheitliche Kundenansicht: Profile, Interaktionen, Fahrzeuge.",
+                requirements: [
+                    "Profile Management",
+                    "Consent Management",
+                    "GDPR Compliance"
+                ]
+            },
+            {
+                id: "fleet-backend",
+                name: "Fleet Management Backend",
+                shortName: "FMB",
+                icon: "🚗",
+                description: "Backend für Flottenverwaltung: Tracking, Utilization, TCO Analysis.",
+                requirements: [
+                    "Real-time Tracking",
+                    "Geofencing",
+                    "Utilization Analytics"
+                ]
+            },
+            {
+                id: "warranty-analytics",
+                name: "Warranty Analytics Service",
+                shortName: "WAS",
+                icon: "📊",
+                description: "Garantie-Analyse: Claim Processing, Fraud Detection, Cost Analytics.",
+                requirements: [
+                    "Claim Processing",
+                    "Fraud Detection",
+                    "Cost Attribution"
+                ]
+            },
+            {
+                id: "qms",
+                name: "Quality Management System",
+                shortName: "QMS",
+                icon: "✅",
+                description: "Qualitätsmanagement: Issue Tracking, SPC/SQC, Audit Management.",
+                requirements: [
+                    "Issue Tracking",
+                    "SPC/SQC",
+                    "Audit Trail"
+                ]
+            },
+            {
+                id: "fmea-db",
+                name: "FMEA Database",
+                shortName: "FMEA",
+                icon: "📋",
+                description: "Failure Mode and Effects Analysis: Design FMEA, Process FMEA.",
+                requirements: [
+                    "Design FMEA",
+                    "Process FMEA",
+                    "RPN Calculation"
+                ]
+            },
+            {
+                id: "8d-engine",
+                name: "8D Process Engine",
+                shortName: "8D",
+                icon: "🔧",
+                description: "Problemlösungsprozess: 8D Report Workflow, Root Cause Analysis.",
+                requirements: [
+                    "8D Workflow",
+                    "Root Cause Analysis",
+                    "Action Management"
+                ]
+            },
+            {
+                id: "parts-forecast",
+                name: "Parts Demand Forecasting",
+                shortName: "PDF",
+                icon: "📦",
+                description: "Ersatzteil-Bedarfsprognose: Demand Planning, Inventory Optimization.",
+                requirements: [
+                    "Demand Forecasting",
+                    "Safety Stock",
+                    "Lead Time Optimization"
+                ]
+            },
+            {
+                id: "service-optimizer",
+                name: "Service Network Optimizer",
+                shortName: "SNO",
+                icon: "🛠️",
+                description: "Werkstatt-Netzwerk Optimierung: Capacity Planning, Scheduling.",
+                requirements: [
+                    "Capacity Planning",
+                    "Scheduling",
+                    "Resource Allocation"
+                ]
+            },
+            {
+                id: "pricing-engine",
+                name: "Dynamic Pricing Engine",
+                shortName: "DPE",
+                icon: "💰",
+                description: "Dynamische Preisgestaltung: Marktanalyse, Incentive Optimization.",
+                requirements: [
+                    "Market Analysis",
+                    "Price Optimization",
+                    "Competitor Monitoring"
+                ]
+            },
+            // --- External Partners ---
             {
                 id: "weather-api",
                 name: "Weather Data API",
                 shortName: "Weather",
                 icon: "🌤️",
-                description: "Wetterdaten-Integration: Aktuelle Bedingungen, Vorhersagen, Historische Daten.",
+                description: "Wetterdaten-Integration: Aktuelle Bedingungen, Vorhersagen.",
                 requirements: [
                     "Real-time Data",
                     "Forecast API",
@@ -969,7 +1118,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Energy Grid Interface",
                 shortName: "Grid",
                 icon: "⚡",
-                description: "Stromnetz-Anbindung: V2G Communication, Dynamic Pricing, Grid Balancing.",
+                description: "Stromnetz-Anbindung: V2G Communication, Dynamic Pricing.",
                 requirements: [
                     "OCPP 2.x",
                     "ISO 15118",
@@ -1017,133 +1166,11 @@ const AUTOMOTIVE_COMPONENTS = {
                 name: "Regulatory Reporting API",
                 shortName: "Reg",
                 icon: "📜",
-                description: "Behörden-Schnittstelle: Rückruf-Meldungen, Compliance Reports, Zulassung.",
+                description: "Behörden-Schnittstelle: Rückruf-Meldungen, Compliance Reports.",
                 requirements: [
                     "NHTSA/KBA Interface",
                     "Recall Management",
                     "Compliance Reports"
-                ]
-            }
-        ]
-    },
-
-    // =========================================================================
-    // CLOUD PLATFORMS - Hyperscaler & Data Infrastructure
-    // =========================================================================
-    cloudPlatforms: {
-        categoryName: "CLOUD PLATFORMS",
-        categoryColor: "#FF6F00",
-        components: [
-            {
-                id: "aws-cloud",
-                name: "AWS Cloud Services",
-                shortName: "AWS",
-                icon: "☁️",
-                description: "Amazon Web Services: EC2, S3, Lambda, IoT Core, SageMaker für ML Workloads.",
-                requirements: [
-                    "VPC Configuration",
-                    "IAM Roles & Policies",
-                    "S3 Bucket Encryption",
-                    "CloudWatch Monitoring",
-                    "TISAX-compliant Setup"
-                ]
-            },
-            {
-                id: "azure-cloud",
-                name: "Microsoft Azure",
-                shortName: "Azure",
-                icon: "☁️",
-                description: "Azure Cloud Platform: Azure IoT Hub, Synapse Analytics, Azure ML, Data Factory.",
-                requirements: [
-                    "Azure Active Directory",
-                    "Virtual Network",
-                    "Key Vault Integration",
-                    "Azure Monitor",
-                    "Compliance Center"
-                ]
-            },
-            {
-                id: "databricks",
-                name: "Databricks Platform",
-                shortName: "DBX",
-                icon: "⚡",
-                description: "Unified Analytics Platform: Lakehouse Architecture, Delta Lake, MLflow, Spark Clusters.",
-                requirements: [
-                    "Unity Catalog",
-                    "Workspace Configuration",
-                    "Cluster Policies",
-                    "Delta Sharing enabled",
-                    "Photon Runtime"
-                ]
-            },
-            {
-                id: "delta-sharing-server",
-                name: "Delta Sharing Server",
-                shortName: "DSS",
-                icon: "🔗",
-                description: "Open Protocol für sicheren Datenaustausch: Cross-Organization, Zero-Copy Sharing.",
-                requirements: [
-                    "Share Endpoints",
-                    "Recipient Management",
-                    "Audit Logging",
-                    "Token Authentication",
-                    "Data Governance"
-                ]
-            },
-            {
-                id: "gcp-cloud",
-                name: "Google Cloud Platform",
-                shortName: "GCP",
-                icon: "☁️",
-                description: "GCP Services: BigQuery, Vertex AI, Cloud IoT, Dataflow für Streaming Analytics.",
-                requirements: [
-                    "Project Configuration",
-                    "Service Accounts",
-                    "VPC Networks",
-                    "Cloud Logging",
-                    "Security Command Center"
-                ]
-            },
-            {
-                id: "snowflake",
-                name: "Snowflake Data Cloud",
-                shortName: "SF",
-                icon: "❄️",
-                description: "Cloud Data Warehouse: Data Sharing, Secure Data Exchange, Multi-Cloud Support.",
-                requirements: [
-                    "Warehouse Configuration",
-                    "Data Sharing Setup",
-                    "Role-based Access",
-                    "Query Monitoring",
-                    "Cross-Cloud Replication"
-                ]
-            },
-            {
-                id: "terraform",
-                name: "Terraform IaC",
-                shortName: "TF",
-                icon: "🔧",
-                description: "Infrastructure as Code: Multi-Cloud Provisioning, State Management, Module Registry.",
-                requirements: [
-                    "State Backend",
-                    "Provider Configuration",
-                    "Module Versioning",
-                    "CI/CD Integration",
-                    "Policy as Code"
-                ]
-            },
-            {
-                id: "kubernetes",
-                name: "Kubernetes Cluster",
-                shortName: "K8s",
-                icon: "☸️",
-                description: "Container Orchestration: EKS/AKS/GKE, Service Mesh, Auto-Scaling, GitOps.",
-                requirements: [
-                    "Cluster Configuration",
-                    "Namespace Isolation",
-                    "Ingress Controller",
-                    "Secrets Management",
-                    "Pod Security Policies"
                 ]
             }
         ]
@@ -1230,19 +1257,15 @@ function getCategoryStats() {
 
 /**
  * Import components into the Data Platform Builder
- * This function integrates with the existing appData structure
  */
 function importComponentsToBuilder(targetCategories) {
-    // Map component library categories to builder categories
     const categoryMapping = {
-        'vehicleSystems': 'ENTWICKLUNG',
-        'dataIngestion': 'PRODUKTION',
-        'dataPlatform': 'Audi Services',
-        'processing': 'Audi Services',
-        'mlAi': 'Audi Services',
-        'backendServices': 'Audi Services',
+        'vehicle': 'ENTWICKLUNG',
+        'nearVehicleBackend': 'PRODUKTION',
+        'dataProcessingBackend': 'Audi Services',
         'frontends': 'NUTZUNG',
-        'external': 'Third Party'
+        'development': 'ENTWICKLUNG',
+        'aftersales': 'Third Party'
     };
 
     const importedBlocks = [];
@@ -1283,7 +1306,7 @@ if (typeof window !== 'undefined') {
     window.importComponentsToBuilder = importComponentsToBuilder;
 }
 
-// Export for Node.js (if needed)
+// Export for Node.js
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         AUTOMOTIVE_COMPONENTS,
@@ -1296,6 +1319,6 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 
-console.log('📦 Automotive Component Library loaded');
+console.log('📦 Automotive Component Library v2.0 loaded');
 console.log(`   Total components: ${getAllComponents().length}`);
 console.log('   Categories:', Object.keys(AUTOMOTIVE_COMPONENTS).join(', '));

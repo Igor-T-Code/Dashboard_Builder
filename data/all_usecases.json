@@ -1,0 +1,509 @@
+{
+  "exportType": "usecases",
+  "exportDate": "2026-01-26",
+  "useCases": [
+    {
+      "name": "Development Logger Replacement",
+      "phaseId": 1,
+      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Das Fahrzeug sammelt kontinuierlich oder event-basiert bis zu 300 GB Rohdaten pro Tag. Upload erfolgt ueber WiFi auf dem Entwicklungs-Parkplatz.",
+      "businessValue": "Eliminierung teurer Hardware-Logger (500-1000 Euro pro Fahrzeug), schnellerer Datenzugriff (Stunden statt Tage), Skalierung auf gesamte Entwicklungsflotte.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        {
+          "type": "container",
+          "name": "Fahrzeug (Development)",
+          "description": "Fahrzeug-Sensorik und High-Speed Datenerfassung",
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-blue"
+        },
+        {
+          "type": "block",
+          "blockName": "Central Vehicle Computer",
+          "x": 130,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Telematics Control Unit",
+          "x": 130,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "OBD Diagnostic Bridge",
+          "x": 130,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Near-Vehicle Backend",
+          "description": "Lokale Datenerfassung und Normalisierung",
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-green"
+        },
+        {
+          "type": "block",
+          "blockName": "Vehicle Data Collector",
+          "x": 580,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "IoT Hub",
+          "x": 580,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Kafka Streaming",
+          "x": 580,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Data Platform",
+          "description": "Datenaufbereitung und Qualitaetssicherung",
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-mint"
+        },
+        {
+          "type": "block",
+          "blockName": "Bronze Layer",
+          "x": 1030,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Silver Layer",
+          "x": 1030,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Data Quality Engine",
+          "x": 1030,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Cloud Platform",
+          "description": "Externe Partner-Plattformen",
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-yellow"
+        },
+        {
+          "type": "block",
+          "blockName": "Databricks Platform",
+          "x": 1480,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Delta Sharing Server",
+          "x": 1480,
+          "y": 280
+        },
+        {
+          "type": "container",
+          "name": "Analytics & Monitoring",
+          "description": "Ueberwachung und Auswertung",
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-purple"
+        },
+        {
+          "type": "block",
+          "blockName": "Executive Dashboard",
+          "x": 1480,
+          "y": 540
+        },
+        {
+          "type": "block",
+          "blockName": "Quality Cockpit",
+          "x": 1480,
+          "y": 690
+        }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
+      ]
+    },
+    {
+      "name": "Production Data Access & Configuration Validation",
+      "phaseId": 2,
+      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion. Ermoeglicht das Auslesen aller Konfigurationsdaten ueber Near-Field Communication (NFC) oder drahtlose Verbindung via Data Collection Interface vom Backend.",
+      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz, Vermeidung von Rueckrufaktionen durch fruehe Fehlererkennung, Compliance mit ISO 26262.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        {
+          "type": "container",
+          "name": "Fahrzeug (Produktion)",
+          "description": "Fahrzeug-Steuergeraete und Konfigurationsspeicher",
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-blue"
+        },
+        {
+          "type": "block",
+          "blockName": "Central Vehicle Computer",
+          "x": 130,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Zone Controller Front",
+          "x": 130,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Central Gateway",
+          "x": 130,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Production Interface",
+          "description": "Nahfeld- und Wireless-Kommunikation",
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-green"
+        },
+        {
+          "type": "block",
+          "blockName": "Edge Gateway",
+          "x": 580,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "OBD Diagnostic Bridge",
+          "x": 580,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Vehicle Data Collector",
+          "x": 580,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Data Platform",
+          "description": "Datenverarbeitung und Qualitaetssicherung",
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-mint"
+        },
+        {
+          "type": "block",
+          "blockName": "Bronze Layer",
+          "x": 1030,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Silver Layer",
+          "x": 1030,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Data Quality Engine",
+          "x": 1030,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Backend Services",
+          "description": "Produktions-Backend und Validierung",
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-purple"
+        },
+        {
+          "type": "block",
+          "blockName": "Quality Management System",
+          "x": 1480,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "FMEA Database",
+          "x": 1480,
+          "y": 280
+        },
+        {
+          "type": "container",
+          "name": "Frontend",
+          "description": "Produktions-Arbeitsplaetze",
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-orange"
+        },
+        {
+          "type": "block",
+          "blockName": "Service Technician App",
+          "x": 1480,
+          "y": 540
+        },
+        {
+          "type": "block",
+          "blockName": "Quality Cockpit",
+          "x": 1480,
+          "y": 690
+        }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
+        { "fromIndex": 3, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
+      ]
+    },
+    {
+      "name": "Field Monitoring & Online Fault Validation",
+      "phaseId": 4,
+      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung. Zugriff auf alle Fahrzeugdaten im Feld basierend auf Kundeneinwilligung zur Ursachenanalyse.",
+      "businessValue": "Fruehe Fehlererkennung vor Kundenreklamation, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%, Proaktive Qualitaetssicherung.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        {
+          "type": "container",
+          "name": "Kundenfahrzeug",
+          "description": "Connected Vehicle im Feld",
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-blue"
+        },
+        {
+          "type": "block",
+          "blockName": "Central Vehicle Computer",
+          "x": 130,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Telematics Control Unit",
+          "x": 130,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Central Gateway",
+          "x": 130,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Data Ingestion",
+          "description": "Datenerfassung aus dem Feld",
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-green"
+        },
+        {
+          "type": "block",
+          "blockName": "Vehicle Data Collector",
+          "x": 580,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "IoT Hub",
+          "x": 580,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Kafka Streaming",
+          "x": 580,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "Data Platform",
+          "description": "Lakehouse mit Fehleranalyse",
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-mint"
+        },
+        {
+          "type": "block",
+          "blockName": "Bronze Layer",
+          "x": 1030,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Silver Layer",
+          "x": 1030,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Gold Layer",
+          "x": 1030,
+          "y": 430
+        },
+        {
+          "type": "container",
+          "name": "ML & Analytics",
+          "description": "Fehler- und Anomalieerkennung",
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-purple"
+        },
+        {
+          "type": "block",
+          "blockName": "Anomaly Detection Model",
+          "x": 1480,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Predictive Maintenance Model",
+          "x": 1480,
+          "y": 280
+        },
+        {
+          "type": "container",
+          "name": "Quality Backend",
+          "description": "Qualitaetsprozesse und Fehlerabstellung",
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-green"
+        },
+        {
+          "type": "block",
+          "blockName": "Quality Management System",
+          "x": 1480,
+          "y": 540
+        },
+        {
+          "type": "block",
+          "blockName": "8D Process Engine",
+          "x": 1480,
+          "y": 690
+        },
+        {
+          "type": "block",
+          "blockName": "FMEA Database",
+          "x": 1480,
+          "y": 840
+        },
+        {
+          "type": "container",
+          "name": "Frontend",
+          "description": "Qualitaets-Dashboards",
+          "x": 1850,
+          "y": 50,
+          "width": 380,
+          "height": 520,
+          "colorClass": "pastel-orange"
+        },
+        {
+          "type": "block",
+          "blockName": "Quality Cockpit",
+          "x": 1930,
+          "y": 130
+        },
+        {
+          "type": "block",
+          "blockName": "Fleet Manager Dashboard",
+          "x": 1930,
+          "y": 280
+        },
+        {
+          "type": "block",
+          "blockName": "Executive Dashboard",
+          "x": 1930,
+          "y": 430
+        }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
+        { "fromIndex": 17, "fromAnchor": "bottom", "toIndex": 18, "toAnchor": "top" },
+        { "fromIndex": 13, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
+        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
+        { "fromIndex": 16, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
+        { "fromIndex": 20, "fromAnchor": "bottom", "toIndex": 21, "toAnchor": "top" },
+        { "fromIndex": 21, "fromAnchor": "bottom", "toIndex": 22, "toAnchor": "top" }
+      ]
+    }
+  ],
+  "newBlocks": []
+}

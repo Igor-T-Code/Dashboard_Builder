@@ -175,6 +175,34 @@
       border-color: #444;
       color: white;
     }
+    .toolbar-btn.build-mode-active {
+      background: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-600) 100%);
+      color: white;
+      border-color: var(--color-brand-500);
+    }
+    .toolbar-btn.build-mode-active:hover {
+      background: linear-gradient(135deg, var(--color-brand-600) 0%, var(--color-brand-700) 100%);
+    }
+
+    /* ============== BUILD MODE ============== */
+    body.build-mode .usecase-panel {
+      display: none !important;
+    }
+    body.build-mode .usecase-library {
+      display: none !important;
+    }
+    body.build-mode .canvas-row {
+      height: 100% !important;
+    }
+    body.build-mode .canvas-area {
+      flex: 1 !important;
+    }
+    body.build-mode .canvas {
+      background: #f8f9fa !important;
+    }
+    body.build-mode .workspace {
+      height: calc(100vh - 56px) !important;
+    }
     .toolbar-divider {
       width: 1px;
       height: 24px;
@@ -598,8 +626,8 @@
     }
     .canvas {
       position: relative;
-      width: 3000px;
-      height: 2000px;
+      width: 15000px;
+      height: 10000px;
       background: #FFFFFF;
       background-image: radial-gradient(rgba(148, 163, 184, 0.3) 1px, transparent 1px);
       background-size: 20px 20px;
@@ -1275,22 +1303,37 @@
       z-index: 1;
     }
     .connection {
-      stroke: var(--slate-400);
-      stroke-width: 2;
+      stroke: #64748b;
+      stroke-width: 1.5;
       fill: none;
       pointer-events: stroke;
       cursor: pointer;
-      transition: stroke 0.15s ease;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: all 0.2s ease;
     }
     .connection:hover {
       stroke: var(--color-brand-500);
-      stroke-width: 2.5;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 3px rgba(235, 13, 63, 0.4));
+    }
+    .connection-shadow {
+      stroke: rgba(0, 0, 0, 0.08);
+      stroke-width: 4;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .connection-temp {
       stroke: var(--color-brand-500);
-      stroke-width: 2;
-      stroke-dasharray: 6, 4;
+      stroke-width: 1.5;
+      stroke-dasharray: 8, 6;
       fill: none;
+      stroke-linecap: round;
+      animation: dash-flow 0.5s linear infinite;
+    }
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -14; }
     }
 
     /* ============== RESIZE HANDLE ============== */
@@ -1925,6 +1968,14 @@
             <line x1="10" y1="8" x2="14" y2="8"/>
           </svg>
           Bibliothek
+        </button>
+        <button class="toolbar-btn" id="buildModeBtn" onclick="toggleBuildMode()" title="Build Mode - Fokussierte Ansicht">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Build Mode
         </button>
       </div>
     </div>
@@ -4074,6 +4125,38 @@
       }
     }
 
+    // ============== BUILD MODE ==============
+    let buildModeActive = false;
+
+    function toggleBuildMode() {
+      buildModeActive = !buildModeActive;
+      const btn = document.getElementById('buildModeBtn');
+
+      if (buildModeActive) {
+        document.body.classList.add('build-mode');
+        btn.classList.add('build-mode-active');
+        btn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Exit Build
+        `;
+      } else {
+        document.body.classList.remove('build-mode');
+        btn.classList.remove('build-mode-active');
+        btn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Build Mode
+        `;
+      }
+    }
+
     // ============== DRAG & DROP ==============
     function handleBlockDragStart(event, blockId) {
       event.dataTransfer.setData('blockId', blockId);
@@ -4294,10 +4377,18 @@
       }
     });
 
-    // ESC zum Abbrechen
+    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
+      // ESC zum Abbrechen
       if (e.key === 'Escape' && connectionStart) {
         cancelConnection();
+      }
+      // B für Build Mode (nur wenn kein Input fokussiert)
+      if (e.key === 'b' || e.key === 'B') {
+        const activeEl = document.activeElement;
+        if (activeEl.tagName !== 'INPUT' && activeEl.tagName !== 'TEXTAREA' && !activeEl.isContentEditable) {
+          toggleBuildMode();
+        }
       }
     });
 
@@ -4313,12 +4404,19 @@
       const svg = document.getElementById('connectionsSvg');
       svg.innerHTML = `
         <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="#555" />
+          <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 8 3 L 0 6 L 2 3 Z" fill="#64748b" />
           </marker>
-          <marker id="arrowhead-hover" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="#e94560" />
+          <marker id="arrowhead-hover" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 8 3 L 0 6 L 2 3 Z" fill="#EB0D3F" />
           </marker>
+          <filter id="connection-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
       `;
 
@@ -4329,7 +4427,13 @@
           const fromPos = getAnchorPosition(fromEl, connectionStart.anchor);
           const tempPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           tempPath.setAttribute('class', 'connection-temp');
-          tempPath.setAttribute('d', `M ${fromPos.x} ${fromPos.y} L ${tempLineEnd.x} ${tempLineEnd.y}`);
+
+          // Smooth curve for temp line too
+          const dx = tempLineEnd.x - fromPos.x;
+          const dy = tempLineEnd.y - fromPos.y;
+          const cx = fromPos.x + dx * 0.5;
+          const cy = fromPos.y + dy * 0.5;
+          tempPath.setAttribute('d', `M ${fromPos.x} ${fromPos.y} Q ${cx} ${fromPos.y}, ${tempLineEnd.x} ${tempLineEnd.y}`);
           svg.appendChild(tempPath);
         }
       }
@@ -4348,10 +4452,12 @@
         // Berechne Kontrollpunkte für glatte Kurve
         const dx = toPos.x - fromPos.x;
         const dy = toPos.y - fromPos.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Bezier-Kurve basierend auf Anker-Positionen
+        // Dynamischer Offset basierend auf Distanz
+        const offset = Math.max(40, Math.min(distance * 0.4, 120));
+
         let cp1x, cp1y, cp2x, cp2y;
-        const offset = Math.min(Math.abs(dx), Math.abs(dy), 80);
 
         if (conn.fromAnchor === 'right' || conn.fromAnchor === 'left') {
           cp1x = fromPos.x + (conn.fromAnchor === 'right' ? offset : -offset);
@@ -4369,14 +4475,21 @@
           cp2y = toPos.y + (conn.toAnchor === 'bottom' ? offset : -offset);
         }
 
+        const pathD = `M ${fromPos.x} ${fromPos.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${toPos.x} ${toPos.y}`;
+
+        // Shadow path (rendered first, behind main path)
+        const shadowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        shadowPath.setAttribute('class', 'connection-shadow');
+        shadowPath.setAttribute('d', pathD);
+        svg.appendChild(shadowPath);
+
+        // Main connection path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('class', 'connection');
         path.setAttribute('data-conn-id', conn.id);
         path.setAttribute('marker-end', 'url(#arrowhead)');
         path.style.pointerEvents = 'stroke';
-
-        // Kubische Bezier-Kurve
-        path.setAttribute('d', `M ${fromPos.x} ${fromPos.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${toPos.x} ${toPos.y}`);
+        path.setAttribute('d', pathD);
 
         // Klick zum Löschen
         path.addEventListener('click', (e) => {
@@ -4384,12 +4497,14 @@
           deleteConnection(conn.id);
         });
 
-        // Hover-Effekt für Pfeilspitze
+        // Hover-Effekt
         path.addEventListener('mouseenter', () => {
           path.setAttribute('marker-end', 'url(#arrowhead-hover)');
+          shadowPath.style.stroke = 'rgba(235, 13, 63, 0.15)';
         });
         path.addEventListener('mouseleave', () => {
           path.setAttribute('marker-end', 'url(#arrowhead)');
+          shadowPath.style.stroke = 'rgba(0, 0, 0, 0.08)';
         });
 
         svg.appendChild(path);
