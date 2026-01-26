@@ -1,0 +1,382 @@
+{
+  "exportType": "usecases",
+  "exportDate": "2026-01-23",
+  "useCases": [
+    {
+      "name": "Development Logger Replacement",
+      "phaseId": 1,
+      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Das Fahrzeug sammelt kontinuierlich oder event-basiert (URC, externe Trigger) bis zu 300 GB Rohdaten pro Tag. Upload erfolgt über die Connectivity Unit via externem WiFi auf dem Entwicklungs-Parkplatz. Daten werden im Near-Vehicle Backend normalisiert und an externe Datenplattformen für Processing und Analytics weitergeleitet.",
+      "businessValue": "Eliminierung teurer Hardware-Logger (Kosteneinsparung 500-1000€ pro Fahrzeug), schnellerer Datenzugriff (Stunden statt Tage), Skalierung auf gesamte Entwicklungsflotte, automatisierte Datenqualitaetssicherung, nahtlose Integration mit bestehenden Analyse-Plattformen.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        {
+          "type": "container",
+          "name": "Fahrzeug (Development)",
+          "description": "Fahrzeug-Sensorik und High-Speed Datenerfassung",
+          "x": 100,
+          "y": 100,
+          "width": 450,
+          "height": 500,
+          "colorClass": "pastel-blue"
+        },
+        {
+          "type": "block",
+          "blockName": "Central Vehicle Computer",
+          "x": 180,
+          "y": 200
+        },
+        {
+          "type": "block",
+          "blockName": "Zone Controller Front",
+          "x": 180,
+          "y": 320
+        },
+        {
+          "type": "block",
+          "blockName": "Central Gateway",
+          "x": 350,
+          "y": 200
+        },
+        {
+          "type": "block",
+          "blockName": "Telematics Control Unit",
+          "x": 350,
+          "y": 320
+        },
+        {
+          "type": "block",
+          "blockName": "OBD Diagnostic Bridge",
+          "x": 180,
+          "y": 440
+        },
+        {
+          "type": "block",
+          "blockName": "Edge Data Buffer",
+          "x": 350,
+          "y": 440
+        },
+        {
+          "type": "container",
+          "name": "Near-Vehicle Backend",
+          "description": "Lokale Datenerfassung und Normalisierung",
+          "x": 650,
+          "y": 100,
+          "width": 350,
+          "height": 500,
+          "colorClass": "pastel-green"
+        },
+        {
+          "type": "block",
+          "blockName": "Vehicle Data Collector",
+          "x": 730,
+          "y": 200
+        },
+        {
+          "type": "block",
+          "blockName": "IoT Hub",
+          "x": 730,
+          "y": 320
+        },
+        {
+          "type": "block",
+          "blockName": "Kafka Streaming",
+          "x": 730,
+          "y": 440
+        },
+        {
+          "type": "container",
+          "name": "Data Normalization Layer",
+          "description": "Datenaufbereitung und Qualitaetssicherung",
+          "x": 1100,
+          "y": 100,
+          "width": 350,
+          "height": 500,
+          "colorClass": "pastel-mint"
+        },
+        {
+          "type": "block",
+          "blockName": "Bronze Layer",
+          "x": 1180,
+          "y": 200
+        },
+        {
+          "type": "block",
+          "blockName": "Silver Layer",
+          "x": 1180,
+          "y": 320
+        },
+        {
+          "type": "block",
+          "blockName": "Data Quality Engine",
+          "x": 1180,
+          "y": 440
+        },
+        {
+          "type": "container",
+          "name": "External Data Platforms",
+          "description": "Partner-Plattformen fuer Processing und Analytics",
+          "x": 1550,
+          "y": 100,
+          "width": 400,
+          "height": 350,
+          "colorClass": "pastel-yellow"
+        },
+        {
+          "type": "block",
+          "blockName": "External Data Platform Connector",
+          "x": 1630,
+          "y": 200
+        },
+        {
+          "type": "block",
+          "blockName": "Supplier Collaboration Portal",
+          "x": 1630,
+          "y": 320
+        },
+        {
+          "type": "block",
+          "blockName": "Partner API Gateway",
+          "x": 1800,
+          "y": 200
+        },
+        {
+          "type": "container",
+          "name": "Analytics & Monitoring",
+          "description": "Ueberwachung und Auswertung",
+          "x": 1550,
+          "y": 500,
+          "width": 400,
+          "height": 250,
+          "colorClass": "pastel-purple"
+        },
+        {
+          "type": "block",
+          "blockName": "Development Analytics Dashboard",
+          "x": 1630,
+          "y": 580
+        },
+        {
+          "type": "block",
+          "blockName": "Data Transfer Monitor",
+          "x": 1800,
+          "y": 580
+        }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 3, "toAnchor": "left" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 3, "toAnchor": "left" },
+        { "fromIndex": 3, "fromAnchor": "bottom", "toIndex": 4, "toAnchor": "top" },
+        { "fromIndex": 5, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 5, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "top", "toIndex": 4, "toAnchor": "bottom" },
+        { "fromIndex": 4, "fromAnchor": "right", "toIndex": 8, "toAnchor": "left" },
+        { "fromIndex": 8, "fromAnchor": "bottom", "toIndex": 9, "toAnchor": "top" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 12, "toAnchor": "left" },
+        { "fromIndex": 12, "fromAnchor": "bottom", "toIndex": 13, "toAnchor": "top" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 16, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "right", "toIndex": 16, "toAnchor": "left" },
+        { "fromIndex": 16, "fromAnchor": "right", "toIndex": 18, "toAnchor": "left" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 20, "toAnchor": "top" }
+      ]
+    },
+    {
+      "name": "Production Data Access & Configuration Validation",
+      "phaseId": 2,
+      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion. Ermoeglicht das Auslesen aller Konfigurationsdaten ueber Near-Field Communication (NFC) oder drahtlose Verbindung via Data Collection Interface vom Backend.",
+      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz, Vermeidung von Rueckrufaktionen durch fruehe Fehlererkennung, Compliance mit ISO 26262 Anforderungen.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        { "type": "container", "name": "Fahrzeug", "description": "Fahrzeug-Steuergeraete und Konfigurationsspeicher", "x": 100, "y": 100, "width": 400, "height": 400, "colorClass": "pastel-blue" },
+        { "type": "block", "blockName": "Central Vehicle Computer", "x": 200, "y": 200 },
+        { "type": "block", "blockName": "Zone Controller", "x": 200, "y": 320 },
+        { "type": "block", "blockName": "Gateway ECU", "x": 200, "y": 440 },
+
+        { "type": "container", "name": "Production Interface", "description": "Nahfeld- und Wireless-Kommunikation", "x": 600, "y": 100, "width": 300, "height": 400, "colorClass": "pastel-green" },
+        { "type": "block", "blockName": "Edge Gateway", "x": 680, "y": 200 },
+        { "type": "block", "blockName": "OBD Diagnostic Bridge", "x": 680, "y": 320 },
+        { "type": "block", "blockName": "Vehicle Data Collector", "x": 680, "y": 440 },
+
+        { "type": "container", "name": "Backend Services", "description": "Produktions-Backend und Validierung", "x": 1000, "y": 100, "width": 350, "height": 400, "colorClass": "pastel-mint" },
+        { "type": "block", "blockName": "Quality Management System", "x": 1080, "y": 200 },
+        { "type": "block", "blockName": "Data Quality Engine", "x": 1080, "y": 320 },
+        { "type": "block", "blockName": "FMEA Database", "x": 1080, "y": 440 },
+
+        { "type": "container", "name": "Frontend", "description": "Produktions-Arbeitsplaetze", "x": 1450, "y": 100, "width": 350, "height": 300, "colorClass": "pastel-orange" },
+        { "type": "block", "blockName": "Service Technician App", "x": 1530, "y": 200 },
+        { "type": "block", "blockName": "Quality Cockpit", "x": 1530, "y": 320 }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
+        { "fromIndex": 3, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 9, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 14, "toAnchor": "left" }
+      ]
+    },
+    {
+      "name": "Field Monitoring & Online Fault Validation",
+      "phaseId": 4,
+      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung. Zugriff auf alle Fahrzeugdaten im Feld fuer Monitoring-Zwecke zur Bewertung moeglicher Probleme. Bei erkannten Problemen dynamischer Zugriff auf erforderliche Daten basierend auf Kundeneinwilligung zur Ursachenanalyse. Zugriff auf SW-Fehler in Connected-Daten des Fahrzeugs.",
+      "businessValue": "Fruehe Fehlererkennung vor Kundenreklamation, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%, Proaktive Qualitaetssicherung, Verbesserung NPS Score durch schnelle Problemloesung.",
+      "owner": "I/EI",
+      "priority": "prio-1",
+      "status": "draft",
+      "elements": [
+        { "type": "container", "name": "Kundenfahrzeug", "description": "Connected Vehicle im Feld", "x": 100, "y": 100, "width": 400, "height": 450, "colorClass": "pastel-blue" },
+        { "type": "block", "blockName": "Central Vehicle Computer", "x": 200, "y": 200 },
+        { "type": "block", "blockName": "Telematics Control Unit", "x": 200, "y": 320 },
+        { "type": "block", "blockName": "Zone Controller", "x": 200, "y": 440 },
+        { "type": "block", "blockName": "Gateway ECU", "x": 320, "y": 320 },
+
+        { "type": "container", "name": "Data Ingestion", "description": "Datenerfassung und Consent Management", "x": 600, "y": 100, "width": 300, "height": 450, "colorClass": "pastel-green" },
+        { "type": "block", "blockName": "Vehicle Data Collector", "x": 680, "y": 200 },
+        { "type": "block", "blockName": "IoT Hub", "x": 680, "y": 320 },
+        { "type": "block", "blockName": "Kafka Streaming", "x": 680, "y": 440 },
+
+        { "type": "container", "name": "Data Platform", "description": "Lakehouse mit Fehleranalyse", "x": 1000, "y": 100, "width": 400, "height": 450, "colorClass": "pastel-mint" },
+        { "type": "block", "blockName": "Bronze Layer", "x": 1080, "y": 200 },
+        { "type": "block", "blockName": "Silver Layer", "x": 1080, "y": 320 },
+        { "type": "block", "blockName": "Gold Layer", "x": 1280, "y": 320 },
+        { "type": "block", "blockName": "Data Quality Engine", "x": 1280, "y": 440 },
+
+        { "type": "container", "name": "ML & Anomaly Detection", "description": "Fehler- und Anomalieerkennung", "x": 1500, "y": 100, "width": 350, "height": 250, "colorClass": "pastel-purple" },
+        { "type": "block", "blockName": "Anomaly Detection Model", "x": 1580, "y": 200 },
+        { "type": "block", "blockName": "Predictive Maintenance Model", "x": 1580, "y": 300 },
+
+        { "type": "container", "name": "Quality Backend", "description": "Qualitaetsprozesse und Fehlerabstellung", "x": 1500, "y": 380, "width": 350, "height": 300, "colorClass": "pastel-green" },
+        { "type": "block", "blockName": "Quality Management System", "x": 1580, "y": 450 },
+        { "type": "block", "blockName": "8D Process Engine", "x": 1580, "y": 550 },
+        { "type": "block", "blockName": "FMEA Database", "x": 1580, "y": 650 },
+
+        { "type": "container", "name": "Frontend", "description": "Qualitaets-Dashboards", "x": 1950, "y": 100, "width": 350, "height": 350, "colorClass": "pastel-orange" },
+        { "type": "block", "blockName": "Quality Cockpit", "x": 2030, "y": 200 },
+        { "type": "block", "blockName": "Fleet Dashboard", "x": 2030, "y": 320 }
+      ],
+      "connections": [
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 4, "toAnchor": "left" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 4, "toAnchor": "left" },
+        { "fromIndex": 3, "fromAnchor": "right", "toIndex": 4, "toAnchor": "bottom" },
+        { "fromIndex": 4, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "bottom", "toIndex": 8, "toAnchor": "top" },
+        { "fromIndex": 8, "fromAnchor": "right", "toIndex": 10, "toAnchor": "left" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 12, "toAnchor": "left" },
+        { "fromIndex": 12, "fromAnchor": "bottom", "toIndex": 13, "toAnchor": "top" },
+        { "fromIndex": 12, "fromAnchor": "right", "toIndex": 15, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "right", "toIndex": 16, "toAnchor": "left" },
+        { "fromIndex": 15, "fromAnchor": "bottom", "toIndex": 18, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "right", "toIndex": 18, "toAnchor": "left" },
+        { "fromIndex": 18, "fromAnchor": "bottom", "toIndex": 19, "toAnchor": "top" },
+        { "fromIndex": 19, "fromAnchor": "bottom", "toIndex": 20, "toAnchor": "top" },
+        { "fromIndex": 18, "fromAnchor": "right", "toIndex": 22, "toAnchor": "left" },
+        { "fromIndex": 19, "fromAnchor": "right", "toIndex": 23, "toAnchor": "left" }
+      ]
+    }
+  ],
+  "newBlocks": [
+    {
+      "name": "Edge Data Buffer",
+      "category": "ENTWICKLUNG",
+      "icon": "database",
+      "description": "Hochkapazitaets-Pufferspeicher im Fahrzeug fuer temporaere Speicherung von bis zu 300GB Entwicklungsdaten vor WiFi-Upload. Unterstuetzt Event-Trigger, URC-basierte Aufzeichnung und kontinuierliches Logging.",
+      "requirements": [
+        "Speicherkapazitaet min. 500GB SSD",
+        "Schreibgeschwindigkeit min. 500 MB/s",
+        "Trigger-Interface fuer URC Events",
+        "Ringbuffer-Modus fuer kontinuierliche Aufzeichnung",
+        "Metadaten-Tagging fuer Events"
+      ]
+    },
+    {
+      "name": "External Data Platform Connector",
+      "category": "Audi Services",
+      "icon": "git-merge",
+      "description": "Standardisierter Connector fuer die Anbindung externer Datenplattformen (Engineering Partner, Zulieferer, Analysedienstleister). Unterstuetzt verschiedene Protokolle und Datenformate.",
+      "requirements": [
+        "REST/gRPC API Support",
+        "Bulk-Transfer fuer grosse Datenmengen",
+        "Authentifizierung via OAuth2/OIDC",
+        "Datenformat-Transformation (Parquet, Avro, JSON)",
+        "Rate Limiting und Retry-Logik"
+      ]
+    },
+    {
+      "name": "Partner API Gateway",
+      "category": "Third Party",
+      "icon": "globe",
+      "description": "API Gateway fuer sichere Datenbereitstellung an externe Partner und Analyseplattformen. Managed Access Control und Audit Logging.",
+      "requirements": [
+        "API Key Management",
+        "Request/Response Logging",
+        "Quota Management pro Partner",
+        "Data Masking fuer sensible Felder",
+        "SLA Monitoring"
+      ]
+    },
+    {
+      "name": "Development Analytics Dashboard",
+      "category": "NUTZUNG",
+      "icon": "bar-chart",
+      "description": "Dashboard fuer Entwicklungsingenieure zur Ueberwachung der Datenerfassung, Upload-Status und Datenqualitaet aller Entwicklungsfahrzeuge.",
+      "requirements": [
+        "Echtzeit-Status aller Fahrzeuge",
+        "Upload-Fortschritt und Fehler",
+        "Datenvolumen-Statistiken",
+        "Event-Trigger Uebersicht",
+        "Filterung nach Fahrzeug/Projekt"
+      ]
+    },
+    {
+      "name": "Data Transfer Monitor",
+      "category": "NUTZUNG",
+      "icon": "activity",
+      "description": "Monitoring-Tool fuer die Ueberwachung aller Datentransfers zu externen Plattformen. Alerting bei Fehlern oder SLA-Verletzungen.",
+      "requirements": [
+        "Transfer-Status Dashboard",
+        "Bandbreiten-Monitoring",
+        "Fehler-Alerting",
+        "SLA-Compliance Reports",
+        "Retry-Queue Management"
+      ]
+    },
+    {
+      "name": "Consent Manager",
+      "category": "Backend Services",
+      "icon": "shield",
+      "description": "Verwaltet Kundeneinwilligungen fuer Datenzugriff gemaess DSGVO und OEM-Richtlinien",
+      "requirements": [
+        "DSGVO-Konformitaet",
+        "Audit-Trail",
+        "Echtzeit-Consent-Pruefung"
+      ]
+    },
+    {
+      "name": "NFC Reader Interface",
+      "category": "PRODUKTION",
+      "icon": "radio",
+      "description": "Near-Field Communication Interface fuer kontaktlose Datenauslese in der Produktionslinie",
+      "requirements": [
+        "ISO 14443 / ISO 15693 Support",
+        "Lesereichweite bis 10cm",
+        "Verschluesselte Datenuebertragung",
+        "Integration in Produktions-IT"
+      ]
+    }
+  ]
+}
