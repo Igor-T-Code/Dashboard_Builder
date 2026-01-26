@@ -1,12 +1,12 @@
 {
   "exportType": "usecases",
-  "exportDate": "2026-01-23",
+  "exportDate": "2026-01-26",
   "useCases": [
     {
       "name": "Production Data Access & Configuration Validation",
       "phaseId": 2,
-      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion. Ermoeglicht das Auslesen aller Konfigurationsdaten ueber Near-Field Communication (NFC) oder drahtlose Verbindung via Data Collection Interface vom Backend. Unterstuetzt End-of-Line Pruefung und Konfigurationsabgleich.",
-      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz, Vermeidung von Rueckrufaktionen durch fruehe Fehlererkennung, Compliance mit ISO 26262 Anforderungen.",
+      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion. Ermoeglicht das Auslesen aller Konfigurationsdaten ueber Near-Field Communication (NFC) oder drahtlose Verbindung via Data Collection Interface vom Backend.",
+      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz, Vermeidung von Rueckrufaktionen durch fruehe Fehlererkennung, Compliance mit ISO 26262.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
@@ -15,161 +15,153 @@
           "type": "container",
           "name": "Fahrzeug (Produktion)",
           "description": "Fahrzeug-Steuergeraete und Konfigurationsspeicher",
-          "x": 100,
-          "y": 100,
-          "width": 400,
-          "height": 450,
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-blue"
         },
         {
           "type": "block",
           "blockName": "Central Vehicle Computer",
-          "x": 200,
-          "y": 200
+          "x": 130,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Zone Controller Front",
-          "x": 200,
-          "y": 320
+          "x": 130,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Central Gateway",
-          "x": 200,
-          "y": 440
-        },
-        {
-          "type": "block",
-          "blockName": "Body Control Module",
-          "x": 320,
-          "y": 320
+          "x": 130,
+          "y": 430
         },
         {
           "type": "container",
           "name": "Production Interface",
-          "description": "Nahfeld- und Wireless-Kommunikation fuer Produktionszugriff",
-          "x": 600,
-          "y": 100,
-          "width": 300,
-          "height": 450,
+          "description": "Nahfeld- und Wireless-Kommunikation",
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-green"
         },
         {
           "type": "block",
           "blockName": "Edge Gateway",
-          "x": 680,
-          "y": 200
+          "x": 580,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "OBD Diagnostic Bridge",
-          "x": 680,
-          "y": 320
+          "x": 580,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Vehicle Data Collector",
-          "x": 680,
-          "y": 440
+          "x": 580,
+          "y": 430
         },
         {
           "type": "container",
           "name": "Data Platform",
           "description": "Datenverarbeitung und Qualitaetssicherung",
-          "x": 1000,
-          "y": 100,
-          "width": 350,
-          "height": 450,
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-mint"
         },
         {
           "type": "block",
           "blockName": "Bronze Layer",
-          "x": 1080,
-          "y": 200
+          "x": 1030,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Silver Layer",
-          "x": 1080,
-          "y": 320
+          "x": 1030,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Data Quality Engine",
-          "x": 1080,
-          "y": 440
+          "x": 1030,
+          "y": 430
         },
         {
           "type": "container",
           "name": "Backend Services",
           "description": "Produktions-Backend und Validierung",
-          "x": 1450,
-          "y": 100,
-          "width": 350,
-          "height": 300,
-          "colorClass": "pastel-green"
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
+          "colorClass": "pastel-purple"
         },
         {
           "type": "block",
           "blockName": "Quality Management System",
-          "x": 1530,
-          "y": 200
+          "x": 1480,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "FMEA Database",
-          "x": 1530,
-          "y": 320
+          "x": 1480,
+          "y": 280
         },
         {
           "type": "container",
           "name": "Frontend",
           "description": "Produktions-Arbeitsplaetze",
-          "x": 1450,
-          "y": 450,
-          "width": 350,
-          "height": 250,
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 370,
           "colorClass": "pastel-orange"
         },
         {
           "type": "block",
           "blockName": "Service Technician App",
-          "x": 1530,
-          "y": 520
+          "x": 1480,
+          "y": 540
         },
         {
           "type": "block",
           "blockName": "Quality Cockpit",
-          "x": 1530,
-          "y": 640
+          "x": 1480,
+          "y": 690
         }
       ],
       "connections": [
         { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
         { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
-        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 4, "toAnchor": "left" },
-        { "fromIndex": 3, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
-        { "fromIndex": 4, "fromAnchor": "right", "toIndex": 7, "toAnchor": "left" },
-        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
+        { "fromIndex": 3, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
         { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
-        { "fromIndex": 7, "fromAnchor": "bottom", "toIndex": 8, "toAnchor": "top" },
-        { "fromIndex": 8, "fromAnchor": "right", "toIndex": 10, "toAnchor": "left" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
-        { "fromIndex": 11, "fromAnchor": "bottom", "toIndex": 12, "toAnchor": "top" },
-        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 14, "toAnchor": "left" },
-        { "fromIndex": 12, "fromAnchor": "right", "toIndex": 14, "toAnchor": "left" },
-        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 15, "toAnchor": "top" },
-        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
-        { "fromIndex": 15, "fromAnchor": "bottom", "toIndex": 18, "toAnchor": "top" }
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
       ]
     },
     {
       "name": "Field Monitoring & Online Fault Validation",
       "phaseId": 4,
-      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung. Zugriff auf alle Fahrzeugdaten im Feld fuer Monitoring-Zwecke zur Bewertung moeglicher Probleme. Bei erkannten Problemen dynamischer Zugriff auf erforderliche Daten basierend auf Kundeneinwilligung zur Ursachenanalyse. Zugriff auf SW-Fehler in Connected-Daten des Fahrzeugs.",
-      "businessValue": "Fruehe Fehlererkennung vor Kundenreklamation, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%, Proaktive Qualitaetssicherung, Verbesserung NPS Score durch schnelle Problemloesung.",
+      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung. Zugriff auf alle Fahrzeugdaten im Feld basierend auf Kundeneinwilligung zur Ursachenanalyse.",
+      "businessValue": "Fruehe Fehlererkennung vor Kundenreklamation, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%, Proaktive Qualitaetssicherung.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
@@ -177,194 +169,185 @@
         {
           "type": "container",
           "name": "Kundenfahrzeug",
-          "description": "Connected Vehicle im Feld mit Telematik",
-          "x": 100,
-          "y": 100,
-          "width": 400,
-          "height": 450,
+          "description": "Connected Vehicle im Feld",
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-blue"
         },
         {
           "type": "block",
           "blockName": "Central Vehicle Computer",
-          "x": 200,
-          "y": 200
+          "x": 130,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Telematics Control Unit",
-          "x": 200,
-          "y": 320
-        },
-        {
-          "type": "block",
-          "blockName": "Zone Controller Front",
-          "x": 200,
-          "y": 440
+          "x": 130,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Central Gateway",
-          "x": 320,
-          "y": 320
+          "x": 130,
+          "y": 430
         },
         {
           "type": "container",
           "name": "Data Ingestion",
           "description": "Datenerfassung aus dem Feld",
-          "x": 600,
-          "y": 100,
-          "width": 300,
-          "height": 450,
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-green"
         },
         {
           "type": "block",
           "blockName": "Vehicle Data Collector",
-          "x": 680,
-          "y": 200
+          "x": 580,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "IoT Hub",
-          "x": 680,
-          "y": 320
+          "x": 580,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Kafka Streaming",
-          "x": 680,
-          "y": 440
+          "x": 580,
+          "y": 430
         },
         {
           "type": "container",
           "name": "Data Platform",
           "description": "Lakehouse mit Fehleranalyse",
-          "x": 1000,
-          "y": 100,
-          "width": 350,
-          "height": 450,
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-mint"
         },
         {
           "type": "block",
           "blockName": "Bronze Layer",
-          "x": 1080,
-          "y": 200
+          "x": 1030,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Silver Layer",
-          "x": 1080,
-          "y": 320
+          "x": 1030,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Gold Layer",
-          "x": 1080,
-          "y": 440
+          "x": 1030,
+          "y": 430
         },
         {
           "type": "container",
           "name": "ML & Analytics",
           "description": "Fehler- und Anomalieerkennung",
-          "x": 1450,
-          "y": 100,
-          "width": 350,
-          "height": 300,
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
           "colorClass": "pastel-purple"
         },
         {
           "type": "block",
           "blockName": "Anomaly Detection Model",
-          "x": 1530,
-          "y": 200
+          "x": 1480,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Predictive Maintenance Model",
-          "x": 1530,
-          "y": 320
+          "x": 1480,
+          "y": 280
         },
         {
           "type": "container",
           "name": "Quality Backend",
           "description": "Qualitaetsprozesse und Fehlerabstellung",
-          "x": 1450,
-          "y": 450,
-          "width": 350,
-          "height": 350,
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-green"
         },
         {
           "type": "block",
           "blockName": "Quality Management System",
-          "x": 1530,
-          "y": 520
+          "x": 1480,
+          "y": 540
         },
         {
           "type": "block",
           "blockName": "8D Process Engine",
-          "x": 1530,
-          "y": 640
+          "x": 1480,
+          "y": 690
         },
         {
           "type": "block",
           "blockName": "FMEA Database",
-          "x": 1530,
-          "y": 760
+          "x": 1480,
+          "y": 840
         },
         {
           "type": "container",
           "name": "Frontend",
-          "description": "Qualitaets-Dashboards und Monitoring",
-          "x": 1900,
-          "y": 100,
-          "width": 350,
-          "height": 400,
+          "description": "Qualitaets-Dashboards",
+          "x": 1850,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-orange"
         },
         {
           "type": "block",
           "blockName": "Quality Cockpit",
-          "x": 1980,
-          "y": 200
+          "x": 1930,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Fleet Manager Dashboard",
-          "x": 1980,
-          "y": 320
+          "x": 1930,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Executive Dashboard",
-          "x": 1980,
-          "y": 440
+          "x": 1930,
+          "y": 430
         }
       ],
       "connections": [
         { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
         { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
-        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 4, "toAnchor": "left" },
-        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 4, "toAnchor": "left" },
-        { "fromIndex": 4, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
         { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
-        { "fromIndex": 7, "fromAnchor": "bottom", "toIndex": 8, "toAnchor": "top" },
-        { "fromIndex": 8, "fromAnchor": "right", "toIndex": 10, "toAnchor": "left" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
+        { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
-        { "fromIndex": 11, "fromAnchor": "bottom", "toIndex": 12, "toAnchor": "top" },
-        { "fromIndex": 12, "fromAnchor": "right", "toIndex": 14, "toAnchor": "left" },
-        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 15, "toAnchor": "top" },
-        { "fromIndex": 15, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
-        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
-        { "fromIndex": 15, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
         { "fromIndex": 17, "fromAnchor": "bottom", "toIndex": 18, "toAnchor": "top" },
-        { "fromIndex": 18, "fromAnchor": "bottom", "toIndex": 19, "toAnchor": "top" },
-        { "fromIndex": 17, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
-        { "fromIndex": 18, "fromAnchor": "right", "toIndex": 22, "toAnchor": "left" },
-        { "fromIndex": 21, "fromAnchor": "bottom", "toIndex": 22, "toAnchor": "top" },
-        { "fromIndex": 22, "fromAnchor": "bottom", "toIndex": 23, "toAnchor": "top" }
+        { "fromIndex": 13, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
+        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
+        { "fromIndex": 16, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
+        { "fromIndex": 20, "fromAnchor": "bottom", "toIndex": 21, "toAnchor": "top" },
+        { "fromIndex": 21, "fromAnchor": "bottom", "toIndex": 22, "toAnchor": "top" }
       ]
     }
   ],

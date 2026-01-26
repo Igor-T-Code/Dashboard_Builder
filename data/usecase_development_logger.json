@@ -1,12 +1,12 @@
 {
   "exportType": "usecases",
-  "exportDate": "2026-01-23",
+  "exportDate": "2026-01-26",
   "useCases": [
     {
       "name": "Development Logger Replacement",
       "phaseId": 1,
-      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Das Fahrzeug sammelt kontinuierlich oder event-basiert (URC, externe Trigger) bis zu 300 GB Rohdaten pro Tag. Upload erfolgt über die Connectivity Unit via externem WiFi auf dem Entwicklungs-Parkplatz. Daten werden im Near-Vehicle Backend normalisiert und an externe Datenplattformen für Processing und Analytics weitergeleitet.",
-      "businessValue": "Eliminierung teurer Hardware-Logger (Kosteneinsparung 500-1000€ pro Fahrzeug), schnellerer Datenzugriff (Stunden statt Tage), Skalierung auf gesamte Entwicklungsflotte, automatisierte Datenqualitaetssicherung, nahtlose Integration mit bestehenden Analyse-Plattformen.",
+      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Das Fahrzeug sammelt kontinuierlich oder event-basiert bis zu 300 GB Rohdaten pro Tag. Upload erfolgt ueber WiFi auf dem Entwicklungs-Parkplatz.",
+      "businessValue": "Eliminierung teurer Hardware-Logger (500-1000 Euro pro Fahrzeug), schnellerer Datenzugriff (Stunden statt Tage), Skalierung auf gesamte Entwicklungsflotte.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
@@ -15,246 +15,147 @@
           "type": "container",
           "name": "Fahrzeug (Development)",
           "description": "Fahrzeug-Sensorik und High-Speed Datenerfassung",
-          "x": 100,
-          "y": 100,
-          "width": 450,
-          "height": 500,
+          "x": 50,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-blue"
         },
         {
           "type": "block",
           "blockName": "Central Vehicle Computer",
-          "x": 180,
-          "y": 200
-        },
-        {
-          "type": "block",
-          "blockName": "Zone Controller Front",
-          "x": 180,
-          "y": 320
-        },
-        {
-          "type": "block",
-          "blockName": "Central Gateway",
-          "x": 350,
-          "y": 200
+          "x": 130,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Telematics Control Unit",
-          "x": 350,
-          "y": 320
+          "x": 130,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "OBD Diagnostic Bridge",
-          "x": 180,
-          "y": 440
+          "x": 130,
+          "y": 430
         },
-        {
-          "type": "block",
-          "blockName": "Edge Data Buffer",
-          "x": 350,
-          "y": 440
-        },
-
         {
           "type": "container",
           "name": "Near-Vehicle Backend",
           "description": "Lokale Datenerfassung und Normalisierung",
-          "x": 650,
-          "y": 100,
-          "width": 350,
-          "height": 500,
+          "x": 500,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-green"
         },
         {
           "type": "block",
           "blockName": "Vehicle Data Collector",
-          "x": 730,
-          "y": 200
+          "x": 580,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "IoT Hub",
-          "x": 730,
-          "y": 320
+          "x": 580,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Kafka Streaming",
-          "x": 730,
-          "y": 440
+          "x": 580,
+          "y": 430
         },
-
         {
           "type": "container",
-          "name": "Data Normalization Layer",
+          "name": "Data Platform",
           "description": "Datenaufbereitung und Qualitaetssicherung",
-          "x": 1100,
-          "y": 100,
-          "width": 350,
-          "height": 500,
+          "x": 950,
+          "y": 50,
+          "width": 380,
+          "height": 520,
           "colorClass": "pastel-mint"
         },
         {
           "type": "block",
           "blockName": "Bronze Layer",
-          "x": 1180,
-          "y": 200
+          "x": 1030,
+          "y": 130
         },
         {
           "type": "block",
           "blockName": "Silver Layer",
-          "x": 1180,
-          "y": 320
+          "x": 1030,
+          "y": 280
         },
         {
           "type": "block",
           "blockName": "Data Quality Engine",
-          "x": 1180,
-          "y": 440
+          "x": 1030,
+          "y": 430
         },
-
         {
           "type": "container",
-          "name": "External Data Platforms",
-          "description": "Partner-Plattformen fuer Processing und Analytics",
-          "x": 1550,
-          "y": 100,
-          "width": 400,
-          "height": 350,
+          "name": "Cloud Platform",
+          "description": "Externe Partner-Plattformen",
+          "x": 1400,
+          "y": 50,
+          "width": 380,
+          "height": 370,
           "colorClass": "pastel-yellow"
         },
         {
           "type": "block",
-          "blockName": "External Data Platform Connector",
-          "x": 1630,
-          "y": 200
+          "blockName": "Databricks Platform",
+          "x": 1480,
+          "y": 130
         },
         {
           "type": "block",
-          "blockName": "Supplier Collaboration Portal",
-          "x": 1630,
-          "y": 320
+          "blockName": "Delta Sharing Server",
+          "x": 1480,
+          "y": 280
         },
-        {
-          "type": "block",
-          "blockName": "Partner API Gateway",
-          "x": 1800,
-          "y": 200
-        },
-
         {
           "type": "container",
           "name": "Analytics & Monitoring",
           "description": "Ueberwachung und Auswertung",
-          "x": 1550,
-          "y": 500,
-          "width": 400,
-          "height": 250,
+          "x": 1400,
+          "y": 460,
+          "width": 380,
+          "height": 370,
           "colorClass": "pastel-purple"
         },
         {
           "type": "block",
-          "blockName": "Development Analytics Dashboard",
-          "x": 1630,
-          "y": 580
+          "blockName": "Executive Dashboard",
+          "x": 1480,
+          "y": 540
         },
         {
           "type": "block",
-          "blockName": "Data Transfer Monitor",
-          "x": 1800,
-          "y": 580
+          "blockName": "Quality Cockpit",
+          "x": 1480,
+          "y": 690
         }
       ],
       "connections": [
-        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 3, "toAnchor": "left" },
-        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 3, "toAnchor": "left" },
-        { "fromIndex": 3, "fromAnchor": "bottom", "toIndex": 4, "toAnchor": "top" },
-        { "fromIndex": 5, "fromAnchor": "right", "toIndex": 6, "toAnchor": "left" },
-        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 5, "toAnchor": "top" },
-        { "fromIndex": 6, "fromAnchor": "top", "toIndex": 4, "toAnchor": "bottom" },
-        { "fromIndex": 4, "fromAnchor": "right", "toIndex": 8, "toAnchor": "left" },
-        { "fromIndex": 8, "fromAnchor": "bottom", "toIndex": 9, "toAnchor": "top" },
+        { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
+        { "fromIndex": 2, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
+        { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
+        { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
+        { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
         { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
-        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 12, "toAnchor": "left" },
-        { "fromIndex": 12, "fromAnchor": "bottom", "toIndex": 13, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
+        { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
+        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
         { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
-        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 16, "toAnchor": "left" },
-        { "fromIndex": 13, "fromAnchor": "right", "toIndex": 16, "toAnchor": "left" },
-        { "fromIndex": 16, "fromAnchor": "right", "toIndex": 18, "toAnchor": "left" },
-        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
-        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
-        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 20, "toAnchor": "top" }
+        { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
+        { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
       ]
     }
   ],
-  "newBlocks": [
-    {
-      "name": "Edge Data Buffer",
-      "category": "ENTWICKLUNG",
-      "icon": "database",
-      "description": "Hochkapazitaets-Pufferspeicher im Fahrzeug fuer temporaere Speicherung von bis zu 300GB Entwicklungsdaten vor WiFi-Upload. Unterstuetzt Event-Trigger, URC-basierte Aufzeichnung und kontinuierliches Logging.",
-      "requirements": [
-        "Speicherkapazitaet min. 500GB SSD",
-        "Schreibgeschwindigkeit min. 500 MB/s",
-        "Trigger-Interface fuer URC Events",
-        "Ringbuffer-Modus fuer kontinuierliche Aufzeichnung",
-        "Metadaten-Tagging fuer Events"
-      ]
-    },
-    {
-      "name": "External Data Platform Connector",
-      "category": "Audi Services",
-      "icon": "git-merge",
-      "description": "Standardisierter Connector fuer die Anbindung externer Datenplattformen (Engineering Partner, Zulieferer, Analysedienstleister). Unterstuetzt verschiedene Protokolle und Datenformate.",
-      "requirements": [
-        "REST/gRPC API Support",
-        "Bulk-Transfer fuer grosse Datenmengen",
-        "Authentifizierung via OAuth2/OIDC",
-        "Datenformat-Transformation (Parquet, Avro, JSON)",
-        "Rate Limiting und Retry-Logik"
-      ]
-    },
-    {
-      "name": "Partner API Gateway",
-      "category": "Third Party",
-      "icon": "globe",
-      "description": "API Gateway fuer sichere Datenbereitstellung an externe Partner und Analyseplattformen. Managed Access Control und Audit Logging.",
-      "requirements": [
-        "API Key Management",
-        "Request/Response Logging",
-        "Quota Management pro Partner",
-        "Data Masking fuer sensible Felder",
-        "SLA Monitoring"
-      ]
-    },
-    {
-      "name": "Development Analytics Dashboard",
-      "category": "NUTZUNG",
-      "icon": "bar-chart",
-      "description": "Dashboard fuer Entwicklungsingenieure zur Ueberwachung der Datenerfassung, Upload-Status und Datenqualitaet aller Entwicklungsfahrzeuge.",
-      "requirements": [
-        "Echtzeit-Status aller Fahrzeuge",
-        "Upload-Fortschritt und Fehler",
-        "Datenvolumen-Statistiken",
-        "Event-Trigger Uebersicht",
-        "Filterung nach Fahrzeug/Projekt"
-      ]
-    },
-    {
-      "name": "Data Transfer Monitor",
-      "category": "NUTZUNG",
-      "icon": "activity",
-      "description": "Monitoring-Tool fuer die Ueberwachung aller Datentransfers zu externen Plattformen. Alerting bei Fehlern oder SLA-Verletzungen.",
-      "requirements": [
-        "Transfer-Status Dashboard",
-        "Bandbreiten-Monitoring",
-        "Fehler-Alerting",
-        "SLA-Compliance Reports",
-        "Retry-Queue Management"
-      ]
-    }
-  ]
+  "newBlocks": []
 }
