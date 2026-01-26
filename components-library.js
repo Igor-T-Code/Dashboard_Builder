@@ -74,7 +74,7 @@ const AUTOMOTIVE_COMPONENTS = {
             {
                 id: "zone-right",
                 name: "Zone Controller Right",
-                shortName: "ZC-R",
+                shortName: "ZC-RT",
                 icon: "🔲",
                 description: "Zonal Controller für rechte Seite: Beifahrertür, Seitenspiegel, Sitzsteuerung rechts.",
                 requirements: [
@@ -286,7 +286,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "production-collector",
                 name: "Production Data Collector",
                 shortName: "PDC",
-                icon: "�icing",
+                icon: "🏭",
                 description: "Datensammler für Produktionslinie: Prozessparameter, Messwerte, Qualitätsdaten.",
                 requirements: [
                     "MES Integration",
