@@ -2476,45 +2476,7 @@
         { id: 4, name: 'NUTZUNG', icon: 'car' },
         { id: 5, name: 'AFTERSALES', icon: 'settings' }
       ],
-      useCases: [
-          {
-            id: 15,
-            name: 'Predictive Maintenance',
-            phaseId: 5,
-            description: 'Vorausschauende Wartung basierend auf Fahrzeugdaten zur Optimierung von Service-Intervallen und Vermeidung von Ausfällen.',
-            businessValue: 'Reduzierung ungeplanter Werkstattbesuche, höhere Kundenzufriedenheit, optimierte Ersatzteillogistik.',
-            owner: 'I/EI',
-            priority: 'prio-1',
-            status: 'in-progress',
-            elements: [
-              { id: 16, type: 'block', blockId: 1, x: 200, y: 240 },
-              { id: 17, type: 'container', name: 'Fahrzeug', description: 'Fahrzeug-Komponenten und Steuergeräte', x: 100, y: 180, width: 460, height: 540, colorClass: 'pastel-blue' },
-              { id: 18, type: 'block', blockId: 2, x: 140, y: 540 },
-              { id: 19, type: 'block', blockId: 3, x: 360, y: 540 },
-              { id: 22, type: 'block', blockId: 4, x: 880, y: 300 },
-              { id: 25, type: 'container', name: 'Data Platform', description: 'Zentrale Datenplattform für Speicherung und Verarbeitung', x: 1200, y: 160, width: 380, height: 640, colorClass: 'pastel-mint' },
-              { id: 26, type: 'block', blockId: 5, x: 1320, y: 320 },
-              { id: 29, type: 'block', blockId: 6, x: 1320, y: 580 },
-              { id: 31, type: 'block', blockId: 9, x: 1900, y: 80 },
-              { id: 34, type: 'block', blockId: 10, x: 1840, y: 500 },
-              { id: 36, type: 'block', blockId: 14, x: 680, y: 880 },
-              { id: 39, type: 'block', blockId: 11, x: 940, y: 80 }
-            ],
-            connections: [
-              { id: 20, from: 19, fromAnchor: 'top', to: 16, toAnchor: 'bottom' },
-              { id: 21, from: 18, fromAnchor: 'top', to: 16, toAnchor: 'bottom' },
-              { id: 23, from: 16, fromAnchor: 'right', to: 22, toAnchor: 'left' },
-              { id: 27, from: 22, fromAnchor: 'right', to: 26, toAnchor: 'left' },
-              { id: 30, from: 26, fromAnchor: 'bottom', to: 29, toAnchor: 'top' },
-              { id: 32, from: 26, fromAnchor: 'right', to: 31, toAnchor: 'left' },
-              { id: 33, from: 29, fromAnchor: 'right', to: 31, toAnchor: 'left' },
-              { id: 35, from: 26, fromAnchor: 'right', to: 34, toAnchor: 'left' },
-              { id: 37, from: 36, fromAnchor: 'top', to: 29, toAnchor: 'bottom' },
-              { id: 38, from: 36, fromAnchor: 'top', to: 16, toAnchor: 'right' },
-              { id: 40, from: 39, fromAnchor: 'right', to: 26, toAnchor: 'left' }
-            ]
-          }
-      ],
+      useCases: [],
       currentUseCase: null,
       canvasElements: [],
       connections: [],
@@ -3067,11 +3029,8 @@
       renderCategories();
       renderPhases();
 
-      // Select default Use Case if available (e.g., Predictive Maintenance)
-      const defaultUc = state.useCases.find(uc => uc.id === 15);
-      if (defaultUc && !state.currentUseCase) {
-        selectUseCase(defaultUc.id);
-      } else if (state.currentUseCase) {
+      // Restore previously selected Use Case if available
+      if (state.currentUseCase) {
         // Restore previously selected Use Case
         const ucId = state.currentUseCase.id;
         selectUseCase(ucId);
