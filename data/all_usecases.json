@@ -5,16 +5,16 @@
     {
       "name": "Development Logger Replacement",
       "phaseId": 1,
-      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Das Fahrzeug sammelt kontinuierlich oder event-basiert bis zu 300 GB Rohdaten pro Tag. Upload erfolgt ueber WiFi auf dem Entwicklungs-Parkplatz.",
-      "businessValue": "Eliminierung teurer Hardware-Logger (500-1000 Euro pro Fahrzeug), schnellerer Datenzugriff (Stunden statt Tage), Skalierung auf gesamte Entwicklungsflotte.",
+      "description": "Ersatz des physischen Development Loggers durch cloud-basierte Datenerfassung. Upload ueber WiFi auf dem Entwicklungs-Parkplatz.",
+      "businessValue": "Eliminierung teurer Hardware-Logger, schnellerer Datenzugriff, Skalierung auf gesamte Entwicklungsflotte.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
       "elements": [
         {
           "type": "container",
-          "name": "Fahrzeug (Development)",
-          "description": "Fahrzeug-Sensorik und High-Speed Datenerfassung",
+          "name": "Fahrzeug",
+          "description": "Entwicklungsfahrzeug mit Datenerfassung",
           "x": 50,
           "y": 50,
           "width": 380,
@@ -41,13 +41,13 @@
         },
         {
           "type": "container",
-          "name": "Near-Vehicle Backend",
-          "description": "Lokale Datenerfassung und Normalisierung",
+          "name": "Vehicle Backend",
+          "description": "Datenerfassung und Streaming",
           "x": 500,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-green"
+          "colorClass": "pastel-purple"
         },
         {
           "type": "block",
@@ -69,13 +69,13 @@
         },
         {
           "type": "container",
-          "name": "Data Platform",
-          "description": "Datenaufbereitung und Qualitaetssicherung",
+          "name": "Data Processing",
+          "description": "Lakehouse Architektur",
           "x": 950,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-mint"
+          "colorClass": "pastel-green"
         },
         {
           "type": "block",
@@ -97,13 +97,13 @@
         },
         {
           "type": "container",
-          "name": "Cloud Platform",
-          "description": "Externe Partner-Plattformen",
+          "name": "Services",
+          "description": "Cloud Platform",
           "x": 1400,
           "y": 50,
           "width": 380,
           "height": 370,
-          "colorClass": "pastel-yellow"
+          "colorClass": "pastel-orange"
         },
         {
           "type": "block",
@@ -119,13 +119,13 @@
         },
         {
           "type": "container",
-          "name": "Analytics & Monitoring",
-          "description": "Ueberwachung und Auswertung",
+          "name": "Frontend",
+          "description": "Dashboards",
           "x": 1400,
           "y": 460,
           "width": 380,
           "height": 370,
-          "colorClass": "pastel-purple"
+          "colorClass": "pastel-mint"
         },
         {
           "type": "block",
@@ -150,17 +150,16 @@
         { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
-        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
         { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
         { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
         { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
       ]
     },
     {
-      "name": "Production Data Access & Configuration Validation",
+      "name": "Production Data Access",
       "phaseId": 2,
-      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion. Ermoeglicht das Auslesen aller Konfigurationsdaten ueber Near-Field Communication (NFC) oder drahtlose Verbindung via Data Collection Interface vom Backend.",
-      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz, Vermeidung von Rueckrufaktionen durch fruehe Fehlererkennung, Compliance mit ISO 26262.",
+      "description": "Zugriff auf Diagnosedaten und Konfigurationsdaten im Fahrzeug zur finalen Validierung in der Produktion.",
+      "businessValue": "Reduktion der End-of-Line Pruefzeit um 40%, Sicherstellung 100% Konfigurationskonsistenz.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
@@ -168,7 +167,7 @@
         {
           "type": "container",
           "name": "Fahrzeug (Produktion)",
-          "description": "Fahrzeug-Steuergeraete und Konfigurationsspeicher",
+          "description": "Fahrzeug in der Produktionslinie",
           "x": 50,
           "y": 50,
           "width": 380,
@@ -195,13 +194,13 @@
         },
         {
           "type": "container",
-          "name": "Production Interface",
-          "description": "Nahfeld- und Wireless-Kommunikation",
+          "name": "Vehicle Backend",
+          "description": "Produktions-Interface",
           "x": 500,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-green"
+          "colorClass": "pastel-purple"
         },
         {
           "type": "block",
@@ -217,19 +216,19 @@
         },
         {
           "type": "block",
-          "blockName": "Vehicle Data Collector",
+          "blockName": "Production Data Collector",
           "x": 580,
           "y": 430
         },
         {
           "type": "container",
-          "name": "Data Platform",
-          "description": "Datenverarbeitung und Qualitaetssicherung",
+          "name": "Data Processing",
+          "description": "Datenverarbeitung",
           "x": 950,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-mint"
+          "colorClass": "pastel-green"
         },
         {
           "type": "block",
@@ -251,13 +250,13 @@
         },
         {
           "type": "container",
-          "name": "Backend Services",
-          "description": "Produktions-Backend und Validierung",
+          "name": "Aftersales",
+          "description": "Qualitaetssicherung",
           "x": 1400,
           "y": 50,
           "width": 380,
           "height": 370,
-          "colorClass": "pastel-purple"
+          "colorClass": "pastel-orange"
         },
         {
           "type": "block",
@@ -274,12 +273,12 @@
         {
           "type": "container",
           "name": "Frontend",
-          "description": "Produktions-Arbeitsplaetze",
+          "description": "Produktions-Dashboards",
           "x": 1400,
           "y": 460,
           "width": 380,
           "height": 370,
-          "colorClass": "pastel-orange"
+          "colorClass": "pastel-mint"
         },
         {
           "type": "block",
@@ -298,24 +297,22 @@
         { "fromIndex": 1, "fromAnchor": "bottom", "toIndex": 2, "toAnchor": "top" },
         { "fromIndex": 2, "fromAnchor": "bottom", "toIndex": 3, "toAnchor": "top" },
         { "fromIndex": 3, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
-        { "fromIndex": 1, "fromAnchor": "right", "toIndex": 5, "toAnchor": "left" },
         { "fromIndex": 5, "fromAnchor": "bottom", "toIndex": 6, "toAnchor": "top" },
         { "fromIndex": 6, "fromAnchor": "bottom", "toIndex": 7, "toAnchor": "top" },
         { "fromIndex": 7, "fromAnchor": "right", "toIndex": 9, "toAnchor": "left" },
         { "fromIndex": 9, "fromAnchor": "bottom", "toIndex": 10, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "bottom", "toIndex": 11, "toAnchor": "top" },
         { "fromIndex": 10, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
-        { "fromIndex": 11, "fromAnchor": "right", "toIndex": 13, "toAnchor": "left" },
         { "fromIndex": 13, "fromAnchor": "bottom", "toIndex": 14, "toAnchor": "top" },
         { "fromIndex": 14, "fromAnchor": "bottom", "toIndex": 16, "toAnchor": "top" },
         { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" }
       ]
     },
     {
-      "name": "Field Monitoring & Online Fault Validation",
+      "name": "Field Monitoring",
       "phaseId": 4,
-      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung. Zugriff auf alle Fahrzeugdaten im Feld basierend auf Kundeneinwilligung zur Ursachenanalyse.",
-      "businessValue": "Fruehe Fehlererkennung vor Kundenreklamation, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%, Proaktive Qualitaetssicherung.",
+      "description": "Feld-Monitoring durch die Qualitaetsabteilung mit Online-Fehlervalidierung basierend auf Kundeneinwilligung.",
+      "businessValue": "Fruehe Fehlererkennung, Reduktion Garantiekosten um 25%, Beschleunigung 8D-Prozess um 60%.",
       "owner": "I/EI",
       "priority": "prio-1",
       "status": "draft",
@@ -350,13 +347,13 @@
         },
         {
           "type": "container",
-          "name": "Data Ingestion",
+          "name": "Vehicle Backend",
           "description": "Datenerfassung aus dem Feld",
           "x": 500,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-green"
+          "colorClass": "pastel-purple"
         },
         {
           "type": "block",
@@ -378,13 +375,13 @@
         },
         {
           "type": "container",
-          "name": "Data Platform",
+          "name": "Data Processing",
           "description": "Lakehouse mit Fehleranalyse",
           "x": 950,
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-mint"
+          "colorClass": "pastel-green"
         },
         {
           "type": "block",
@@ -406,13 +403,13 @@
         },
         {
           "type": "container",
-          "name": "ML & Analytics",
-          "description": "Fehler- und Anomalieerkennung",
+          "name": "Analytics",
+          "description": "ML & Anomalieerkennung",
           "x": 1400,
           "y": 50,
           "width": 380,
           "height": 370,
-          "colorClass": "pastel-purple"
+          "colorClass": "pastel-red"
         },
         {
           "type": "block",
@@ -428,13 +425,13 @@
         },
         {
           "type": "container",
-          "name": "Quality Backend",
-          "description": "Qualitaetsprozesse und Fehlerabstellung",
+          "name": "Aftersales",
+          "description": "Qualitaetsprozesse",
           "x": 1400,
           "y": 460,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-green"
+          "colorClass": "pastel-orange"
         },
         {
           "type": "block",
@@ -462,7 +459,7 @@
           "y": 50,
           "width": 380,
           "height": 520,
-          "colorClass": "pastel-orange"
+          "colorClass": "pastel-mint"
         },
         {
           "type": "block",
@@ -498,7 +495,6 @@
         { "fromIndex": 16, "fromAnchor": "bottom", "toIndex": 17, "toAnchor": "top" },
         { "fromIndex": 17, "fromAnchor": "bottom", "toIndex": 18, "toAnchor": "top" },
         { "fromIndex": 13, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
-        { "fromIndex": 14, "fromAnchor": "right", "toIndex": 20, "toAnchor": "left" },
         { "fromIndex": 16, "fromAnchor": "right", "toIndex": 21, "toAnchor": "left" },
         { "fromIndex": 20, "fromAnchor": "bottom", "toIndex": 21, "toAnchor": "top" },
         { "fromIndex": 21, "fromAnchor": "bottom", "toIndex": 22, "toAnchor": "top" }
