@@ -2444,30 +2444,16 @@
     // ============== DEFAULT STATE (Example Configuration) ==============
     const DEFAULT_STATE = {
       categories: [
-        { id: 1, name: 'ENTWICKLUNG', color: '#5B8BA8', icon: 'cpu' },
-        { id: 2, name: 'PRODUKTION', color: '#8B6B9E', icon: 'cog' },
-        { id: 3, name: 'VERKAUF', color: '#4A9494', icon: 'shopping-cart' },
-        { id: 4, name: 'NUTZUNG', color: '#C9985A', icon: 'car' },
-        { id: 5, name: 'AFTERSALES', color: '#6B9E6B', icon: 'wrench' },
-        { id: 6, name: 'Audi Services', color: '#B07090', icon: 'server' },
-        { id: 7, name: 'Third Party', color: '#7080A0', icon: 'globe' }
+        { id: 1, name: 'VEHICLE', color: '#1565C0', icon: 'car' },
+        { id: 2, name: 'VEHICLE BACKEND', color: '#7B1FA2', icon: 'globe' },
+        { id: 3, name: 'DATA PROCESSING', color: '#00695C', icon: 'database' },
+        { id: 4, name: 'ANALYTICS', color: '#C62828', icon: 'brain' },
+        { id: 5, name: 'SERVICES', color: '#E65100', icon: 'cloud' },
+        { id: 6, name: 'FRONTEND', color: '#1976D2', icon: 'smartphone' },
+        { id: 7, name: 'CUSTOMER', color: '#00838F', icon: 'users' },
+        { id: 8, name: 'AFTERSALES', color: '#37474F', icon: 'wrench' }
       ],
-      blocks: [
-        { id: 1, categoryId: 1, name: 'XMM', icon: 'cpu', description: 'Gateway', notes: '', owner: 'I/EI', status: 'offen', requirements: [] },
-        { id: 2, categoryId: 1, name: 'Central Zone', icon: 'chip', description: 'CZ', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 3, categoryId: 1, name: 'Rear Zone', icon: 'chip', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 4, categoryId: 2, name: 'JV Backend', icon: 'server', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 5, categoryId: 3, name: 'UDE Datalake', icon: 'database', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 6, categoryId: 3, name: 'HAAP Audi', icon: 'database', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 7, categoryId: 4, name: 'Ingest Prozessing', icon: 'download', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 8, categoryId: 4, name: 'Outbound Compute', icon: 'upload', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 9, categoryId: 5, name: 'EU Data Act', icon: 'save', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 10, categoryId: 6, name: 'Customer Support', icon: 'image', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 11, categoryId: 7, name: 'System 42', icon: 'globe', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 12, categoryId: 4, name: 'ML Prozessing', icon: 'brain', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 13, categoryId: 4, name: 'AI Engine', icon: 'sparkles', description: '', notes: '', owner: '', status: 'offen', requirements: [] },
-        { id: 14, categoryId: 7, name: 'OAUTH', icon: 'key', description: '', notes: '', owner: '', status: 'offen', requirements: [] }
-      ],
+      blocks: [],
       containers: [],
       phases: [
         { id: 1, name: 'ENTWICKLUNG', icon: 'wrench' },
@@ -2480,7 +2466,7 @@
       currentUseCase: null,
       canvasElements: [],
       connections: [],
-      nextId: 41
+      nextId: 1
     };
 
     // ============== STATE MANAGEMENT ==============
@@ -3024,8 +3010,49 @@
       if (e.button === 1) e.preventDefault();
     });
 
+    // ============== LOAD COMPONENTS FROM LIBRARY ==============
+    function loadComponentsFromLibrary() {
+      // Only load if blocks are empty (fresh start)
+      if (state.blocks.length === 0 && typeof AUTOMOTIVE_COMPONENTS !== 'undefined') {
+        const categoryMapping = {
+          'vehicle': 1,
+          'vehicleBackend': 2,
+          'dataProcessing': 3,
+          'analytics': 4,
+          'services': 5,
+          'frontend': 6,
+          'customer': 7,
+          'aftersales': 8
+        };
+
+        let blockId = 1;
+        for (const [catKey, category] of Object.entries(AUTOMOTIVE_COMPONENTS)) {
+          const categoryId = categoryMapping[catKey];
+          if (!categoryId) continue;
+
+          for (const comp of category.components) {
+            state.blocks.push({
+              id: blockId++,
+              categoryId: categoryId,
+              name: comp.name,
+              icon: comp.icon || 'cpu',
+              description: comp.description || '',
+              notes: '',
+              owner: '',
+              status: 'offen',
+              requirements: comp.requirements || []
+            });
+          }
+        }
+        state.nextId = blockId;
+        saveState();
+        console.log(`📦 Loaded ${state.blocks.length} components from library`);
+      }
+    }
+
     // ============== INIT ==============
     function init() {
+      loadComponentsFromLibrary();
       renderCategories();
       renderPhases();
 
