@@ -1025,6 +1025,128 @@ const AUTOMOTIVE_COMPONENTS = {
                 ]
             }
         ]
+    },
+
+    // =========================================================================
+    // CLOUD PLATFORMS - Hyperscaler & Data Infrastructure
+    // =========================================================================
+    cloudPlatforms: {
+        categoryName: "CLOUD PLATFORMS",
+        categoryColor: "#FF6F00",
+        components: [
+            {
+                id: "aws-cloud",
+                name: "AWS Cloud Services",
+                shortName: "AWS",
+                icon: "☁️",
+                description: "Amazon Web Services: EC2, S3, Lambda, IoT Core, SageMaker für ML Workloads.",
+                requirements: [
+                    "VPC Configuration",
+                    "IAM Roles & Policies",
+                    "S3 Bucket Encryption",
+                    "CloudWatch Monitoring",
+                    "TISAX-compliant Setup"
+                ]
+            },
+            {
+                id: "azure-cloud",
+                name: "Microsoft Azure",
+                shortName: "Azure",
+                icon: "☁️",
+                description: "Azure Cloud Platform: Azure IoT Hub, Synapse Analytics, Azure ML, Data Factory.",
+                requirements: [
+                    "Azure Active Directory",
+                    "Virtual Network",
+                    "Key Vault Integration",
+                    "Azure Monitor",
+                    "Compliance Center"
+                ]
+            },
+            {
+                id: "databricks",
+                name: "Databricks Platform",
+                shortName: "DBX",
+                icon: "⚡",
+                description: "Unified Analytics Platform: Lakehouse Architecture, Delta Lake, MLflow, Spark Clusters.",
+                requirements: [
+                    "Unity Catalog",
+                    "Workspace Configuration",
+                    "Cluster Policies",
+                    "Delta Sharing enabled",
+                    "Photon Runtime"
+                ]
+            },
+            {
+                id: "delta-sharing-server",
+                name: "Delta Sharing Server",
+                shortName: "DSS",
+                icon: "🔗",
+                description: "Open Protocol für sicheren Datenaustausch: Cross-Organization, Zero-Copy Sharing.",
+                requirements: [
+                    "Share Endpoints",
+                    "Recipient Management",
+                    "Audit Logging",
+                    "Token Authentication",
+                    "Data Governance"
+                ]
+            },
+            {
+                id: "gcp-cloud",
+                name: "Google Cloud Platform",
+                shortName: "GCP",
+                icon: "☁️",
+                description: "GCP Services: BigQuery, Vertex AI, Cloud IoT, Dataflow für Streaming Analytics.",
+                requirements: [
+                    "Project Configuration",
+                    "Service Accounts",
+                    "VPC Networks",
+                    "Cloud Logging",
+                    "Security Command Center"
+                ]
+            },
+            {
+                id: "snowflake",
+                name: "Snowflake Data Cloud",
+                shortName: "SF",
+                icon: "❄️",
+                description: "Cloud Data Warehouse: Data Sharing, Secure Data Exchange, Multi-Cloud Support.",
+                requirements: [
+                    "Warehouse Configuration",
+                    "Data Sharing Setup",
+                    "Role-based Access",
+                    "Query Monitoring",
+                    "Cross-Cloud Replication"
+                ]
+            },
+            {
+                id: "terraform",
+                name: "Terraform IaC",
+                shortName: "TF",
+                icon: "🔧",
+                description: "Infrastructure as Code: Multi-Cloud Provisioning, State Management, Module Registry.",
+                requirements: [
+                    "State Backend",
+                    "Provider Configuration",
+                    "Module Versioning",
+                    "CI/CD Integration",
+                    "Policy as Code"
+                ]
+            },
+            {
+                id: "kubernetes",
+                name: "Kubernetes Cluster",
+                shortName: "K8s",
+                icon: "☸️",
+                description: "Container Orchestration: EKS/AKS/GKE, Service Mesh, Auto-Scaling, GitOps.",
+                requirements: [
+                    "Cluster Configuration",
+                    "Namespace Isolation",
+                    "Ingress Controller",
+                    "Secrets Management",
+                    "Pod Security Policies"
+                ]
+            }
+        ]
     }
 };
 
