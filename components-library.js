@@ -21,14 +21,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     vehicle: {
         categoryName: "VEHICLE",
-        categoryIcon: "🚗",
+        categoryIcon: "car",
         categoryColor: "#1565C0",
         components: [
             {
                 id: "cvc",
                 name: "Central Vehicle Computer",
                 shortName: "CVC",
-                icon: "🖥️",
+                icon: "cpu",
                 description: "Zentraler Fahrzeugrechner für Software-Defined Vehicle Architektur.",
                 requirements: ["AUTOSAR Adaptive", "Echtzeit-OS", "OTA Update", "ISO 21434"]
             },
@@ -36,7 +36,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-front",
                 name: "Zone Controller Front",
                 shortName: "ZC-F",
-                icon: "🔳",
+                icon: "chip",
                 description: "Zonal Controller für Front-Domäne: ADAS, Beleuchtung, Klima.",
                 requirements: ["CAN/LIN Gateway", "Ethernet Backbone", "Sensor Fusion"]
             },
@@ -44,7 +44,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-rear",
                 name: "Zone Controller Rear",
                 shortName: "ZC-R",
-                icon: "🔳",
+                icon: "chip",
                 description: "Zonal Controller für Heck-Domäne: Beleuchtung, Kofferraum, Anhänger.",
                 requirements: ["CAN/LIN Gateway", "Ethernet Backbone", "Trailer Interface"]
             },
@@ -52,7 +52,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-left",
                 name: "Zone Controller Left",
                 shortName: "ZC-L",
-                icon: "🔳",
+                icon: "chip",
                 description: "Zonal Controller für linke Seite: Fahrertür, Spiegel, Sitz.",
                 requirements: ["Door Module Integration", "Seat Control Interface"]
             },
@@ -60,7 +60,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "zone-right",
                 name: "Zone Controller Right",
                 shortName: "ZC-RT",
-                icon: "🔳",
+                icon: "chip",
                 description: "Zonal Controller für rechte Seite: Beifahrertür, Spiegel, Sitz.",
                 requirements: ["Door Module Integration", "Seat Control Interface"]
             },
@@ -68,7 +68,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "bms",
                 name: "Battery Management System",
                 shortName: "BMS",
-                icon: "🔋",
+                icon: "battery",
                 description: "HV-Batterie Überwachung: SoC, SoH, Zellbalancing, Thermomanagement.",
                 requirements: ["Cell Monitoring", "Thermal Management", "ASIL-D", "V2G"]
             },
@@ -76,7 +76,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "adas-ecu",
                 name: "ADAS ECU",
                 shortName: "ADAS",
-                icon: "👁️",
+                icon: "eye",
                 description: "Advanced Driver Assistance: Sensorfusion, Objekterkennung, Pfadplanung.",
                 requirements: ["Camera/Radar/LiDAR", "Sensor Fusion", "ASIL-D"]
             },
@@ -84,7 +84,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "infotainment",
                 name: "Infotainment ECU",
                 shortName: "IVI",
-                icon: "📱",
+                icon: "tablet",
                 description: "In-Vehicle Infotainment: Multimedia, Navigation, Voice Assistant.",
                 requirements: ["Android Automotive", "Voice Recognition", "Smartphone Integration"]
             },
@@ -92,7 +92,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "tcu",
                 name: "Telematics Control Unit",
                 shortName: "TCU",
-                icon: "📡",
+                icon: "radio",
                 description: "Telematik für Fahrzeug-Cloud: 4G/5G, V2X, eCall, Remote Services.",
                 requirements: ["4G/5G Modem", "V2X", "eCall", "GNSS"]
             },
@@ -100,7 +100,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "gateway",
                 name: "Central Gateway",
                 shortName: "CGW",
-                icon: "🔀",
+                icon: "shuffle",
                 description: "Zentrales Gateway für Netzwerk-Routing und Protokollübersetzung.",
                 requirements: ["Multi-Protocol", "Firewall", "Diagnostic Routing"]
             },
@@ -108,7 +108,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "bcm",
                 name: "Body Control Module",
                 shortName: "BCM",
-                icon: "💡",
+                icon: "lightbulb",
                 description: "Karosserie-Steuergerät: Beleuchtung, Verriegelung, Fensterheber.",
                 requirements: ["LIN Master", "PWM Control", "Low Power Mode"]
             },
@@ -116,7 +116,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "powertrain",
                 name: "Powertrain ECU",
                 shortName: "PTM",
-                icon: "⚡",
+                icon: "zap",
                 description: "Antriebsstrang: E-Motor, Inverter, Getriebe, Rekuperation.",
                 requirements: ["Motor Control", "Inverter Interface", "ASIL-D"]
             }
@@ -128,14 +128,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     vehicleBackend: {
         categoryName: "VEHICLE BACKEND",
-        categoryIcon: "🌐",
+        categoryIcon: "globe",
         categoryColor: "#7B1FA2",
         components: [
             {
                 id: "vehicle-collector",
                 name: "Vehicle Data Collector",
                 shortName: "VDC",
-                icon: "📥",
+                icon: "download",
                 description: "Edge-Service zur Sammlung und Vorverarbeitung von Telematikdaten.",
                 requirements: ["Edge Processing", "Compression", "Offline Buffer", "Privacy Filter"]
             },
@@ -143,7 +143,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "obd-bridge",
                 name: "OBD Diagnostic Bridge",
                 shortName: "OBD",
-                icon: "🔌",
+                icon: "plug",
                 description: "Diagnose-Schnittstelle: OBD-II, DoIP, UDS Protokolle.",
                 requirements: ["OBD-II Protocol", "DoIP Support", "UDS Services"]
             },
@@ -151,7 +151,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "iot-hub",
                 name: "IoT Hub",
                 shortName: "IoT",
-                icon: "🌐",
+                icon: "globe",
                 description: "Managed IoT Platform: Device Management, Message Routing.",
                 requirements: ["MQTT/AMQP", "Device Twin", "Message Routing", "Auto-Scaling"]
             },
@@ -159,7 +159,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "kafka-cluster",
                 name: "Kafka Streaming",
                 shortName: "Kafka",
-                icon: "📊",
+                icon: "bar-chart",
                 description: "Event Streaming für Echtzeit-Datenverarbeitung.",
                 requirements: ["High Throughput", "Exactly-Once", "Schema Registry"]
             },
@@ -167,7 +167,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "edge-gateway",
                 name: "Edge Gateway",
                 shortName: "Edge",
-                icon: "🏭",
+                icon: "factory",
                 description: "Edge Computing für Produktion: PLCs, Sensoren, MES.",
                 requirements: ["OPC-UA", "Local Processing", "Store & Forward"]
             },
@@ -175,7 +175,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "fleet-gateway",
                 name: "Fleet Telematics Gateway",
                 shortName: "FTG",
-                icon: "🚛",
+                icon: "truck",
                 description: "Gateway für Flottendaten: Multi-Vehicle Aggregation.",
                 requirements: ["Multi-Vehicle", "Fleet Analytics", "API Integration"]
             },
@@ -183,7 +183,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "production-collector",
                 name: "Production Data Collector",
                 shortName: "PDC",
-                icon: "🏭",
+                icon: "factory",
                 description: "Datensammler für Produktionslinie: Prozesse, Messwerte, Qualität.",
                 requirements: ["MES Integration", "SCADA Interface", "Real-time"]
             },
@@ -191,7 +191,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "cdc-connector",
                 name: "CDC Connector",
                 shortName: "CDC",
-                icon: "🔄",
+                icon: "refresh",
                 description: "Change Data Capture für Echtzeit-Replikation aus ERP, MES, CRM.",
                 requirements: ["Debezium", "Transaction Log Mining", "Schema Evolution"]
             },
@@ -199,7 +199,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "batch-loader",
                 name: "Batch File Loader",
                 shortName: "Batch",
-                icon: "📁",
+                icon: "folder",
                 description: "Batch-Ingestion: CSV, Parquet, XML von Partnern.",
                 requirements: ["File Formats", "Schema Validation", "Error Handling"]
             },
@@ -207,7 +207,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "supplier-connector",
                 name: "Supplier Data Connector",
                 shortName: "SDC",
-                icon: "🤝",
+                icon: "users",
                 description: "Sichere Datenanbindung für Lieferanten via Delta Sharing.",
                 requirements: ["Delta Sharing", "EDI Support", "Encryption"]
             }
@@ -219,14 +219,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     dataProcessing: {
         categoryName: "DATA PROCESSING",
-        categoryIcon: "💾",
+        categoryIcon: "database",
         categoryColor: "#00695C",
         components: [
             {
                 id: "bronze-layer",
                 name: "Bronze Layer",
                 shortName: "Bronze",
-                icon: "🥉",
+                icon: "layers",
                 description: "Raw Data Layer: Rohdaten, append-only, vollständige Historie.",
                 requirements: ["Raw Storage", "Schema-on-Read", "Retention Policy"]
             },
@@ -234,7 +234,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "silver-layer",
                 name: "Silver Layer",
                 shortName: "Silver",
-                icon: "🥈",
+                icon: "layers",
                 description: "Cleaned Data Layer: Validiert, bereinigt, angereichert.",
                 requirements: ["Validation", "Deduplication", "Schema Enforcement"]
             },
@@ -242,7 +242,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "gold-layer",
                 name: "Gold Layer",
                 shortName: "Gold",
-                icon: "🥇",
+                icon: "layers",
                 description: "Business Layer: Aggregiert, business-ready für Analytics.",
                 requirements: ["Aggregations", "Dimension Tables", "Fact Tables"]
             },
@@ -250,7 +250,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "delta-lake",
                 name: "Delta Lake Storage",
                 shortName: "Delta",
-                icon: "💾",
+                icon: "hard-drive",
                 description: "ACID Data Lake: Time Travel, Schema Evolution, Unified Batch/Stream.",
                 requirements: ["ACID Transactions", "Time Travel", "Schema Evolution"]
             },
@@ -258,7 +258,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "unity-catalog",
                 name: "Unity Catalog",
                 shortName: "Unity",
-                icon: "📚",
+                icon: "archive",
                 description: "Metadaten-Katalog: Governance, Access Control, Lineage.",
                 requirements: ["Fine-grained ACLs", "Lineage", "Audit Logging"]
             },
@@ -266,7 +266,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "dq-engine",
                 name: "Data Quality Engine",
                 shortName: "DQE",
-                icon: "✅",
+                icon: "shield-check",
                 description: "Automatisierte Datenqualität: Rules, Anomalie-Detection.",
                 requirements: ["Rule Validation", "Anomaly Detection", "Quality Dashboards"]
             },
@@ -274,7 +274,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "lineage-tracker",
                 name: "Lineage Tracker",
                 shortName: "LT",
-                icon: "🔗",
+                icon: "link",
                 description: "End-to-End Data Lineage: Herkunft, Transformationen.",
                 requirements: ["Column-level Lineage", "Impact Analysis", "Visualization"]
             },
@@ -282,7 +282,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "spark-cluster",
                 name: "Spark Cluster",
                 shortName: "Spark",
-                icon: "⚡",
+                icon: "zap",
                 description: "Distributed Processing für Batch und Streaming.",
                 requirements: ["Auto-Scaling", "Photon Engine", "Spot Instances"]
             },
@@ -290,7 +290,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "dlt-pipelines",
                 name: "Delta Live Tables",
                 shortName: "DLT",
-                icon: "🔄",
+                icon: "refresh",
                 description: "Deklarative ETL Pipelines mit Auto-Recovery.",
                 requirements: ["Declarative ETL", "Auto-Recovery", "Expectations"]
             },
@@ -298,7 +298,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "sql-warehouse",
                 name: "SQL Warehouse",
                 shortName: "SQL",
-                icon: "🗄️",
+                icon: "database",
                 description: "Serverless SQL für BI und Ad-hoc Queries.",
                 requirements: ["Serverless", "High Concurrency", "BI Integration"]
             },
@@ -306,7 +306,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "stream-processor",
                 name: "Stream Processing Engine",
                 shortName: "SPE",
-                icon: "🌊",
+                icon: "arrow-left-right",
                 description: "Echtzeit-Streaming: Structured Streaming, Watermarks.",
                 requirements: ["Structured Streaming", "Watermarks", "Exactly-Once"]
             },
@@ -314,7 +314,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "etl-engine",
                 name: "ETL Pipeline Engine",
                 shortName: "ETL",
-                icon: "⚙️",
+                icon: "sliders",
                 description: "Orchestrierte ETL Workflows: Scheduling, Dependencies.",
                 requirements: ["Workflow Orchestration", "Dependencies", "Retry Logic"]
             }
@@ -326,14 +326,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     analytics: {
         categoryName: "ANALYTICS",
-        categoryIcon: "🧠",
+        categoryIcon: "brain",
         categoryColor: "#C62828",
         components: [
             {
                 id: "feature-store",
                 name: "Feature Store",
                 shortName: "FS",
-                icon: "🎯",
+                icon: "target",
                 description: "ML Feature Repository: Versioning, Online/Offline Serving.",
                 requirements: ["Feature Versioning", "Online Serving", "Offline Serving"]
             },
@@ -341,7 +341,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "model-registry",
                 name: "Model Registry",
                 shortName: "MLR",
-                icon: "📋",
+                icon: "archive",
                 description: "ML-Modell Verwaltung: Versioning, Staging, Deployment.",
                 requirements: ["Model Versioning", "Stage Management", "Approval Workflows"]
             },
@@ -349,7 +349,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "ml-training",
                 name: "ML Training Pipeline",
                 shortName: "MLT",
-                icon: "🧠",
+                icon: "brain",
                 description: "End-to-End ML Training: Feature Engineering, Tuning.",
                 requirements: ["Distributed Training", "Hyperparameter Tuning", "Experiment Tracking"]
             },
@@ -357,7 +357,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "automl",
                 name: "AutoML Engine",
                 shortName: "AutoML",
-                icon: "🤖",
+                icon: "bot",
                 description: "Automatisiertes ML: Feature Selection, Algorithm Selection.",
                 requirements: ["Auto Feature Engineering", "Algorithm Selection", "Explainability"]
             },
@@ -365,7 +365,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "anomaly-detection",
                 name: "Anomaly Detection Model",
                 shortName: "ADM",
-                icon: "🔍",
+                icon: "search",
                 description: "ML-basierte Anomalie-Erkennung für Fahrzeug- und Produktionsdaten.",
                 requirements: ["Unsupervised Learning", "Real-time Scoring", "Thresholds"]
             },
@@ -373,7 +373,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "predictive-maintenance",
                 name: "Predictive Maintenance Model",
                 shortName: "PDM",
-                icon: "🔮",
+                icon: "sparkles",
                 description: "Vorhersagemodell: Remaining Useful Life, Failure Prediction.",
                 requirements: ["Time Series", "Survival Analysis", "Confidence Intervals"]
             },
@@ -381,7 +381,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "genai-service",
                 name: "GenAI / LLM Service",
                 shortName: "GenAI",
-                icon: "💬",
+                icon: "sparkles",
                 description: "Generative AI: LLM für Dokumentenanalyse, Chatbots.",
                 requirements: ["LLM Hosting", "RAG Pipeline", "Prompt Management"]
             },
@@ -389,7 +389,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "cv-pipeline",
                 name: "Computer Vision Pipeline",
                 shortName: "CV",
-                icon: "👁️",
+                icon: "eye",
                 description: "Bildverarbeitung: Qualitätskontrolle, ADAS Training.",
                 requirements: ["Image Processing", "Object Detection", "GPU Acceleration"]
             },
@@ -397,7 +397,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "nlp-engine",
                 name: "NLP Engine",
                 shortName: "NLP",
-                icon: "📝",
+                icon: "type",
                 description: "Natural Language Processing: Sentiment, Classification.",
                 requirements: ["Text Classification", "NER", "Multi-Language"]
             },
@@ -405,7 +405,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "recommendation",
                 name: "Recommendation Engine",
                 shortName: "REC",
-                icon: "💡",
+                icon: "lightbulb",
                 description: "Empfehlungssystem: Next-Best-Action, Recommendations.",
                 requirements: ["Collaborative Filtering", "Content-based", "Real-time"]
             },
@@ -413,7 +413,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "model-serving",
                 name: "Model Serving Endpoint",
                 shortName: "MSE",
-                icon: "🎯",
+                icon: "target",
                 description: "Low-Latency Model Inference: REST APIs, Batch Scoring.",
                 requirements: ["Low Latency", "Auto-Scaling", "Canary Deployments"]
             },
@@ -421,7 +421,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "ab-testing",
                 name: "A/B Testing Engine",
                 shortName: "A/B",
-                icon: "⚖️",
+                icon: "shuffle",
                 description: "Experimentier-Plattform für Modell-Vergleiche.",
                 requirements: ["Traffic Splitting", "Statistical Analysis", "Metrics"]
             },
@@ -429,7 +429,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "realtime-analytics",
                 name: "Real-time Analytics Engine",
                 shortName: "RTA",
-                icon: "⏱️",
+                icon: "gauge-circle",
                 description: "Sub-Sekunden Analytics für Echtzeit-Dashboards.",
                 requirements: ["Low Latency", "In-Memory", "Push Updates"]
             },
@@ -437,7 +437,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "aggregation-engine",
                 name: "Aggregation Engine",
                 shortName: "AGG",
-                icon: "📈",
+                icon: "trending-up",
                 description: "Vordefinierte Aggregationen: Rollups, Materialized Views.",
                 requirements: ["Pre-Aggregations", "Materialized Views", "Incremental"]
             }
@@ -449,14 +449,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     services: {
         categoryName: "SERVICES",
-        categoryIcon: "☁️",
+        categoryIcon: "cloud",
         categoryColor: "#E65100",
         components: [
             {
                 id: "ota-server",
                 name: "OTA Update Server",
                 shortName: "OTA",
-                icon: "📲",
+                icon: "upload",
                 description: "Over-the-Air Update: Staged Rollout, Versioning, Rollback.",
                 requirements: ["Staged Rollout", "Version Control", "Rollback Support"]
             },
@@ -464,7 +464,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "delta-sharing",
                 name: "Delta Sharing Hub",
                 shortName: "DSH",
-                icon: "🔐",
+                icon: "lock",
                 description: "Sichere Datenfreigabe: Open Protocol, Zero-Copy Sharing.",
                 requirements: ["Open Protocol", "Access Tokens", "Audit Trail"]
             },
@@ -472,7 +472,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "aws-cloud",
                 name: "AWS Cloud Services",
                 shortName: "AWS",
-                icon: "☁️",
+                icon: "cloud",
                 description: "Amazon Web Services: EC2, S3, Lambda, IoT Core, SageMaker.",
                 requirements: ["VPC Config", "IAM Policies", "TISAX-compliant"]
             },
@@ -480,7 +480,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "azure-cloud",
                 name: "Microsoft Azure",
                 shortName: "Azure",
-                icon: "☁️",
+                icon: "cloud",
                 description: "Azure Cloud: IoT Hub, Synapse, Azure ML, Data Factory.",
                 requirements: ["Azure AD", "Virtual Network", "Key Vault"]
             },
@@ -488,7 +488,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "databricks",
                 name: "Databricks Platform",
                 shortName: "DBX",
-                icon: "🔶",
+                icon: "server",
                 description: "Unified Analytics: Lakehouse, Delta Lake, MLflow, Spark.",
                 requirements: ["Unity Catalog", "Workspace Config", "Photon Runtime"]
             },
@@ -496,7 +496,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "delta-sharing-server",
                 name: "Delta Sharing Server",
                 shortName: "DSS",
-                icon: "🔗",
+                icon: "link",
                 description: "Open Protocol für Cross-Organization Data Sharing.",
                 requirements: ["Share Endpoints", "Recipients", "Audit Logging"]
             },
@@ -504,7 +504,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "gcp-cloud",
                 name: "Google Cloud Platform",
                 shortName: "GCP",
-                icon: "☁️",
+                icon: "cloud",
                 description: "GCP: BigQuery, Vertex AI, Cloud IoT, Dataflow.",
                 requirements: ["Project Config", "Service Accounts", "VPC Networks"]
             },
@@ -512,7 +512,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "snowflake",
                 name: "Snowflake Data Cloud",
                 shortName: "SF",
-                icon: "❄️",
+                icon: "database",
                 description: "Cloud Data Warehouse: Data Sharing, Multi-Cloud.",
                 requirements: ["Warehouse Config", "Data Sharing", "Role-based Access"]
             },
@@ -520,7 +520,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "terraform",
                 name: "Terraform IaC",
                 shortName: "TF",
-                icon: "🔧",
+                icon: "wrench",
                 description: "Infrastructure as Code: Multi-Cloud Provisioning.",
                 requirements: ["State Backend", "Provider Config", "CI/CD Integration"]
             },
@@ -528,7 +528,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "kubernetes",
                 name: "Kubernetes Cluster",
                 shortName: "K8s",
-                icon: "☸️",
+                icon: "server",
                 description: "Container Orchestration: EKS/AKS/GKE, Service Mesh.",
                 requirements: ["Cluster Config", "Namespace Isolation", "Ingress"]
             },
@@ -536,7 +536,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "ci-cd-pipeline",
                 name: "CI/CD Pipeline",
                 shortName: "CICD",
-                icon: "🔄",
+                icon: "refresh",
                 description: "Continuous Integration/Deployment: Build, Test, Deploy.",
                 requirements: ["Git Integration", "Automated Testing", "Deploy Stages"]
             }
@@ -548,14 +548,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     frontend: {
         categoryName: "FRONTEND",
-        categoryIcon: "📱",
+        categoryIcon: "smartphone",
         categoryColor: "#1976D2",
         components: [
             {
                 id: "driver-app",
                 name: "Driver Mobile App",
                 shortName: "App",
-                icon: "📱",
+                icon: "smartphone",
                 description: "Kunden-App: Remote Services, Status, Navigation, Charging.",
                 requirements: ["iOS/Android", "Push Notifications", "Secure Auth"]
             },
@@ -563,7 +563,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "fleet-dashboard",
                 name: "Fleet Manager Dashboard",
                 shortName: "FMD",
-                icon: "📊",
+                icon: "bar-chart",
                 description: "Flotten-Dashboard: Fahrzeugübersicht, KPIs, Alerts.",
                 requirements: ["Real-time Updates", "Custom Reports", "Export"]
             },
@@ -571,7 +571,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "quality-cockpit",
                 name: "Quality Cockpit",
                 shortName: "QC",
-                icon: "🎛️",
+                icon: "sliders",
                 description: "Qualitäts-Dashboard: Issues, Trends, Alerts.",
                 requirements: ["Real-time Monitoring", "Drill-down", "Alert Management"]
             },
@@ -579,7 +579,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "technician-app",
                 name: "Service Technician App",
                 shortName: "STA",
-                icon: "🔧",
+                icon: "wrench",
                 description: "Werkstatt-App: Diagnose, Anleitungen, Teilebestellung.",
                 requirements: ["Offline Mode", "Diagnostic Integration", "Parts Catalog"]
             },
@@ -587,7 +587,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "dealer-portal",
                 name: "Dealer Portal",
                 shortName: "DP",
-                icon: "🏢",
+                icon: "building",
                 description: "Händler-Portal: Bestand, Kunden, Kampagnen.",
                 requirements: ["Inventory Management", "CRM Integration", "Campaigns"]
             },
@@ -595,7 +595,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "exec-dashboard",
                 name: "Executive Dashboard",
                 shortName: "Exec",
-                icon: "📈",
+                icon: "trending-up",
                 description: "Management-Dashboard: KPIs, Trends, Strategic Insights.",
                 requirements: ["KPI Overview", "Trend Analysis", "Mobile Access"]
             },
@@ -603,7 +603,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "ota-monitor",
                 name: "OTA Monitoring Dashboard",
                 shortName: "OTM",
-                icon: "📡",
+                icon: "satellite",
                 description: "OTA-Überwachung: Rollout-Status, Success Rate, Errors.",
                 requirements: ["Rollout Tracking", "Error Analysis", "Rollback Trigger"]
             },
@@ -611,7 +611,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "digital-twin-viewer",
                 name: "Digital Twin Viewer",
                 shortName: "DTV",
-                icon: "🖥️",
+                icon: "monitor",
                 description: "3D-Visualisierung: Fahrzeug, Produktion, Simulation.",
                 requirements: ["3D Rendering", "Real-time Data", "Simulation Mode"]
             }
@@ -623,14 +623,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     customer: {
         categoryName: "CUSTOMER",
-        categoryIcon: "👤",
+        categoryIcon: "users",
         categoryColor: "#00838F",
         components: [
             {
                 id: "customer-360",
                 name: "Customer 360 Service",
                 shortName: "C360",
-                icon: "👤",
+                icon: "user",
                 description: "Ganzheitliche Kundenansicht: Profile, Interaktionen, Fahrzeuge.",
                 requirements: ["Profile Management", "Consent Management", "GDPR"]
             },
@@ -638,7 +638,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "fleet-backend",
                 name: "Fleet Management Backend",
                 shortName: "FMB",
-                icon: "🚗",
+                icon: "car",
                 description: "Backend für Flottenverwaltung: Tracking, TCO Analysis.",
                 requirements: ["Real-time Tracking", "Geofencing", "Utilization Analytics"]
             },
@@ -646,7 +646,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "hil-simulator",
                 name: "HIL Simulator Interface",
                 shortName: "HIL",
-                icon: "🔬",
+                icon: "cpu",
                 description: "Hardware-in-the-Loop: ECU Testing, Signal Injection.",
                 requirements: ["Signal Simulation", "Real-time Processing", "Test Automation"]
             },
@@ -654,7 +654,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "data-logger",
                 name: "Development Data Logger",
                 shortName: "DDL",
-                icon: "📝",
+                icon: "save",
                 description: "High-Speed Datenerfassung: CAN, FlexRay, Ethernet.",
                 requirements: ["High Bandwidth", "Time Sync", "Cloud Upload"]
             },
@@ -662,7 +662,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "calibration-tool",
                 name: "Calibration Tool Interface",
                 shortName: "CAL",
-                icon: "🎚️",
+                icon: "sliders",
                 description: "Kalibrier-Werkzeug: Parameter Tuning, Flash Programming.",
                 requirements: ["XCP/CCP Protocol", "A2L Files", "Parameter Management"]
             },
@@ -670,7 +670,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "test-bench",
                 name: "Test Bench Connector",
                 shortName: "TBC",
-                icon: "🏗️",
+                icon: "server",
                 description: "Prüfstand-Anbindung: Motor, Batterie, Klimakammer.",
                 requirements: ["Measurement Integration", "Test Sequences", "Data Export"]
             },
@@ -678,7 +678,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "validation-hub",
                 name: "Validation Data Hub",
                 shortName: "VDH",
-                icon: "✔️",
+                icon: "shield-check",
                 description: "Validierungsdaten: Test Results, Requirements Tracing.",
                 requirements: ["Requirements Linking", "Test Coverage", "Approval Workflows"]
             },
@@ -686,7 +686,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "simulation-cloud",
                 name: "Simulation Cloud",
                 shortName: "SIM",
-                icon: "☁️",
+                icon: "cloud",
                 description: "Cloud-basierte Simulation: Virtual Testing, Scenarios.",
                 requirements: ["Scalable Compute", "Scenario Library", "Result Analysis"]
             }
@@ -698,14 +698,14 @@ const AUTOMOTIVE_COMPONENTS = {
     // =========================================================================
     aftersales: {
         categoryName: "AFTERSALES",
-        categoryIcon: "🛠️",
+        categoryIcon: "wrench",
         categoryColor: "#37474F",
         components: [
             {
                 id: "warranty-analytics",
                 name: "Warranty Analytics Service",
                 shortName: "WAS",
-                icon: "📊",
+                icon: "bar-chart",
                 description: "Garantie-Analyse: Claims, Fraud Detection, Cost Analytics.",
                 requirements: ["Claim Processing", "Fraud Detection", "Cost Attribution"]
             },
@@ -713,7 +713,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "qms",
                 name: "Quality Management System",
                 shortName: "QMS",
-                icon: "✅",
+                icon: "shield-check",
                 description: "Qualitätsmanagement: Issue Tracking, SPC/SQC, Audits.",
                 requirements: ["Issue Tracking", "SPC/SQC", "Audit Trail"]
             },
@@ -721,7 +721,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "fmea-db",
                 name: "FMEA Database",
                 shortName: "FMEA",
-                icon: "📋",
+                icon: "archive",
                 description: "Failure Mode and Effects Analysis: Design, Process FMEA.",
                 requirements: ["Design FMEA", "Process FMEA", "RPN Calculation"]
             },
@@ -729,7 +729,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "8d-engine",
                 name: "8D Process Engine",
                 shortName: "8D",
-                icon: "🔧",
+                icon: "wrench",
                 description: "Problemlösung: 8D Workflow, Root Cause Analysis.",
                 requirements: ["8D Workflow", "Root Cause Analysis", "Action Management"]
             },
@@ -737,7 +737,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "parts-forecast",
                 name: "Parts Demand Forecasting",
                 shortName: "PDF",
-                icon: "📦",
+                icon: "inbox",
                 description: "Ersatzteil-Prognose: Demand Planning, Inventory.",
                 requirements: ["Demand Forecasting", "Safety Stock", "Lead Time"]
             },
@@ -745,7 +745,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "service-optimizer",
                 name: "Service Network Optimizer",
                 shortName: "SNO",
-                icon: "🛠️",
+                icon: "sliders",
                 description: "Werkstatt-Optimierung: Capacity Planning, Scheduling.",
                 requirements: ["Capacity Planning", "Scheduling", "Resource Allocation"]
             },
@@ -753,7 +753,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "pricing-engine",
                 name: "Dynamic Pricing Engine",
                 shortName: "DPE",
-                icon: "💰",
+                icon: "trending-up",
                 description: "Dynamische Preisgestaltung: Marktanalyse, Incentives.",
                 requirements: ["Market Analysis", "Price Optimization", "Competitor Monitor"]
             },
@@ -761,7 +761,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "weather-api",
                 name: "Weather Data API",
                 shortName: "Weather",
-                icon: "🌤️",
+                icon: "cloud",
                 description: "Wetterdaten: Aktuelle Bedingungen, Vorhersagen.",
                 requirements: ["Real-time Data", "Forecast API", "Geo-based"]
             },
@@ -769,7 +769,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "traffic-api",
                 name: "Traffic Data Provider",
                 shortName: "Traffic",
-                icon: "🚦",
+                icon: "car",
                 description: "Verkehrsdaten: Echtzeit-Traffic, Incidents, Routes.",
                 requirements: ["Real-time Traffic", "Incident Reports", "Routing Data"]
             },
@@ -777,7 +777,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "insurance-api",
                 name: "Insurance Partner API",
                 shortName: "Ins",
-                icon: "🛡️",
+                icon: "shield",
                 description: "Versicherung: UBI Data Sharing, Claims, Risk Scores.",
                 requirements: ["Secure Sharing", "Privacy Compliance", "Real-time Events"]
             },
@@ -785,7 +785,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "energy-grid",
                 name: "Energy Grid Interface",
                 shortName: "Grid",
-                icon: "⚡",
+                icon: "zap",
                 description: "Stromnetz: V2G Communication, Dynamic Pricing.",
                 requirements: ["OCPP 2.x", "ISO 15118", "Price Signals"]
             },
@@ -793,7 +793,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "map-provider",
                 name: "Map & Navigation Provider",
                 shortName: "Maps",
-                icon: "🗺️",
+                icon: "globe",
                 description: "Kartendienst: HD Maps, POI, Routing.",
                 requirements: ["HD Maps", "Live Updates", "POI Database"]
             },
@@ -801,7 +801,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "supplier-portal",
                 name: "Supplier Collaboration Portal",
                 shortName: "SCP",
-                icon: "🤝",
+                icon: "users",
                 description: "Lieferanten-Portal: Qualitätsdaten, 8D-Prozesse.",
                 requirements: ["Delta Sharing", "8D Exchange", "Quality Metrics"]
             },
@@ -809,7 +809,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "charging-network",
                 name: "Charging Network API",
                 shortName: "Charge",
-                icon: "🔌",
+                icon: "plug",
                 description: "Ladenetzwerk: Station Availability, Pricing.",
                 requirements: ["Station Status", "Pricing API", "Plug & Charge"]
             },
@@ -817,7 +817,7 @@ const AUTOMOTIVE_COMPONENTS = {
                 id: "regulatory-api",
                 name: "Regulatory Reporting API",
                 shortName: "Reg",
-                icon: "📜",
+                icon: "save",
                 description: "Behörden: Rückruf-Meldungen, Compliance Reports.",
                 requirements: ["NHTSA/KBA Interface", "Recall Management", "Compliance"]
             }

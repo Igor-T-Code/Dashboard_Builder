@@ -230,7 +230,7 @@
       max-width: 1600px;
       margin: 0 auto;
       background: white;
-      border-radius: 12px;
+      border-radius: var(--radius-xl);
       overflow: hidden;
     }
     .system-view-header {
@@ -256,7 +256,7 @@
     .system-view-header-btn {
       padding: 10px 18px;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
@@ -315,7 +315,7 @@
       height: 400px;
       background: white;
       border: 1px solid #e5e5e5;
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       position: relative;
       overflow: hidden;
     }
@@ -331,7 +331,7 @@
       height: 60px;
       background: white;
       border: 2px solid #333;
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -372,7 +372,7 @@
     .system-view-usecase {
       background: #f8f8f8;
       border: 2px solid #e5e5e5;
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       padding: 10px 15px;
       cursor: pointer;
       transition: all 0.2s;
@@ -392,7 +392,7 @@
       width: 18px;
       height: 18px;
       border: 2px solid #ccc;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -513,7 +513,7 @@
     }
     .sidebar-content::-webkit-scrollbar-thumb {
       background: rgba(148, 163, 184, 0.3);
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
     }
     .sidebar-content::-webkit-scrollbar-thumb:hover {
       background: rgba(148, 163, 184, 0.5);
@@ -597,6 +597,46 @@
       background: rgba(0, 0, 0, 0.08);
       border-color: var(--color-brand-400);
       color: var(--color-brand-600);
+    }
+
+    /* ============== DRAG & DROP SORTING ============== */
+    .category.dragging {
+      opacity: 0.5;
+      transform: scale(0.98);
+    }
+    .category.drag-over {
+      border: 2px dashed var(--color-brand-500);
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .block-item.dragging-sort {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+    .block-item.drag-over-sort {
+      border-top: 3px solid var(--color-brand-500);
+      margin-top: -3px;
+    }
+    .block-item.drag-over-sort-bottom {
+      border-bottom: 3px solid var(--color-brand-500);
+      margin-bottom: -3px;
+    }
+    .category-items.drag-over-category {
+      background: rgba(0, 0, 0, 0.08) !important;
+      min-height: 50px;
+    }
+    .drag-handle {
+      cursor: grab;
+      opacity: 0.4;
+      transition: opacity 0.15s;
+      margin-right: 6px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .drag-handle:hover {
+      opacity: 1;
+    }
+    .drag-handle:active {
+      cursor: grabbing;
     }
 
     /* ============== WORKSPACE ============== */
@@ -869,7 +909,7 @@
     }
     .usecase-panel-content::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, 0.15);
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
     }
     .usecase-panel label {
       display: block;
@@ -1243,7 +1283,7 @@
     .canvas-container .container-header {
       padding: 10px 14px;
       background: rgba(255, 255, 255, 0.6);
-      border-radius: 14px 14px 0 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
       font-weight: 600;
       font-size: 13px;
       color: var(--slate-700);
@@ -1345,7 +1385,7 @@
       height: 16px;
       cursor: se-resize;
       background: linear-gradient(135deg, transparent 50%, rgba(148, 163, 184, 0.5) 50%);
-      border-radius: 0 0 14px 0;
+      border-radius: 0 0 var(--radius-lg) 0;
       transition: background 0.15s ease;
     }
     .resize-handle:hover {
@@ -1410,7 +1450,7 @@
       color: white;
       width: 32px;
       height: 32px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 18px;
       cursor: pointer;
       display: flex;
@@ -1435,7 +1475,7 @@
     }
     .modal-body::-webkit-scrollbar-thumb {
       background: rgba(148, 163, 184, 0.3);
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
     }
     .modal-footer {
       padding: 16px 24px;
@@ -1529,7 +1569,7 @@
       font-size: 16px;
       width: 28px;
       height: 28px;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1780,7 +1820,7 @@
     .lib-component-card {
       background: white;
       border: 2px solid #e5e5e5;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       padding: 16px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -1821,7 +1861,7 @@
     .lib-card-icon {
       width: 44px;
       height: 44px;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1846,7 +1886,7 @@
       font-weight: 600;
       color: white;
       padding: 3px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -1871,7 +1911,7 @@
       background: #f0f0f0;
       color: #555;
       padding: 3px 7px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
     .lib-category-section {
       grid-column: 1 / -1;
@@ -1895,7 +1935,7 @@
       color: #888;
       background: #f0f0f0;
       padding: 2px 8px;
-      border-radius: 10px;
+      border-radius: 20px;
     }
   </style>
 </head>
@@ -1942,6 +1982,16 @@
             <line x1="12" y1="3" x2="12" y2="15"/>
           </svg>
           Speichern
+        </button>
+        <button class="toolbar-btn" onclick="exportAsShareable()" title="Als einzelne HTML-Datei exportieren (zum Teilen per Email)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Teilen
         </button>
         <button class="toolbar-btn toolbar-btn-danger" onclick="resetToDefault()" title="Auf Standardwerte zurücksetzen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
@@ -2392,10 +2442,10 @@
           <div style="flex: 1; min-width: 200px;">
             <input type="text" id="librarySearchInput" placeholder="Komponenten suchen..."
                    oninput="filterComponentLibrary()"
-                   style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+                   style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
           </div>
           <select id="libraryCategoryFilter" onchange="filterComponentLibrary()"
-                  style="padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; min-width: 180px;">
+                  style="padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; min-width: 180px;">
             <option value="all">Alle Kategorien</option>
           </select>
           <div style="display: flex; gap: 8px; margin-left: auto;">
@@ -2422,7 +2472,7 @@
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
         <div style="font-size: 13px; color: #666;">
           <span id="importTargetInfo">Ziel-Kategorie wählen:</span>
-          <select id="importTargetCategory" style="margin-left: 8px; padding: 6px 10px; border: 1px solid #ddd; border-radius: 4px;">
+          <select id="importTargetCategory" style="margin-left: 8px; padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px;">
           </select>
         </div>
         <div style="display: flex; gap: 10px;">
@@ -2520,6 +2570,159 @@
       a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
+    }
+
+    // Export as shareable single HTML file (for email)
+    async function exportAsShareable() {
+      showToast('Erstelle teilbare Datei...', 'info', 2000);
+
+      try {
+        // Get the current HTML
+        const currentHTML = document.documentElement.outerHTML;
+
+        // Create a standalone version with embedded state
+        const stateJSON = JSON.stringify(state);
+
+        // Create the shareable HTML with embedded state
+        const shareableHTML = `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automotive Architecture Builder - Shared View</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"><\/script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>
+  <script>
+    // Embedded project state
+    window.EMBEDDED_STATE = ${stateJSON};
+  <\/script>
+  ${document.querySelector('style') ? '<style>' + document.querySelector('style').textContent + '</style>' : ''}
+</head>
+<body>
+  <div style="padding: 20px; font-family: Inter, sans-serif; max-width: 1400px; margin: 0 auto;">
+    <div style="background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+      <h1 style="margin: 0 0 8px 0; color: #333;">Automotive Architecture Builder</h1>
+      <p style="margin: 0; color: #666;">Projekt exportiert am ${new Date().toLocaleDateString('de-DE')} um ${new Date().toLocaleTimeString('de-DE')}</p>
+    </div>
+
+    <div id="projectContent"></div>
+
+    <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px; text-align: center;">
+      <p style="margin: 0 0 12px 0; color: #666;">Diese Datei wurde mit dem Automotive Architecture Builder erstellt.</p>
+      <p style="margin: 0; font-size: 12px; color: #999;">Um das Projekt zu bearbeiten, öffne die Original-Anwendung und importiere die JSON-Daten.</p>
+      <button onclick="downloadProjectJSON()" style="margin-top: 16px; padding: 10px 20px; background: #666; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+        Projekt-Daten als JSON herunterladen
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function downloadProjectJSON() {
+      const dataStr = JSON.stringify(window.EMBEDDED_STATE, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'projekt_daten.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Render project overview
+    function renderProjectOverview() {
+      const state = window.EMBEDDED_STATE;
+      const container = document.getElementById('projectContent');
+
+      let html = '';
+
+      // Phases and Use Cases
+      if (state.phases && state.phases.length > 0) {
+        html += '<h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">Phasen & Use Cases</h2>';
+
+        state.phases.forEach(phase => {
+          const phaseUseCases = (state.useCases || []).filter(uc => uc.phaseId === phase.id);
+
+          html += '<div style="margin: 20px 0; padding: 16px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">';
+          html += '<h3 style="margin: 0 0 12px 0; color: ' + (phase.color || '#666') + ';">' + phase.name + '</h3>';
+
+          if (phaseUseCases.length > 0) {
+            phaseUseCases.forEach(uc => {
+              const priorityColors = {'prio-1': '#C62828', 'prio-2': '#E65100', 'prio-3': '#1565C0'};
+              const statusLabels = {'draft': 'Entwurf', 'active': 'Aktiv', 'done': 'Fertig'};
+
+              html += '<div style="padding: 12px; margin: 8px 0; background: #fafafa; border-radius: 6px; border-left: 4px solid ' + (priorityColors[uc.priority] || '#999') + ';">';
+              html += '<div style="display: flex; justify-content: space-between; align-items: center;">';
+              html += '<strong style="color: #333;">' + (uc.name || 'Unbenannt') + '</strong>';
+              html += '<span style="font-size: 12px; padding: 2px 8px; background: #e0e0e0; border-radius: 4px;">' + (statusLabels[uc.status] || uc.status) + '</span>';
+              html += '</div>';
+              if (uc.description) {
+                html += '<p style="margin: 8px 0 0 0; font-size: 14px; color: #666;">' + uc.description + '</p>';
+              }
+              if (uc.elements && uc.elements.length > 0) {
+                html += '<p style="margin: 8px 0 0 0; font-size: 12px; color: #999;">' + uc.elements.length + ' Elemente, ' + (uc.connections?.length || 0) + ' Verbindungen</p>';
+              }
+              html += '</div>';
+            });
+          } else {
+            html += '<p style="color: #999; font-style: italic;">Keine Use Cases</p>';
+          }
+
+          html += '</div>';
+        });
+      }
+
+      // Block Catalog Summary
+      if (state.categories && state.categories.length > 0) {
+        html += '<h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px; margin-top: 40px;">Block-Katalog</h2>';
+        html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">';
+
+        state.categories.forEach(cat => {
+          const catBlocks = (state.blocks || []).filter(b => b.categoryId === cat.id);
+          html += '<div style="padding: 16px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid ' + (cat.color || '#666') + ';">';
+          html += '<h4 style="margin: 0 0 8px 0; color: ' + (cat.color || '#333') + ';">' + cat.name + '</h4>';
+          html += '<p style="margin: 0; font-size: 14px; color: #666;">' + catBlocks.length + ' Blöcke</p>';
+          if (catBlocks.length > 0) {
+            html += '<ul style="margin: 8px 0 0 0; padding-left: 20px; font-size: 13px; color: #666;">';
+            catBlocks.slice(0, 5).forEach(b => {
+              html += '<li>' + b.name + '</li>';
+            });
+            if (catBlocks.length > 5) {
+              html += '<li style="color: #999;">... und ' + (catBlocks.length - 5) + ' weitere</li>';
+            }
+            html += '</ul>';
+          }
+          html += '</div>';
+        });
+
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', renderProjectOverview);
+  <\/script>
+</body>
+</html>`;
+
+        // Download the shareable HTML
+        const blob = new Blob([shareableHTML], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const timestamp = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `Automotive_Architecture_${timestamp}.html`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        showToast('Datei erstellt! Du kannst sie jetzt per Email versenden.', 'success', 4000);
+
+      } catch (error) {
+        console.error('Export error:', error);
+        showToast('Fehler beim Export: ' + error.message, 'error');
+      }
     }
 
     // Import project from JSON file
@@ -3067,44 +3270,238 @@
     }
     
     // ============== CATEGORIES ==============
+    let draggedCategory = null;
+    let draggedSortBlock = null;
+    let dragSourceCategoryId = null;
+
     function renderCategories() {
       // Auto-save state
       scheduleSave();
 
       const container = document.getElementById('categoriesContainer');
       container.innerHTML = '';
-      
-      state.categories.forEach(cat => {
+
+      state.categories.forEach((cat, catIndex) => {
         const catBlocks = state.blocks.filter(b => b.categoryId === cat.id);
         const catIcon = cat.icon || 'folder';
 
         const div = document.createElement('div');
-        div.className = 'category'; // Default: zugeklappt
+        div.className = 'category';
+        div.draggable = true;
+        div.dataset.categoryId = cat.id;
+        div.dataset.categoryIndex = catIndex;
+
+        // Category drag events
+        div.addEventListener('dragstart', (e) => handleCategoryDragStart(e, cat.id, catIndex));
+        div.addEventListener('dragend', handleCategoryDragEnd);
+        div.addEventListener('dragover', handleCategoryDragOver);
+        div.addEventListener('dragleave', handleCategoryDragLeave);
+        div.addEventListener('drop', (e) => handleCategoryDrop(e, catIndex));
+
         div.innerHTML = `
           <div class="category-header" onclick="toggleCategory(this)" ondblclick="editCategory(${cat.id})" style="background: linear-gradient(135deg, ${cat.color}12 0%, rgba(255,255,255,0.6) 100%); border-left: 2px solid ${cat.color};">
             <span style="display:flex;align-items:center;gap:8px;">
+              <span class="drag-handle" title="Kategorie verschieben">${getSvgIcon('grip-vertical', 14)}</span>
               <span style="display: inline-flex; align-items: center; color: ${cat.color}; opacity: 0.9;">${getSvgIcon(catIcon, 16)}</span>
               <span style="color: #333; font-weight: 600;">${cat.name}</span>
               <span style="color: ${cat.color}; font-size: 10px; opacity: 0.7;">(${catBlocks.length})</span>
             </span>
             <span class="toggle" style="color: ${cat.color}; opacity: 0.7;">▶</span>
           </div>
-          <div class="category-items" style="background: ${cat.color}06;">
-            ${catBlocks.map(block => `
+          <div class="category-items" data-category-id="${cat.id}" style="background: ${cat.color}06;">
+            ${catBlocks.map((block, blockIndex) => `
               <div class="block-item"
                    draggable="true"
                    data-block-id="${block.id}"
+                   data-block-index="${blockIndex}"
+                   data-category-id="${cat.id}"
                    style="border-left-color: ${cat.color}; background: linear-gradient(135deg, ${cat.color}10 0%, rgba(255,255,255,0.9) 100%);"
-                   ondragstart="handleBlockDragStart(event, ${block.id})"
                    ondblclick="editBlockFromCatalog(${block.id})">
+                <span class="drag-handle" title="Block verschieben">${getSvgIcon('grip-vertical', 12)}</span>
                 <span style="margin-right:6px; display: inline-flex; align-items: center; color: ${cat.color}; opacity: 0.85;">${getSvgIcon(block.icon || 'cpu', 14)}</span>${block.name}
               </div>
             `).join('')}
             <button class="add-block-btn" onclick="addBlockToCategory(${cat.id})">+ Block anlegen</button>
           </div>
         `;
+
+        // Add block sorting events
+        const categoryItems = div.querySelector('.category-items');
+        categoryItems.addEventListener('dragover', (e) => handleBlockSortDragOver(e, cat.id));
+        categoryItems.addEventListener('dragleave', handleBlockSortDragLeave);
+        categoryItems.addEventListener('drop', (e) => handleBlockSortDrop(e, cat.id));
+
+        // Add events to block items
+        div.querySelectorAll('.block-item').forEach(blockEl => {
+          const blockId = parseInt(blockEl.dataset.blockId);
+          blockEl.addEventListener('dragstart', (e) => handleBlockSortDragStart(e, blockId, cat.id));
+          blockEl.addEventListener('dragend', handleBlockSortDragEnd);
+        });
+
         container.appendChild(div);
       });
+    }
+
+    // Category Drag & Drop handlers
+    function handleCategoryDragStart(e, catId, catIndex) {
+      // Only allow drag from handle
+      if (!e.target.closest('.drag-handle') && e.target.closest('.category-header')) {
+        e.preventDefault();
+        return;
+      }
+      draggedCategory = { id: catId, index: catIndex };
+      e.currentTarget.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', 'category-' + catId);
+    }
+
+    function handleCategoryDragEnd(e) {
+      draggedCategory = null;
+      document.querySelectorAll('.category').forEach(el => {
+        el.classList.remove('dragging', 'drag-over');
+      });
+    }
+
+    function handleCategoryDragOver(e) {
+      if (!draggedCategory) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const category = e.currentTarget;
+      if (!category.classList.contains('dragging')) {
+        category.classList.add('drag-over');
+      }
+    }
+
+    function handleCategoryDragLeave(e) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+
+    function handleCategoryDrop(e, targetIndex) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+
+      if (!draggedCategory || draggedCategory.index === targetIndex) return;
+
+      // Reorder categories
+      const [movedCategory] = state.categories.splice(draggedCategory.index, 1);
+      state.categories.splice(targetIndex, 0, movedCategory);
+
+      draggedCategory = null;
+      renderCategories();
+    }
+
+    // Block Sorting Drag & Drop handlers (separate from canvas drag)
+    function handleBlockSortDragStart(e, blockId, categoryId) {
+      // Check if we should use sort mode or canvas mode
+      const handle = e.target.closest('.drag-handle');
+      if (handle) {
+        // Sort mode - reordering blocks
+        e.stopPropagation();
+        draggedSortBlock = { id: blockId, categoryId: categoryId };
+        dragSourceCategoryId = categoryId;
+        e.currentTarget.classList.add('dragging-sort');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', 'sort-block-' + blockId);
+      } else {
+        // Canvas mode - dragging to canvas
+        handleBlockDragStart(e, blockId);
+      }
+    }
+
+    function handleBlockSortDragEnd(e) {
+      draggedSortBlock = null;
+      dragSourceCategoryId = null;
+      document.querySelectorAll('.block-item').forEach(el => {
+        el.classList.remove('dragging-sort', 'drag-over-sort', 'drag-over-sort-bottom');
+      });
+      document.querySelectorAll('.category-items').forEach(el => {
+        el.classList.remove('drag-over-category');
+      });
+    }
+
+    function handleBlockSortDragOver(e, targetCategoryId) {
+      if (!draggedSortBlock) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+
+      const categoryItems = e.currentTarget;
+      const blockItem = e.target.closest('.block-item');
+
+      // Clear previous indicators
+      categoryItems.querySelectorAll('.block-item').forEach(el => {
+        el.classList.remove('drag-over-sort', 'drag-over-sort-bottom');
+      });
+
+      if (blockItem && blockItem.dataset.blockId != draggedSortBlock.id) {
+        const rect = blockItem.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+        if (e.clientY < midY) {
+          blockItem.classList.add('drag-over-sort');
+        } else {
+          blockItem.classList.add('drag-over-sort-bottom');
+        }
+      } else if (!blockItem) {
+        categoryItems.classList.add('drag-over-category');
+      }
+    }
+
+    function handleBlockSortDragLeave(e) {
+      const categoryItems = e.currentTarget;
+      if (!categoryItems.contains(e.relatedTarget)) {
+        categoryItems.classList.remove('drag-over-category');
+        categoryItems.querySelectorAll('.block-item').forEach(el => {
+          el.classList.remove('drag-over-sort', 'drag-over-sort-bottom');
+        });
+      }
+    }
+
+    function handleBlockSortDrop(e, targetCategoryId) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!draggedSortBlock) return;
+
+      const categoryItems = e.currentTarget;
+      categoryItems.classList.remove('drag-over-category');
+
+      const block = state.blocks.find(b => b.id === draggedSortBlock.id);
+      if (!block) return;
+
+      const targetBlockEl = e.target.closest('.block-item');
+
+      // Get all blocks in target category (in current order)
+      const targetCatBlocks = state.blocks.filter(b => b.categoryId === targetCategoryId);
+
+      // Remove block from its current position
+      const blockIndex = state.blocks.findIndex(b => b.id === draggedSortBlock.id);
+      state.blocks.splice(blockIndex, 1);
+
+      // Update category if moving between categories
+      block.categoryId = targetCategoryId;
+
+      if (targetBlockEl && targetBlockEl.dataset.blockId != draggedSortBlock.id) {
+        // Insert relative to target block
+        const targetBlockId = parseInt(targetBlockEl.dataset.blockId);
+        const targetIndex = state.blocks.findIndex(b => b.id === targetBlockId);
+        const rect = targetBlockEl.getBoundingClientRect();
+        const insertAfter = e.clientY > (rect.top + rect.height / 2);
+
+        state.blocks.splice(insertAfter ? targetIndex + 1 : targetIndex, 0, block);
+      } else {
+        // Add at end of category - find last block of this category
+        let insertIndex = state.blocks.length;
+        for (let i = state.blocks.length - 1; i >= 0; i--) {
+          if (state.blocks[i].categoryId === targetCategoryId) {
+            insertIndex = i + 1;
+            break;
+          }
+        }
+        state.blocks.splice(insertIndex, 0, block);
+      }
+
+      draggedSortBlock = null;
+      dragSourceCategoryId = null;
+      renderCategories();
     }
     
     function toggleCategory(header) {
@@ -3253,7 +3650,15 @@
       'shield-check': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',
       'key': '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
       'lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-      'satellite': '<path d="M13 7L9 3L5 7l4 4"/><path d="M17 11l4 4-4 4-4-4"/><path d="m8 12 4 4 6-6-4-4-6 6z"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/>'
+      'satellite': '<path d="M13 7L9 3L5 7l4 4"/><path d="M17 11l4 4-4 4-4-4"/><path d="m8 12 4 4 6-6-4-4-6 6z"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/>',
+
+      // Personen & Teams
+      'users': '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+      'user': '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+      'user-check': '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/>',
+
+      // UI / Drag Handle
+      'grip-vertical': '<circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>'
     };
 
     // Icon-Namen Liste für einfache Iteration
@@ -4769,7 +5174,7 @@
         // Category header
         html += '<div class="lib-category-section">';
         html += '<div class="lib-category-title">';
-        html += '<span style="width: 12px; height: 12px; border-radius: 3px; background: ' + category.categoryColor + ';"></span>';
+        html += '<span style="width: 12px; height: 12px; border-radius: 4px; background: ' + category.categoryColor + ';"></span>';
         html += category.categoryName;
         html += '<span class="lib-category-count">' + filteredComponents.length + '</span>';
         html += '</div></div>';
