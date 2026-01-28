@@ -1317,6 +1317,28 @@
       z-index: 1000;
     }
 
+    /* Copy/Paste Toast */
+    .copy-paste-toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--slate-800);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .copy-paste-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     .canvas-container .container-header {
       padding: 10px 14px;
       background: rgba(255, 255, 255, 0.6);
@@ -3098,6 +3120,12 @@
     let isMarqueeSelecting = false;
     let marqueeStart = { x: 0, y: 0 };
     let marqueeBox = null;
+
+    // ============== CLIPBOARD (Copy/Paste) ==============
+    let clipboard = {
+      elements: [],
+      connections: []
+    };
 
     // ============== SELECTION COUNTER ==============
     function updateSelectionCounter() {
@@ -5254,6 +5282,131 @@
       renderCanvas();
     }
 
+    // ============== COPY/PASTE ==============
+    function copySelectedElements() {
+      if (!state.currentUseCase || selectedElements.size === 0) return;
+
+      // Elemente kopieren
+      clipboard.elements = [];
+      const selectedIds = [...selectedElements];
+
+      selectedIds.forEach(elId => {
+        const element = state.currentUseCase.elements.find(el => el.id === elId);
+        if (element) {
+          // Deep copy des Elements
+          clipboard.elements.push(JSON.parse(JSON.stringify(element)));
+        }
+      });
+
+      // Verbindungen zwischen den kopierten Elementen kopieren
+      clipboard.connections = [];
+      if (state.currentUseCase.connections) {
+        state.currentUseCase.connections.forEach(conn => {
+          if (selectedIds.includes(conn.from) && selectedIds.includes(conn.to)) {
+            clipboard.connections.push(JSON.parse(JSON.stringify(conn)));
+          }
+        });
+      }
+
+      // Visuelles Feedback
+      showToast(`${clipboard.elements.length} Element${clipboard.elements.length > 1 ? 'e' : ''} kopiert`);
+    }
+
+    function pasteElements() {
+      if (!state.currentUseCase || clipboard.elements.length === 0) return;
+
+      // ID-Mapping für alte zu neue IDs
+      const idMapping = new Map();
+
+      // Offset für eingefügte Elemente (leicht versetzt)
+      const offsetX = 20;
+      const offsetY = 20;
+
+      // Neue Elemente erstellen
+      const newElements = [];
+      clipboard.elements.forEach(element => {
+        const newId = state.nextId++;
+        idMapping.set(element.id, newId);
+
+        const newElement = {
+          ...JSON.parse(JSON.stringify(element)),
+          id: newId,
+          x: element.x + offsetX,
+          y: element.y + offsetY
+        };
+
+        newElements.push(newElement);
+        state.currentUseCase.elements.push(newElement);
+      });
+
+      // Verbindungen mit neuen IDs erstellen
+      clipboard.connections.forEach(conn => {
+        const newFromId = idMapping.get(conn.from);
+        const newToId = idMapping.get(conn.to);
+
+        if (newFromId && newToId) {
+          if (!state.currentUseCase.connections) {
+            state.currentUseCase.connections = [];
+          }
+          state.currentUseCase.connections.push({
+            id: state.nextId++,
+            from: newFromId,
+            fromAnchor: conn.fromAnchor,
+            to: newToId,
+            toAnchor: conn.toAnchor
+          });
+        }
+      });
+
+      // Neue Elemente selektieren
+      selectedElements.clear();
+      newElements.forEach(el => selectedElements.add(el.id));
+
+      updateSelectionCounter();
+      renderCanvas();
+      saveState();
+
+      // Visuelles Feedback
+      showToast(`${newElements.length} Element${newElements.length > 1 ? 'e' : ''} eingefügt`);
+    }
+
+    function selectAllElements() {
+      if (!state.currentUseCase || !state.currentUseCase.elements) return;
+
+      selectedElements.clear();
+      state.currentUseCase.elements.forEach(el => {
+        selectedElements.add(el.id);
+      });
+
+      // Visuelle Selektion aktualisieren
+      document.querySelectorAll('.canvas-block, .canvas-container').forEach(el => {
+        el.classList.add('selected');
+      });
+
+      updateSelectionCounter();
+    }
+
+    function showToast(message) {
+      // Existierenden Toast entfernen
+      const existingToast = document.querySelector('.copy-paste-toast');
+      if (existingToast) {
+        existingToast.remove();
+      }
+
+      // Neuen Toast erstellen
+      const toast = document.createElement('div');
+      toast.className = 'copy-paste-toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      // Animation
+      setTimeout(() => toast.classList.add('visible'), 10);
+      setTimeout(() => {
+        toast.classList.remove('visible');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
     // Hide context menu on click outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.context-menu')) {
@@ -5282,6 +5435,31 @@
       if ((e.key === 'Delete' || e.key === 'Backspace') && selectedElements.size > 0 && state.currentUseCase) {
         e.preventDefault();
         deleteSelectedElements();
+      }
+
+      // Ctrl+C - Kopieren
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c' && selectedElements.size > 0 && state.currentUseCase) {
+        e.preventDefault();
+        copySelectedElements();
+      }
+
+      // Ctrl+V - Einfügen
+      if ((e.ctrlKey || e.metaKey) && e.key === 'v' && clipboard.elements.length > 0 && state.currentUseCase) {
+        e.preventDefault();
+        pasteElements();
+      }
+
+      // Ctrl+X - Ausschneiden
+      if ((e.ctrlKey || e.metaKey) && e.key === 'x' && selectedElements.size > 0 && state.currentUseCase) {
+        e.preventDefault();
+        copySelectedElements();
+        deleteSelectedElements();
+      }
+
+      // Ctrl+A - Alles auswählen
+      if ((e.ctrlKey || e.metaKey) && e.key === 'a' && state.currentUseCase) {
+        e.preventDefault();
+        selectAllElements();
       }
 
       if (e.key === 'Escape') {
