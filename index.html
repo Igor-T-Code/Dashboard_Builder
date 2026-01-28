@@ -1280,6 +1280,33 @@
       border-color: var(--color-brand-500);
       box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
     }
+
+    /* Multi-Selection Counter */
+    .selection-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-brand-600);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .selection-counter.visible {
+      display: flex;
+    }
+    .selection-counter kbd {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
     .canvas-container .container-header {
       padding: 10px 14px;
       background: rgba(255, 255, 255, 0.6);
@@ -1940,6 +1967,12 @@
   </style>
 </head>
 <body>
+  <!-- Selection Counter -->
+  <div class="selection-counter" id="selectionCounter">
+    <span id="selectionCount">0</span> Elemente ausgewählt
+    <kbd>Del</kbd> Löschen
+  </div>
+
   <!-- Context Menu -->
   <div class="context-menu" id="contextMenu">
     <div class="context-menu-item" onclick="contextMenuEdit()">
@@ -3046,10 +3079,25 @@
     // ============== STATE ==============
     let state = loadState();
 
-    let selectedElement = null;
+    let selectedElements = new Set(); // Multi-Selection Set
     let isDragging = false;
-    let dragOffset = { x: 0, y: 0 };
+    let dragOffsets = new Map(); // Offsets für jedes selektierte Element
     let connectionStart = null;
+
+    // ============== SELECTION COUNTER ==============
+    function updateSelectionCounter() {
+      const counter = document.getElementById('selectionCounter');
+      const countEl = document.getElementById('selectionCount');
+      if (counter && countEl) {
+        const count = selectedElements.size;
+        if (count > 1) {
+          countEl.textContent = count;
+          counter.classList.add('visible');
+        } else {
+          counter.classList.remove('visible');
+        }
+      }
+    }
 
     // ============== CANVAS ZOOM ==============
     let canvasZoom = 1;
@@ -4370,7 +4418,7 @@
       }
 
       const div = document.createElement('div');
-      div.className = 'canvas-block' + (selectedElement === element.id ? ' selected' : '') + reqsStatusClass;
+      div.className = 'canvas-block' + (selectedElements.has(element.id) ? ' selected' : '') + reqsStatusClass;
       div.id = `element-${element.id}`;
       div.style.left = element.x + 'px';
       div.style.top = element.y + 'px';
@@ -4434,7 +4482,7 @@
       }
 
       const div = document.createElement('div');
-      div.className = 'canvas-container ' + element.colorClass + (selectedElement === element.id ? ' selected' : '');
+      div.className = 'canvas-container ' + element.colorClass + (selectedElements.has(element.id) ? ' selected' : '');
       div.id = `element-${element.id}`;
       div.style.left = element.x + 'px';
       div.style.top = element.y + 'px';
@@ -4593,23 +4641,49 @@
     function handleElementMouseDown(e, element) {
       if (e.target.classList.contains('anchor')) return;
 
-      // Vorherige Selektion entfernen
-      document.querySelectorAll('.canvas-block.selected, .canvas-container.selected').forEach(el => {
-        el.classList.remove('selected');
-      });
-
-      selectedElement = element.id;
-      mouseDownPos = { x: e.clientX, y: e.clientY };
-
-      // Neue Selektion hinzufügen
+      const isMultiSelect = e.ctrlKey || e.metaKey; // Ctrl (Windows/Linux) oder Cmd (Mac)
       const blockEl = e.target.closest('.canvas-block, .canvas-container');
-      if (blockEl) {
-        blockEl.classList.add('selected');
+
+      if (isMultiSelect) {
+        // Multi-Selection: Element zur Auswahl hinzufügen oder entfernen
+        if (selectedElements.has(element.id)) {
+          selectedElements.delete(element.id);
+          if (blockEl) blockEl.classList.remove('selected');
+        } else {
+          selectedElements.add(element.id);
+          if (blockEl) blockEl.classList.add('selected');
+        }
+      } else {
+        // Normale Selektion: Wenn Element bereits selektiert, Selection beibehalten
+        if (!selectedElements.has(element.id)) {
+          // Vorherige Selektion entfernen
+          document.querySelectorAll('.canvas-block.selected, .canvas-container.selected').forEach(el => {
+            el.classList.remove('selected');
+          });
+          selectedElements.clear();
+          selectedElements.add(element.id);
+          if (blockEl) blockEl.classList.add('selected');
+        }
       }
 
-      const rect = blockEl.getBoundingClientRect();
-      dragOffset.x = e.clientX - rect.left;
-      dragOffset.y = e.clientY - rect.top;
+      updateSelectionCounter();
+
+      mouseDownPos = { x: e.clientX, y: e.clientY };
+
+      // Offsets für alle selektierten Elemente berechnen
+      dragOffsets.clear();
+      const canvasEl = document.getElementById('canvas');
+      const canvasRect = canvasEl.getBoundingClientRect();
+
+      selectedElements.forEach(elId => {
+        const el = state.currentUseCase.elements.find(e => e.id === elId);
+        if (el) {
+          dragOffsets.set(elId, {
+            x: (e.clientX - canvasRect.left) / canvasZoom - el.x,
+            y: (e.clientY - canvasRect.top) / canvasZoom - el.y
+          });
+        }
+      });
 
       // Verzögerung bevor Drag startet, um Doppelklick zu ermöglichen
       dragStartTimeout = setTimeout(() => {
@@ -4618,8 +4692,8 @@
     }
     
     document.addEventListener('mousemove', (e) => {
-      // Wenn Maus bewegt wird und Element ausgewählt, sofort Drag starten
-      if (selectedElement && !isDragging && dragStartTimeout) {
+      // Wenn Maus bewegt wird und Elemente ausgewählt, sofort Drag starten
+      if (selectedElements.size > 0 && !isDragging && dragStartTimeout) {
         const dx = Math.abs(e.clientX - mouseDownPos.x);
         const dy = Math.abs(e.clientY - mouseDownPos.y);
         if (dx > 3 || dy > 3) {
@@ -4629,24 +4703,30 @@
         }
       }
 
-      if (!isDragging || !selectedElement || !state.currentUseCase) return;
-
-      const element = state.currentUseCase.elements.find(el => el.id === selectedElement);
-      if (!element) return;
+      if (!isDragging || selectedElements.size === 0 || !state.currentUseCase) return;
 
       const canvasEl = document.getElementById('canvas');
       const canvasRect = canvasEl.getBoundingClientRect();
-      // Zoom berücksichtigen bei Koordinatenberechnung + Snap to Grid
-      const rawX = (e.clientX - canvasRect.left) / canvasZoom;
-      const rawY = (e.clientY - canvasRect.top) / canvasZoom;
-      element.x = snapValue(rawX);
-      element.y = snapValue(rawY);
 
-      const el = document.getElementById(`element-${element.id}`);
-      if (el) {
-        el.style.left = element.x + 'px';
-        el.style.top = element.y + 'px';
-      }
+      // Alle selektierten Elemente bewegen
+      selectedElements.forEach(elId => {
+        const element = state.currentUseCase.elements.find(el => el.id === elId);
+        if (!element) return;
+
+        const offset = dragOffsets.get(elId) || { x: 0, y: 0 };
+
+        // Zoom berücksichtigen bei Koordinatenberechnung + Snap to Grid
+        const rawX = (e.clientX - canvasRect.left) / canvasZoom - offset.x;
+        const rawY = (e.clientY - canvasRect.top) / canvasZoom - offset.y;
+        element.x = snapValue(rawX);
+        element.y = snapValue(rawY);
+
+        const el = document.getElementById(`element-${element.id}`);
+        if (el) {
+          el.style.left = element.x + 'px';
+          el.style.top = element.y + 'px';
+        }
+      });
 
       renderConnections();
     });
@@ -5008,7 +5088,21 @@
       state.currentUseCase.elements = state.currentUseCase.elements.filter(el => el.id !== elementId);
       state.currentUseCase.connections = (state.currentUseCase.connections || [])
         .filter(c => c.from !== elementId && c.to !== elementId);
-      if (selectedElement === elementId) selectedElement = null;
+      selectedElements.delete(elementId);
+      updateSelectionCounter();
+      renderCanvas();
+    }
+
+    function deleteSelectedElements() {
+      if (!state.currentUseCase || selectedElements.size === 0) return;
+      const elementsToDelete = [...selectedElements];
+      elementsToDelete.forEach(elId => {
+        state.currentUseCase.elements = state.currentUseCase.elements.filter(el => el.id !== elId);
+        state.currentUseCase.connections = (state.currentUseCase.connections || [])
+          .filter(c => c.from !== elId && c.to !== elId);
+      });
+      selectedElements.clear();
+      updateSelectionCounter();
       renderCanvas();
     }
 
@@ -5037,9 +5131,9 @@
         return; // Keine weitere Aktion bei offenen Modals oder in Formularelementen
       }
 
-      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedElement && state.currentUseCase) {
+      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedElements.size > 0 && state.currentUseCase) {
         e.preventDefault();
-        deleteElement(selectedElement);
+        deleteSelectedElements();
       }
 
       if (e.key === 'Escape') {
@@ -5071,8 +5165,11 @@
     // ============== CLICK OUTSIDE ==============
     canvas.addEventListener('click', (e) => {
       if (e.target === canvas || e.target.classList.contains('connections-svg')) {
-        selectedElement = null;
-        renderCanvas();
+        selectedElements.clear();
+        document.querySelectorAll('.canvas-block.selected, .canvas-container.selected').forEach(el => {
+          el.classList.remove('selected');
+        });
+        updateSelectionCounter();
       }
     });
 
