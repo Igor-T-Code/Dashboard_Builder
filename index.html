@@ -7329,7 +7329,7 @@
       // Berechne Bounding Box aller Elemente
       let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
       const blockWidth = 140;
-      const blockHeight = 100;
+      const blockHeight = 120;
 
       elements.forEach(el => {
         const width = el.type === 'container' ? (el.width || 200) : blockWidth;
@@ -7341,7 +7341,7 @@
       });
 
       // Padding hinzufügen
-      const padding = 40;
+      const padding = 50;
       minX -= padding;
       minY -= padding;
       maxX += padding;
@@ -7350,35 +7350,63 @@
       const svgWidth = maxX - minX;
       const svgHeight = maxY - minY;
 
-      // SVG Header
+      // Sammle verwendete Farben für Gradients
+      const usedColors = new Set();
+      elements.filter(el => el.type !== 'container').forEach(el => {
+        const block = state.blocks.find(b => b.id === el.blockId);
+        if (block) {
+          const cat = state.categories.find(c => c.id === block.categoryId);
+          if (cat?.color) usedColors.add(cat.color);
+        }
+      });
+
+      // SVG Header mit Defs
       let svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="${minX} ${minY} ${svgWidth} ${svgHeight}">
   <defs>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <path d="M0,0 L8,3 L0,6 L2,3 Z" fill="#64748b"/>
     </marker>
-    <style>
-      .block-rect { fill: #fff; stroke-width: 2; rx: 12; }
-      .block-title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 600; fill: #1e293b; }
-      .block-category { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 9px; fill: #64748b; }
-      .container-rect { fill-opacity: 0.3; stroke-width: 2; stroke-dasharray: 4,2; rx: 16; }
-      .container-title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 12px; font-weight: 600; fill: #475569; }
-      .connection { fill: none; stroke: #64748b; stroke-width: 2; marker-end: url(#arrowhead); }
-    </style>
-  </defs>
-  <rect x="${minX}" y="${minY}" width="${svgWidth}" height="${svgHeight}" fill="#f8fafc"/>
-
-  <!-- Titel -->
-  <text x="${minX + padding}" y="${minY + 25}" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="700" fill="#0f172a">${escapeXml(uc.name)}</text>
+    <!-- Glow Filter für Requirements-Status -->
+    <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#22c55e" flood-opacity="0.35"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#ef4444" flood-opacity="0.35"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
 `;
 
-      // Container zuerst rendern (im Hintergrund)
+      // Gradients für jede verwendete Farbe
+      usedColors.forEach(color => {
+        const colorId = color.replace('#', '');
+        svg += `    <linearGradient id="grad-${colorId}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:${color};stop-opacity:0.1"/>
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.97"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.99"/>
+    </linearGradient>
+`;
+      });
+
+      svg += `  </defs>
+  <rect x="${minX}" y="${minY}" width="${svgWidth}" height="${svgHeight}" fill="#f8fafc"/>
+  <text x="${minX + padding}" y="${minY + 30}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="700" fill="#0f172a">${escapeXml(uc.name)}</text>
+`;
+
+      // Container zuerst rendern
       const containerColors = ['#dbeafe', '#fce7f3', '#d1fae5', '#fef3c7', '#e0e7ff', '#f3e8ff'];
       elements.filter(el => el.type === 'container').forEach((el, idx) => {
         const color = containerColors[idx % containerColors.length];
-        const strokeColor = color.replace('fe', 'cd').replace('f3', 'd0').replace('e7', 'c0');
-        svg += `  <rect class="container-rect" x="${el.x}" y="${el.y}" width="${el.width || 200}" height="${el.height || 150}" fill="${color}" stroke="${strokeColor}"/>
-  <text class="container-title" x="${el.x + 12}" y="${el.y + 22}">${escapeXml(el.name || 'Container')}</text>
+        svg += `  <rect x="${el.x}" y="${el.y}" width="${el.width || 200}" height="${el.height || 150}" rx="16" fill="${color}" fill-opacity="0.5" stroke="${color}" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="${el.x + 14}" y="${el.y + 24}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(el.name || 'Container')}</text>
 `;
       });
 
@@ -7391,7 +7419,6 @@
         const fromPos = getSvgAnchorPosition(fromEl, conn.fromAnchor, blockWidth, blockHeight);
         const toPos = getSvgAnchorPosition(toEl, conn.toAnchor, blockWidth, blockHeight);
 
-        // Berechne Kontrollpunkte für Bezier-Kurve
         const dx = toPos.x - fromPos.x;
         const dy = toPos.y - fromPos.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -7413,34 +7440,52 @@
           cp2y = toPos.y + (conn.toAnchor === 'bottom' ? offset : -offset);
         }
 
-        svg += `  <path class="connection" d="M${fromPos.x},${fromPos.y} C${cp1x},${cp1y} ${cp2x},${cp2y} ${toPos.x},${toPos.y}"/>
+        svg += `  <path d="M${fromPos.x},${fromPos.y} C${cp1x},${cp1y} ${cp2x},${cp2y} ${toPos.x},${toPos.y}" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
 `;
       });
 
-      // Blöcke rendern
+      // Blöcke rendern mit Icons und Glow
       elements.filter(el => el.type !== 'container').forEach(el => {
         const block = state.blocks.find(b => b.id === el.blockId);
         if (!block) return;
         const cat = state.categories.find(c => c.id === block.categoryId);
-        const color = cat?.color || '#666';
+        const color = cat?.color || '#666666';
+        const colorId = color.replace('#', '');
+        const iconPath = blockIcons[block.icon || 'cpu'] || blockIcons['cpu'];
 
-        svg += `  <rect class="block-rect" x="${el.x}" y="${el.y}" width="${blockWidth}" height="${blockHeight}" stroke="${color}"/>
-  <text class="block-title" x="${el.x + blockWidth/2}" y="${el.y + 45}" text-anchor="middle">${escapeXml(truncateText(block.name, 18))}</text>
-  <text class="block-category" x="${el.x + blockWidth/2}" y="${el.y + 62}" text-anchor="middle">${escapeXml(cat?.name || '')}</text>
+        // Requirements-Status für Glow
+        const reqs = block.requirements || [];
+        let glowFilter = '';
+        let borderColor = color;
+        if (reqs.length === 0) {
+          glowFilter = 'filter="url(#glow-red)"';
+          borderColor = '#ef4444';
+        } else {
+          const allComplete = reqs.every(r => r.checked && r.text && r.text.trim() !== '');
+          glowFilter = allComplete ? 'filter="url(#glow-green)"' : 'filter="url(#glow-red)"';
+          borderColor = allComplete ? '#22c55e' : '#ef4444';
+        }
+
+        svg += `  <g ${glowFilter}>
+    <rect x="${el.x}" y="${el.y}" width="${blockWidth}" height="${blockHeight}" rx="12" fill="url(#grad-${colorId})" stroke="${borderColor}" stroke-width="2" filter="url(#shadow)"/>
+    <g transform="translate(${el.x + blockWidth/2 - 12},${el.y + 12})"><svg viewBox="0 0 24 24" width="24" height="24" stroke="${color}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none">${iconPath}</svg></g>
+    <text x="${el.x + blockWidth/2}" y="${el.y + 55}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">${escapeXml(truncateText(block.name, 16))}</text>
+    <rect x="${el.x + blockWidth/2 - 35}" y="${el.y + 62}" width="70" height="18" rx="9" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="1.5"/>
+    <text x="${el.x + blockWidth/2}" y="${el.y + 75}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" font-weight="600" fill="${color}" text-anchor="middle">${escapeXml(truncateText(cat?.name || '', 12))}</text>
+  </g>
 `;
       });
 
       svg += '</svg>';
 
-      // Prüfe Dateigröße (max 500 KB)
-      const sizeKB = new Blob([svg]).size / 1024;
-      if (sizeKB > 500) {
-        // Optimiere: Entferne Kommentare und überflüssige Whitespaces
-        svg = svg.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><');
+      // Optimiere wenn > 500 KB
+      let finalSvg = svg;
+      if (new Blob([svg]).size / 1024 > 500) {
+        finalSvg = svg.replace(/\n\s*/g, '').replace(/>\s+</g, '><');
       }
 
       // Download
-      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const blob = new Blob([finalSvg], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -7448,9 +7493,7 @@
       a.click();
       URL.revokeObjectURL(url);
 
-      // Zeige Größe
-      const finalSizeKB = new Blob([svg]).size / 1024;
-      showToast(`SVG exportiert (${finalSizeKB.toFixed(1)} KB)`);
+      showToast(`SVG exportiert (${(new Blob([finalSvg]).size / 1024).toFixed(1)} KB)`);
     }
 
     function getSvgAnchorPosition(element, anchor, blockWidth, blockHeight) {
