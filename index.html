@@ -7516,9 +7516,13 @@
     </g>
     <!-- Block Name -->
     <text x="${el.x + blockWidth/2}" y="${el.y + 70}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600" fill="#1e293b" text-anchor="middle">${escapeXml(truncateText(block.name, 18))}</text>
-    <!-- Kategorie Badge -->
-    <rect x="${el.x + blockWidth/2 - 40}" y="${el.y + 78}" width="80" height="20" rx="10" fill="${color}25" stroke="${color}" stroke-width="2"/>
-    <text x="${el.x + blockWidth/2}" y="${el.y + 92}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" font-weight="600" fill="${color}" text-anchor="middle">${escapeXml(truncateText(cat?.name || '', 14))}</text>
+    <!-- Kategorie Badge (dynamische Breite) -->
+    ${(() => {
+      const catName = truncateText(cat?.name || '', 20);
+      const badgeWidth = Math.max(60, catName.length * 7 + 20);
+      return `<rect x="${el.x + blockWidth/2 - badgeWidth/2}" y="${el.y + 78}" width="${badgeWidth}" height="20" rx="10" fill="${color}25" stroke="${color}" stroke-width="2"/>
+    <text x="${el.x + blockWidth/2}" y="${el.y + 92}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" font-weight="600" fill="${color}" text-anchor="middle">${escapeXml(catName)}</text>`;
+    })()}
     ${desc ? `<text x="${el.x + blockWidth/2}" y="${el.y + 115}" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">${escapeXml(truncateText(desc, 22))}</text>` : ''}
   </g>
 `;
