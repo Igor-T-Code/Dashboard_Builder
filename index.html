@@ -4461,6 +4461,11 @@
           PDF Export
         </button>
 
+        <button class="btn btn-secondary" style="width:100%; margin-top:10px;" onclick="exportDiagramToSVG()">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;margin-right:6px;vertical-align:middle;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          SVG Diagramm Export
+        </button>
+
         <button class="btn btn-danger" style="width:100%; margin-top:10px;" onclick="deleteUseCase()">
           Use Case löschen
         </button>
@@ -7303,6 +7308,172 @@
       // PDF speichern
       const filename = `${uc.name.replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_')}_Dokumentation.pdf`;
       doc.save(filename);
+    }
+
+    // ============== SVG DIAGRAM EXPORT ==============
+    function exportDiagramToSVG() {
+      if (!state.currentUseCase) {
+        alert('Bitte wähle zuerst einen Use Case aus.');
+        return;
+      }
+
+      const uc = state.currentUseCase;
+      const elements = uc.elements || [];
+      const connections = uc.connections || [];
+
+      if (elements.length === 0) {
+        alert('Der Use Case enthält keine Elemente zum Exportieren.');
+        return;
+      }
+
+      // Berechne Bounding Box aller Elemente
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      const blockWidth = 140;
+      const blockHeight = 100;
+
+      elements.forEach(el => {
+        const width = el.type === 'container' ? (el.width || 200) : blockWidth;
+        const height = el.type === 'container' ? (el.height || 150) : blockHeight;
+        minX = Math.min(minX, el.x);
+        minY = Math.min(minY, el.y);
+        maxX = Math.max(maxX, el.x + width);
+        maxY = Math.max(maxY, el.y + height);
+      });
+
+      // Padding hinzufügen
+      const padding = 40;
+      minX -= padding;
+      minY -= padding;
+      maxX += padding;
+      maxY += padding;
+
+      const svgWidth = maxX - minX;
+      const svgHeight = maxY - minY;
+
+      // SVG Header
+      let svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="${minX} ${minY} ${svgWidth} ${svgHeight}">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 L2,3 Z" fill="#64748b"/>
+    </marker>
+    <style>
+      .block-rect { fill: #fff; stroke-width: 2; rx: 12; }
+      .block-title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 600; fill: #1e293b; }
+      .block-category { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 9px; fill: #64748b; }
+      .container-rect { fill-opacity: 0.3; stroke-width: 2; stroke-dasharray: 4,2; rx: 16; }
+      .container-title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 12px; font-weight: 600; fill: #475569; }
+      .connection { fill: none; stroke: #64748b; stroke-width: 2; marker-end: url(#arrowhead); }
+    </style>
+  </defs>
+  <rect x="${minX}" y="${minY}" width="${svgWidth}" height="${svgHeight}" fill="#f8fafc"/>
+
+  <!-- Titel -->
+  <text x="${minX + padding}" y="${minY + 25}" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="700" fill="#0f172a">${escapeXml(uc.name)}</text>
+`;
+
+      // Container zuerst rendern (im Hintergrund)
+      const containerColors = ['#dbeafe', '#fce7f3', '#d1fae5', '#fef3c7', '#e0e7ff', '#f3e8ff'];
+      elements.filter(el => el.type === 'container').forEach((el, idx) => {
+        const color = containerColors[idx % containerColors.length];
+        const strokeColor = color.replace('fe', 'cd').replace('f3', 'd0').replace('e7', 'c0');
+        svg += `  <rect class="container-rect" x="${el.x}" y="${el.y}" width="${el.width || 200}" height="${el.height || 150}" fill="${color}" stroke="${strokeColor}"/>
+  <text class="container-title" x="${el.x + 12}" y="${el.y + 22}">${escapeXml(el.name || 'Container')}</text>
+`;
+      });
+
+      // Verbindungen rendern
+      connections.forEach(conn => {
+        const fromEl = elements.find(e => e.id === conn.from);
+        const toEl = elements.find(e => e.id === conn.to);
+        if (!fromEl || !toEl) return;
+
+        const fromPos = getSvgAnchorPosition(fromEl, conn.fromAnchor, blockWidth, blockHeight);
+        const toPos = getSvgAnchorPosition(toEl, conn.toAnchor, blockWidth, blockHeight);
+
+        // Berechne Kontrollpunkte für Bezier-Kurve
+        const dx = toPos.x - fromPos.x;
+        const dy = toPos.y - fromPos.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const offset = Math.max(40, Math.min(distance * 0.4, 120));
+
+        let cp1x, cp1y, cp2x, cp2y;
+        if (conn.fromAnchor === 'right' || conn.fromAnchor === 'left') {
+          cp1x = fromPos.x + (conn.fromAnchor === 'right' ? offset : -offset);
+          cp1y = fromPos.y;
+        } else {
+          cp1x = fromPos.x;
+          cp1y = fromPos.y + (conn.fromAnchor === 'bottom' ? offset : -offset);
+        }
+        if (conn.toAnchor === 'right' || conn.toAnchor === 'left') {
+          cp2x = toPos.x + (conn.toAnchor === 'right' ? offset : -offset);
+          cp2y = toPos.y;
+        } else {
+          cp2x = toPos.x;
+          cp2y = toPos.y + (conn.toAnchor === 'bottom' ? offset : -offset);
+        }
+
+        svg += `  <path class="connection" d="M${fromPos.x},${fromPos.y} C${cp1x},${cp1y} ${cp2x},${cp2y} ${toPos.x},${toPos.y}"/>
+`;
+      });
+
+      // Blöcke rendern
+      elements.filter(el => el.type !== 'container').forEach(el => {
+        const block = state.blocks.find(b => b.id === el.blockId);
+        if (!block) return;
+        const cat = state.categories.find(c => c.id === block.categoryId);
+        const color = cat?.color || '#666';
+
+        svg += `  <rect class="block-rect" x="${el.x}" y="${el.y}" width="${blockWidth}" height="${blockHeight}" stroke="${color}"/>
+  <text class="block-title" x="${el.x + blockWidth/2}" y="${el.y + 45}" text-anchor="middle">${escapeXml(truncateText(block.name, 18))}</text>
+  <text class="block-category" x="${el.x + blockWidth/2}" y="${el.y + 62}" text-anchor="middle">${escapeXml(cat?.name || '')}</text>
+`;
+      });
+
+      svg += '</svg>';
+
+      // Prüfe Dateigröße (max 500 KB)
+      const sizeKB = new Blob([svg]).size / 1024;
+      if (sizeKB > 500) {
+        // Optimiere: Entferne Kommentare und überflüssige Whitespaces
+        svg = svg.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><');
+      }
+
+      // Download
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${uc.name.replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_')}_Diagramm.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      // Zeige Größe
+      const finalSizeKB = new Blob([svg]).size / 1024;
+      showToast(`SVG exportiert (${finalSizeKB.toFixed(1)} KB)`);
+    }
+
+    function getSvgAnchorPosition(element, anchor, blockWidth, blockHeight) {
+      const width = element.type === 'container' ? (element.width || 200) : blockWidth;
+      const height = element.type === 'container' ? (element.height || 150) : blockHeight;
+
+      switch(anchor) {
+        case 'top': return { x: element.x + width/2, y: element.y };
+        case 'bottom': return { x: element.x + width/2, y: element.y + height };
+        case 'left': return { x: element.x, y: element.y + height/2 };
+        case 'right': return { x: element.x + width, y: element.y + height/2 };
+        default: return { x: element.x + width/2, y: element.y + height/2 };
+      }
+    }
+
+    function escapeXml(text) {
+      if (!text) return '';
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+    }
+
+    function truncateText(text, maxLength) {
+      if (!text) return '';
+      return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     }
 
     // ============== START ==============
